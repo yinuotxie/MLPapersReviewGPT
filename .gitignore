@@ -1,0 +1,6 @@
+# data
+papers/
+reviews/ 
+
+# DS store
+.DS_Store
