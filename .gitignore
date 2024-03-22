@@ -2,5 +2,8 @@
 papers/
 reviews/ 
 
+# env 
+cis6200/
+
 # DS store
 .DS_Store
