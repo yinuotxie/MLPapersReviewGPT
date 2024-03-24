@@ -1,4 +1,4 @@
-title,url,abstract,authors,review_title,review,rating,gpt-3.5-turbo-reviews
+title,url,abstract,authors,review_title,review,rating,gpt-3.5-turbo-reviews,gpt-4-full-reviews
 Pre-Training by Completing Point Clouds,https://openreview.net/pdf?id=jPSYH47QSZL,"There has recently been a flurry of exciting advances in deep learning models on point clouds. However, these advances have been hampered by the difficulty of creating labelled point cloud datasets: sparse point clouds often have unclear label identities for certain points, while dense point clouds are time-consuming to annotate. Inspired by mask-based pre-training in the natural language processing community, we propose a pre-training mechanism based point clouds completion. It works by masking occluded points that result from observations at different camera views. It then optimizes a completion model that learns how to reconstruct the occluded points, given the partial point cloud. In this way, our method learns a pre-trained representation that can identify the visual constraints inherently embedded in real-world point clouds. We call our method Occlusion Completion (OcCo). We demonstrate that OcCo learns representations that improve the semantic understandings as well as generalization on downstream tasks over prior methods, transfer to different datasets, reduce training time and improve label efficiency.","Hanchen Wang,Qi Liu,Xiangyu Yue,Joan Lasenby,Matt Kusner",A good one,"This paper proposes a better pre-trained prior for a variety of downstream applications in point cloud analysis. The workflow of the pre-training mechanism is to first 1) generate occluded points that result from view occlusion and then 2) optimize the encoder to learn how to complete the occluded points from the partial point cloud. In downstream applications, the obtained encoder will be used as the initial weights in the network training. Empirical experiments have shown that such a pre-train mechanism can improve initialization over prior baselines and benefit a variety of tasks even with a large domain gap.
 
 Pros:
@@ -30,7 +30,26 @@ The authors' response has resolved my concerns. I would keep my positive rating.
         ""Comparative analysis"": ""Include a more comprehensive comparative analysis with existing methods to highlight the advantages of the OcCo method."",
         ""Additional experiments"": ""Conduct additional experiments on different datasets and scenarios to provide a deeper evaluation of the proposed method.""
     }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Introduction of Occlusion Completion (OcCo) for point cloud pre-training"": ""The paper introduces a novel pre-training method named Occlusion Completion (OcCo), which enhances point cloud models by learning to reconstruct occluded parts of point clouds. This approach is inspired by mask-based pre-training in natural language processing and adapts it innovatively for 3D point cloud data. The novelty lies in using occlusion as a mechanism for pre-training, aiming to improve semantic understandings and generalization on downstream tasks."",
+    ""Leveraging occluded point clouds for learning structural information"": ""The method uniquely leverages the natural occurrence of occlusions in point clouds obtained from different camera viewpoints to generate occluded point clouds. This approach forces the model to learn structural and contextual information about the objects, which is a novel strategy for pre-training point cloud models.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Demonstrated improvements over existing methods"": ""OcCo shows significant improvements over prior methods in various downstream tasks such as object classification, part segmentation, and semantic segmentation. These improvements are quantitatively demonstrated through comprehensive experiments."",
+    ""Extensive experimental validation"": ""The paper provides extensive experimental results validating the effectiveness of OcCo pre-training across multiple benchmarks and settings. This includes few-shot learning scenarios and different levels of label availability, showcasing the method's versatility and robustness.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Lack of theoretical analysis"": ""The paper primarily focuses on empirical results and may lack a detailed theoretical analysis explaining why OcCo pre-training leads to better generalization and performance on downstream tasks."",
+    ""Comparison with very recent or concurrent works"": ""Depending on the timing and scope of the review, the paper might not compare its approach against the very latest or concurrent works in point cloud processing, which could be seen as a limitation.""
+  },
+  ""Suggestions for improvement"": {
+    ""Provide more theoretical insights"": ""Enhancing the paper with theoretical insights or analysis on why OcCo pre-training is effective could strengthen the paper. This could include discussions on the nature of occlusions in point clouds and their role in learning robust features."",
+    ""Expand comparisons to include more recent methods"": ""Updating the experimental comparisons to include more recent or concurrent works in point cloud pre-training and completion could provide a clearer picture of OcCo's standing in the field."",
+    ""Explore limitations and future work"": ""A more detailed discussion on the limitations of the proposed method and potential directions for future work could provide readers with insights into the method's applicability and areas for improvement.""
+  }
+}
+    "
 Pre-Training by Completing Point Clouds,https://openreview.net/pdf?id=jPSYH47QSZL,"There has recently been a flurry of exciting advances in deep learning models on point clouds. However, these advances have been hampered by the difficulty of creating labelled point cloud datasets: sparse point clouds often have unclear label identities for certain points, while dense point clouds are time-consuming to annotate. Inspired by mask-based pre-training in the natural language processing community, we propose a pre-training mechanism based point clouds completion. It works by masking occluded points that result from observations at different camera views. It then optimizes a completion model that learns how to reconstruct the occluded points, given the partial point cloud. In this way, our method learns a pre-trained representation that can identify the visual constraints inherently embedded in real-world point clouds. We call our method Occlusion Completion (OcCo). We demonstrate that OcCo learns representations that improve the semantic understandings as well as generalization on downstream tasks over prior methods, transfer to different datasets, reduce training time and improve label efficiency.","Hanchen Wang,Qi Liu,Xiangyu Yue,Joan Lasenby,Matt Kusner","paper shows promising results using point cloud completion tasks for pre-training representations, method is clearly described; however, highly related work not discussed that limits novelty of the proposed OcCo task, experimental setup not fully clear, making it hard to understand the results","The paper considers the problem of training networks for point cloud processing through a point cloud completion task. Given a point cloud, it is rendered from a set of viewpoints and for each viewpoint the set of visible points is determine. A network is then trained to generate the full point cloud from the partially observed point cloud for a given view. Here, an encoder-decoder architecture is used, where the encoder corresponds to the network that should be pre-trained. Experimental results show that the proposed method outperforms two baselines for three tasks (object classification, object part segmentation, and semantic segmentation), when using less training data, and that the pre-training on the occlusion task leads to faster convergence.
 
 On the positive side, the occlusion completion (OcCo) task is clearly described and it should be fairly straightforward for a researcher to setup this task. The task requires no human annotation and is thus suitable for pre-training from large datasets captured in uncontrolled settings. The experiments cover a wide range of tasks and settings and show that the OcCo pre-training strategy outperforms random initialization and the approach from Saunders & Sievers. Here, the simplicity of the OcCo task coupled with its performance is clearly a major strength of the paper. In particular, Fig. 4 shows that the networks pre-trained on the OcCo task tend to converge much faster compared to the baselines.
@@ -70,7 +89,25 @@ The comments by the authors and the revised version of the paper successfully ad
     ""Evaluation on larger datasets"": ""It would be beneficial to evaluate the performance of OcCo on larger datasets to further validate its effectiveness."",
     ""Comparison with state-of-the-art methods"": ""A comparative analysis with existing state-of-the-art methods would help in demonstrating the superiority of the proposed approach.""
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Introduction of Occlusion Completion (OcCo) mechanism"": ""The paper proposes a novel pre-training mechanism, Occlusion Completion (OcCo), which innovatively uses the natural occurrence of occlusions in point clouds to generate training data. This mechanism helps in learning robust representations that improve semantic understanding and generalization on downstream tasks."",
+    ""Advances in handling sparse and dense point clouds"": ""By addressing the challenges in annotating point clouds due to their sparsity or density, the paper introduces an approach that potentially reduces the need for extensive labeled datasets. This approach is significant for advancing point cloud processing techniques.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Comprehensive experimental validation"": ""The paper presents extensive experiments demonstrating the effectiveness of OcCo across multiple benchmarks and tasks, including object classification, part segmentation, and semantic segmentation, showing improvements over existing methods."",
+    ""Insightful analysis on learned representations"": ""Through various analyses, including feature visualization and concept detection, the paper provides deep insights into what the pre-trained model learns, highlighting the method's capability to capture useful geometric and semantic information from point clouds.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Limited theoretical underpinning"": ""The paper's strong empirical results might be seen as lacking a robust theoretical framework explaining why OcCo works effectively, which could be a point of critique."",
+    ""Comparison with state-of-the-art methods"": ""Although the paper compares OcCo with existing methods, the rapidly evolving nature of the field might require further comparison with more recent or concurrent works to fully establish its position.""
+  },
+  ""Suggestions for improvement"": {
+    ""Enhanced theoretical explanation"": ""Providing a more detailed theoretical analysis or justification for the effectiveness of OcCo could strengthen the paper, offering insights into how and why occlusion-based pre-training aids in learning robust point cloud representations."",
+    ""Extended comparisons and benchmarks"": ""Expanding the experimental comparisons to include the latest methods in point cloud processing could further validate OcCo's effectiveness. Additionally, exploring its applicability to more varied and challenging datasets could showcase its adaptability and robustness.""
+  }
+}
+    "
 Pre-Training by Completing Point Clouds,https://openreview.net/pdf?id=jPSYH47QSZL,"There has recently been a flurry of exciting advances in deep learning models on point clouds. However, these advances have been hampered by the difficulty of creating labelled point cloud datasets: sparse point clouds often have unclear label identities for certain points, while dense point clouds are time-consuming to annotate. Inspired by mask-based pre-training in the natural language processing community, we propose a pre-training mechanism based point clouds completion. It works by masking occluded points that result from observations at different camera views. It then optimizes a completion model that learns how to reconstruct the occluded points, given the partial point cloud. In this way, our method learns a pre-trained representation that can identify the visual constraints inherently embedded in real-world point clouds. We call our method Occlusion Completion (OcCo). We demonstrate that OcCo learns representations that improve the semantic understandings as well as generalization on downstream tasks over prior methods, transfer to different datasets, reduce training time and improve label efficiency.","Hanchen Wang,Qi Liu,Xiangyu Yue,Joan Lasenby,Matt Kusner",Limited novelty and weak improvements,"The authors propose completing an occluded point cloud as a pretraining step for point cloud processing methods. Multiple occlusions are generated for the network to complete by simulating a camera perspective. 
 
 Pros: 
@@ -97,7 +134,25 @@ Nevertheless, the paper would still be interesting if it showed extraordinary re
         ""Additional experiments"": ""Including more experiments to validate the effectiveness of the Occlusion Completion method would strengthen the paper."",
         ""Comparison with existing methods"": ""Providing a detailed comparison with state-of-the-art methods in the field would enhance the contribution of the paper.""
     }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Novel pre-training mechanism"": ""The paper introduces Occlusion Completion (OcCo), a novel pre-training mechanism for point cloud models, addressing the challenge of sparse and dense point clouds by learning to reconstruct occluded parts."",
+    ""Enhanced semantic understanding and generalization"": ""OcCo is shown to enhance semantic understandings and generalization on downstream tasks, offering significant contributions over prior methods by using occlusions naturally occurring in point clouds.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Comprehensive experiments and benchmarks"": ""Extensive experimental validation demonstrates the effectiveness of OcCo across multiple benchmarks, including object classification, part segmentation, and semantic segmentation, showing improvements over existing methods."",
+    ""Innovative approach to learning from occlusions"": ""The approach to generate occluded point clouds and learning a completion model to reconstruct them provides a fresh perspective on pre-training, potentially inspiring future research in point cloud processing.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Lack of theoretical foundation"": ""The paper could face criticism for not providing a solid theoretical foundation explaining the effectiveness of OcCo, potentially leaving some questions unanswered regarding the underlying principles."",
+    ""Limited comparison with recent methods"": ""Given the rapid advancements in point cloud processing, the paper might be critiqued for not including comparisons with the most recent or concurrent methods in the field.""
+  },
+  ""Suggestions for improvement"": {
+    ""Strengthen theoretical explanations"": ""Incorporating more detailed theoretical analysis or insights could help in understanding why OcCo outperforms other pre-training methods, providing a stronger foundation for the proposed approach."",
+    ""Expand experimental comparisons"": ""Broadening the scope of experimental comparisons to include more recent and varied methods could help in establishing OcCo's position more firmly within the current research landscape.""
+  }
+}
+    "
 Pre-Training by Completing Point Clouds,https://openreview.net/pdf?id=jPSYH47QSZL,"There has recently been a flurry of exciting advances in deep learning models on point clouds. However, these advances have been hampered by the difficulty of creating labelled point cloud datasets: sparse point clouds often have unclear label identities for certain points, while dense point clouds are time-consuming to annotate. Inspired by mask-based pre-training in the natural language processing community, we propose a pre-training mechanism based point clouds completion. It works by masking occluded points that result from observations at different camera views. It then optimizes a completion model that learns how to reconstruct the occluded points, given the partial point cloud. In this way, our method learns a pre-trained representation that can identify the visual constraints inherently embedded in real-world point clouds. We call our method Occlusion Completion (OcCo). We demonstrate that OcCo learns representations that improve the semantic understandings as well as generalization on downstream tasks over prior methods, transfer to different datasets, reduce training time and improve label efficiency.","Hanchen Wang,Qi Liu,Xiangyu Yue,Joan Lasenby,Matt Kusner","Since the idea itself is simple enough, the reviewer would not argue too much about the technical contribution of this paper, but concerns more about the analytic contributions. The reviewer’s concerns lie as follows.","The idea of this paper is simple but fascinating. Actually there are many studies concerning the task of point cloud completion, but using it as the initialization approach to improve the other tasks is quiet novel. The experimental results seem solid and quantitatively prove the effectiveness of the OcCo-initialization.
 
 Since the idea itself is simple enough, the reviewer would not argue too much about the technical contribution of this paper, but concerns more about the analytic contributions. The reviewer’s concerns are as follows.
@@ -123,7 +178,25 @@ Since the idea itself is simple enough, the reviewer would not argue too much ab
     ""Empirical evaluation"": ""Conducting more extensive experiments and providing further empirical evidence to support the claims made in the paper."",
     ""Comparison with state-of-the-art methods"": ""Comparing the proposed Occlusion Completion (OcCo) method with current state-of-the-art techniques in the field to showcase its effectiveness.""
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Innovative pre-training approach"": ""The paper introduces Occlusion Completion (OcCo), a novel pre-training method for point cloud models, which enhances model performance by learning to reconstruct occluded parts of point clouds. This approach is inspired by mask-based pre-training in NLP and uniquely adapted for 3D point cloud data, addressing the challenge of sparse and dense point clouds."",
+    ""Enhancement in semantic understanding and generalization"": ""OcCo demonstrates significant advancements in improving semantic understandings and generalization across various downstream tasks including object classification, part segmentation, and semantic segmentation, showcasing its ability to transfer to different datasets efficiently.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Comprehensive experimental validation"": ""Extensive experiments across multiple benchmarks and settings validate OcCo's effectiveness, showing improvements over existing methods and highlighting its robustness and versatility in handling point cloud data."",
+    ""Insightful analysis and interpretation"": ""The paper provides a thorough analysis of what is learned from OcCo pre-training, using visualizations and probe tests, to offer insights into how the pre-trained model captures useful geometric and semantic information from point clouds.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Lack of theoretical explanation"": ""While the empirical results are strong, the paper might be criticized for not providing a detailed theoretical foundation explaining the effectiveness of OcCo, which could strengthen the paper's claims."",
+    ""Limited comparison with state-of-the-art methods"": ""The rapidly evolving field of point cloud processing may have seen new developments since the submission, and the paper could be seen as lacking if it does not include comparisons with the very latest methods.""
+  },
+  ""Suggestions for improvement"": {
+    ""Strengthen theoretical underpinnings"": ""Enhancing the paper with more detailed theoretical insights or explanations for why OcCo pre-training leads to improved performance on downstream tasks could provide a stronger justification for the approach."",
+    ""Broaden comparisons and update benchmarks"": ""Expanding comparisons to include the latest methods in point cloud processing and exploring its applicability to more diverse and challenging datasets could further demonstrate OcCo's effectiveness and adaptability.""
+  }
+}
+    "
 GamePad: A Learning Environment for Theorem Proving,https://openreview.net/pdf?id=r1xwKoR9Y7,"In this paper, we introduce a system called GamePad that can be used to explore the application of machine learning methods to theorem proving in the Coq proof assistant. Interactive theorem provers such as Coq enable users to construct machine-checkable proofs in a step-by-step manner. Hence, they provide an opportunity to explore theorem proving with human supervision. We use GamePad to synthesize proofs for a simple algebraic rewrite problem and train baseline models for a formalization of the Feit-Thompson theorem. We address position evaluation (i.e., predict the number of proof steps left) and tactic prediction (i.e., predict the next proof step) tasks, which arise naturally in tactic-based theorem proving.","Daniel Huang,Prafulla Dhariwal,Dawn Song,Ilya Sutskever",An intriguing integration of ML and automated theorem proving,"Summary: This paper mixes automated theorem proving with machine learning models. The final goal, of course, is to be able to train a model that works in conjunction with an automated theorem proving system to efficiently prove theorems, and, ideally, in a way that resembles the way humans prove theorems. This is a distant goal, and the authors instead focus on several tractable tasks that are required for future progress in this direction. They start by integrating the Coq theorem proving environment with ML frameworks, allowing for the creation of models that perform various tasks related to theorem proving. In particular, they focus on two tasks. One is to estimate how many steps are left to complete the proof given a current proof state. The other is to determine what is a good choice of next step. Finally, they also consider issues surrounding representations of the various data structures involved in proofs (i.e., the proof tree, variables, etc.). They test various models on a synthetic nearly trivial logical expression proof, along with a more complicated (and meaningful real world) group theory result.
 
 Strengths: This is a very important area. Automated theorem proving has a potentially very significant impact, and being able to take advantage of some of the recent successes in ML would be excellent. The main environment proposed here, integrating PyTorch with Coq could potentially be a very useful platform for future research in this area. The paper exposes many interesting questions, and I generally think we need more exploratory papers that open up an area (as opposed to seeking to finalize existing areas) 
@@ -156,7 +229,25 @@ Comments and questions:
     ""Include more detailed experimental results"": ""Adding more detailed experimental results and analysis would strengthen the paper."",
     ""Provide comparison with existing approaches"": ""Comparing the proposed approach with existing methods could further validate the effectiveness of the GamePad system.""
   }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Introduction of GamePad"": ""GamePad is introduced as a system to explore the application of machine learning methods to theorem proving in the Coq proof assistant. It provides a structured Python representation of Coq proofs, enabling dynamic proof construction and serving as an environment for reinforcement learning."",
+    ""Focus on interactive theorem provers (ITPs)"": ""The work focuses on leveraging ITPs, specifically the Coq proof assistant, for theorem proving with human supervision. This approach is novel in its attempt to bridge the gap between machine learning and human-level proof construction and understanding.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Structured representation of proofs"": ""GamePad offers a detailed and structured representation of Coq proofs, including proof states, steps, and expression ASTs, which are crucial for applying machine learning algorithms effectively to theorem proving."",
+    ""Exploration of machine learning tasks in theorem proving"": ""The paper addresses essential machine learning tasks within theorem proving, such as position evaluation and tactic prediction, laying the groundwork for future research in applying learning techniques to formal proofs.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Limited scope of evaluation"": ""The evaluation primarily focuses on simple algebraic rewrite problems and the Feit-Thompson formalization. There might be concerns about the system's applicability and performance on a broader range of theorem proving tasks."",
+    ""Complexity and accessibility of the environment"": ""While GamePad is a powerful tool, its complexity and the requirement for familiarity with Coq might limit its accessibility to researchers and practitioners not already versed in theorem proving.""
+  },
+  ""Suggestions for improvement"": {
+    ""Extend evaluations to more diverse problems"": ""Expanding the evaluation to include a wider variety of theorem proving problems could demonstrate the system's versatility and effectiveness across different domains."",
+    ""Improve documentation and user-friendliness"": ""Enhancing the documentation and providing more resources for users unfamiliar with Coq could make GamePad more accessible to a broader audience, encouraging adoption and experimentation.""
+  }
+}
+    "
 GamePad: A Learning Environment for Theorem Proving,https://openreview.net/pdf?id=r1xwKoR9Y7,"In this paper, we introduce a system called GamePad that can be used to explore the application of machine learning methods to theorem proving in the Coq proof assistant. Interactive theorem provers such as Coq enable users to construct machine-checkable proofs in a step-by-step manner. Hence, they provide an opportunity to explore theorem proving with human supervision. We use GamePad to synthesize proofs for a simple algebraic rewrite problem and train baseline models for a formalization of the Feit-Thompson theorem. We address position evaluation (i.e., predict the number of proof steps left) and tactic prediction (i.e., predict the next proof step) tasks, which arise naturally in tactic-based theorem proving.","Daniel Huang,Prafulla Dhariwal,Dawn Song,Ilya Sutskever",Nice exposition on the opportunities and the issues in using machine learning for interactive theorem proving in Coq,"In the paper, the authors describe how machine learning techniques can be used to help build proofs in the widely-used interactive theorem prover Coq. They do so by explaining the experience with their system called GamePad, which converts various proof-related objects of Coq to python data structures so that python-based machine learning tools can be applied to those data structures. 
 
 Although the word, GamePad, appears in the title of the paper, the paper focuses mostly on how Coq works, which aspects of proving in Coq can be aided by machine learning techniques, and what challenges they experienced when using machine learning techniques to the Feit-Thompson data set, an impressive big Coq proof of a famous theorem in group theory. I wasn't impressed by the GamePad tool, which seems to be just a translator of Coq internal data structures to python data structures. But I liked the authors' general exposition about the opportunities and the issues in using machine learning techniques to theorem proving in Coq. They explain that one key difficulty of the tactic prediction problem is the need to synthesize a term parameter to a tactic. They also point out the issue of choosing the granularity of tactic when approaching this problem. 
@@ -191,7 +282,25 @@ Here are some minor comments.
     'Detailed methodology': 'Provide a more detailed explanation of the methodology used in GamePad for theorem proving to help readers understand the process better.',
     'Broader applications': 'Consider expanding on the potential broader applications of GamePad beyond the specific problems addressed in the paper.'
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Introduces GamePad"": ""A novel system designed to integrate machine learning with theorem proving within the Coq proof assistant. It aims to bridge the gap between automated and interactive theorem proving by leveraging machine learning for proof synthesis and tactic prediction."",
+    ""Focus on ITPs for machine learning application"": ""Pioneering in its focus on utilizing Interactive Theorem Provers (ITPs) for machine learning applications, specifically targeting the Coq proof assistant. This approach opens new avenues for applying deep learning techniques in formal theorem proving.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Structured representation of proofs"": ""GamePad provides a structured Python representation of Coq proofs, including all proof states and steps, which is a significant advancement for integrating machine learning with theorem proving."",
+    ""Comprehensive evaluation"": ""The paper conducts a comprehensive evaluation, demonstrating the effectiveness of GamePad in synthesizing proofs for algebraic rewrite problems and applying baseline models for position evaluation and tactic prediction on real-world datasets.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Scope of evaluation"": ""The evaluation primarily focuses on algebraic rewrite problems and the Feit-Thompson formalization. The scope might be perceived as limited in demonstrating the system's capabilities across a broader range of theorem proving tasks."",
+    ""Complexity and accessibility"": ""The complexity of setting up and interacting with GamePad, given its reliance on the Coq proof assistant, might pose a barrier to entry for researchers and practitioners not already familiar with theorem proving.""
+  },
+  ""Suggestions for improvement"": {
+    ""Expand the range of evaluations"": ""Broadening the range of theorem proving problems used in the evaluation could better showcase GamePad's capabilities and its potential impact on the field."",
+    ""Improve documentation and user guidance"": ""Enhancing the documentation and providing more comprehensive guides and tutorials could lower the barrier to entry, making GamePad more accessible to a wider audience.""
+  }
+}
+    "
 GamePad: A Learning Environment for Theorem Proving,https://openreview.net/pdf?id=r1xwKoR9Y7,"In this paper, we introduce a system called GamePad that can be used to explore the application of machine learning methods to theorem proving in the Coq proof assistant. Interactive theorem provers such as Coq enable users to construct machine-checkable proofs in a step-by-step manner. Hence, they provide an opportunity to explore theorem proving with human supervision. We use GamePad to synthesize proofs for a simple algebraic rewrite problem and train baseline models for a formalization of the Feit-Thompson theorem. We address position evaluation (i.e., predict the number of proof steps left) and tactic prediction (i.e., predict the next proof step) tasks, which arise naturally in tactic-based theorem proving.","Daniel Huang,Prafulla Dhariwal,Dawn Song,Ilya Sutskever","Interesting direction, but too preliminary","The submission describes a system for applying machine learning to interactive theorem proving. The paper focuses on two tasks: tactic prediction (e.g. attempting a proof by induction) and position evaluation (the number of  remaining steps required for a proof). Experiments show that a neural model outperforms an SVM on both tasks, using proof states sampled from a proof of the Feit-Thompson theorem as a dataset. It's great to see work on applying neural networks to symbolic reasoning. The paper is clearly written, and provides helpful background on interactive theorem proving.
 
 The main weakness of the paper is the limited experiments, which only really show that neural methods outperform an SVM (with only a high level description of the features) - and only on the proof of a single theorem. The paper doesn't explore relevant interesting questions, such as whether the model is helpful for guiding humans or machines in making proofs, or perhaps if the approach can be used to find more human-understandable proofs than those found without training on human data. What are the trade-offs in learning from human proofs instead of automated proofs?
@@ -218,7 +327,25 @@ Overall, the paper explores an interesting direction, but I think the current ex
     ""Detailed methodology description"": ""Providing a more detailed explanation of the methodology used in GamePad and the training of baseline models would enhance the paper."",
     ""Comparison with existing methods"": ""Including a comparison with existing methods in theorem proving would help highlight the novelty and effectiveness of GamePad.""
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Introduction of GamePad"": ""The paper presents GamePad, a novel system designed to facilitate the application of machine learning techniques to theorem proving within the Coq proof assistant. This integration is significant as it leverages interactive theorem provers (ITPs) to enable machine-checkable proof construction with human supervision, bridging a gap in the automation of theorem proving."",
+    ""Focus on Coq proof assistant"": ""GamePad's specific focus on the Coq proof assistant is novel, as Coq is a mature system used for formalizing non-trivial theorems. The system's support for extracting verified software makes it a strategic choice for proving program correctness.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Comprehensive toolset"": ""GamePad provides a structured Python representation of Coq proofs, including proof states, steps, and expression ASTs. This comprehensive toolset facilitates dynamic proof construction and is usable as an environment for reinforcement learning, making it a versatile resource for researchers."",
+    ""Empirical validation"": ""The paper demonstrates GamePad's utility through empirical validation, including synthesis of Coq proof scripts for algebraic rewrite problems and application of baseline models for position evaluation and tactic prediction on real-world datasets, showcasing its practical applicability.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Limited scope of evaluation"": ""While GamePad is evaluated on algebraic rewrite problems and the Feit-Thompson formalization, the scope of these evaluations may be seen as limited. Expanding the range of problems and datasets could further validate GamePad's effectiveness and versatility."",
+    ""Complexity of setup and use"": ""The initial setup and use of GamePad, particularly its integration with the Coq proof assistant, may present a barrier to entry for some researchers, potentially limiting its broader adoption.""
+  },
+  ""Suggestions for improvement"": {
+    ""Extend the range of evaluation problems"": ""Broadening the scope of evaluation problems and datasets could help demonstrate GamePad's applicability to a wider range of theorem proving tasks, enhancing its appeal to the research community."",
+    ""Improve documentation and user guides"": ""Enhancing the documentation and providing detailed user guides and tutorials could lower the barrier to entry, making GamePad more accessible and encouraging its adoption among researchers not already familiar with Coq.""
+  }
+}
+    "
 Generalisation and the Geometry of Class Separability,https://openreview.net/pdf?id=4NtqESjOIAz,"Recent results in deep learning show that considering only the capacity of machines does not adequately explain the generalisation performance we can observe. We propose that by considering the geometry of the data we can better explain generalisation achieved in deep learning. In particular we show that in classification the separability of the data can explain how good generalisation can be achieved in high dimensions. Further we show that layers within a CNNs sequentially increase the linear separability of data, and that the information these layers retain or discard can help explain why these models generalise.","Dominic Belcher,Adam Prugel-Bennett,Srinandan Dasmahapatra",Linear separability in layers.,"This work investigates how linearly separable the features in a network are as a function of network depth.  I think looking at linear separability is a bit of a naive probe to apply in this case.
 
 Instead of taking the linear classifier accuracy as a measure of the linear separability, why not instead interpret the linear classifiers likelihood as a variational lower bound on the mutual information between the labels and the layers representation?  You could then go beyond linear and measure how much information (or a variational lower bound there of) of how much information is present at each layer of the network, which would likely be of more interest to the crowd of this workshop.
@@ -241,7 +368,25 @@ Overall, I think this is find for the workshop, but the work would probably need
       ""Include benchmark comparisons"": ""To strengthen the paper, it could benefit from including comparisons with existing benchmark methods to show the superiority or uniqueness of the proposed data geometry approach."",
       ""Enhance clarity in experimental methodology"": ""Clarifying the experimental methodology used to demonstrate how data separability affects generalization in deep learning can improve the paper's overall quality.""
    }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Exploration of data geometry in generalisation"": ""The paper shifts focus from the traditional examination of machine capacity and hypothesis class size to the geometry of data in explaining generalisation performance in machine learning. It posits that data's geometrical properties, particularly in high dimensions, are crucial for understanding generalisation in deep learning models."",
+    ""Insight into class separability in high dimensions"": ""The theoretical insights into how class separability affects generalisation, even in high-dimensional spaces, offer a novel perspective. The demonstration that layers within CNNs increase linear separability sequentially is a significant contribution to understanding why deep learning models, especially CNNs, exhibit strong generalisation capabilities.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Theoretical and empirical analysis"": ""The combination of theoretical results on class separation with empirical investigations into CNNs presents a comprehensive study that bridges theory with practical observations. This holistic approach strengthens the paper's contributions and its potential impact on the field."",
+    ""Practical implications for CNN architecture design"": ""The findings regarding the role of convolutional and max pooling layers in enhancing data separability could have direct implications on CNN architecture design. These insights could guide the development of more efficient and generalisable deep learning models.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalisability of results beyond CNNs"": ""While the paper offers in-depth analysis and findings related to CNNs, its focus is somewhat narrow. The generalisability of the results to other types of deep learning models or to different machine learning paradigms may be questioned."",
+    ""Quantitative evaluation and benchmarks"": ""The empirical work, though insightful, might be critiqued for its scope and the choice of datasets. Further quantitative evaluation against established benchmarks or across a broader range of datasets might be needed to fully validate the claims.""
+  },
+  ""Suggestions for improvement"": {
+    ""Expand empirical analysis"": ""Extending the empirical analysis to include other types of neural networks and machine learning models could help validate the universality of the paper's claims about data geometry and class separability. Such expansion would also enhance the paper's appeal to a broader audience."",
+    ""In-depth investigation into other data types"": ""Further investigation into the geometry of class separability across varied data types, beyond image data, could provide additional insights into the model's generalisation capabilities. This could also include exploring different dimensional reduction techniques to visualise and understand data geometry.""
+  }
+}
+    "
 Generalisation and the Geometry of Class Separability,https://openreview.net/pdf?id=4NtqESjOIAz,"Recent results in deep learning show that considering only the capacity of machines does not adequately explain the generalisation performance we can observe. We propose that by considering the geometry of the data we can better explain generalisation achieved in deep learning. In particular we show that in classification the separability of the data can explain how good generalisation can be achieved in high dimensions. Further we show that layers within a CNNs sequentially increase the linear separability of data, and that the information these layers retain or discard can help explain why these models generalise.","Dominic Belcher,Adam Prugel-Bennett,Srinandan Dasmahapatra",Review,"This paper attempts to explain the generalization in a deep network using separability of the features at various layers. The paper is motivated via a perceptron classifying a Gaussian distribution.
 
 Overall, I think the experimental evidence in the paper is not rigorous enough to draw the conclusions that the authors wish to draw. The paper will benefit from more careful experiments, I am listing down some suggestions below.
@@ -266,7 +411,25 @@ On lines 103-110, max-pooling should reduce variability because it collapses spa
     ""Comparison with existing methods"": ""It would be beneficial to compare the proposed approach with existing methods for explaining generalization in deep learning."",
     ""Additional experiments"": ""Including more experiments to further validate the findings on data separability and CNN layers would strengthen the paper's conclusions.""
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Geometry of data in generalization"": ""The paper introduces a novel perspective by emphasizing the importance of the geometry of data, rather than just the capacity of learning models, in explaining the generalization performance in machine learning. This approach could significantly shift the current understanding and methodologies in the field."",
+    ""Sequential increase of linear separability in CNNs"": ""It highlights a crucial insight that layers within CNNs sequentially increase the linear separability of data, offering a detailed explanation on the mechanics behind CNNs' ability to generalize well, which is a novel contribution to the understanding of deep learning architectures.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Bridging theoretical insights with empirical validation"": ""The work adeptly combines theoretical analysis on class separation with empirical studies on CNNs, offering a comprehensive look at the problem. This duality ensures the paper's appeal to both theoretical and practical machine learning audiences."",
+    ""Practical implications for CNN design and application"": ""The findings regarding the role of convolutional and max pooling layers in enhancing data separability have direct implications on CNN architecture design and application, making the paper highly relevant for current deep learning research and practice.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Limited broader applicability beyond image classification"": ""While the paper offers significant insights into CNNs and image classification, its focus may be perceived as narrow. Extending these findings to other data types or learning models could enhance its impact and address potential concerns about its broader applicability."",
+    ""Quantitative benchmarks and comparison"": ""The empirical section could be strengthened by including more rigorous quantitative benchmarks and comparisons with state-of-the-art models. This would help in solidifying the paper’s claims and situating its contributions within the larger body of work.""
+  },
+  ""Suggestions for improvement"": {
+    ""Expand analysis to other model types and data"": ""Exploring how the proposed insights on data geometry and class separability apply to other types of neural networks and learning models could enhance the paper's contributions and demonstrate the universality of its findings."",
+    ""Include more rigorous benchmarks"": ""Incorporating more rigorous benchmarks and comparisons with existing methods could help validate the proposed theories more robustly. This could involve detailed performance analysis on various datasets and against current state-of-the-art models.""
+  }
+}
+    "
 "Using Anomaly Feature Vectors for Detecting, Classifying and Warning of Outlier Adversarial Examples",https://openreview.net/pdf?id=XDo0go2IJgT,"We present DeClaW, a system for detecting, classifying,  and warning of adversarial inputs presented to a classification neural network. In contrast to current state-of-the-art methods that, given an input, detect whether an input is clean or adversarial,  we  aim  to  also  identify  the  types  of adversarial attack (e.g., PGD, Carlini-Wagner or clean). To achieve this, we extract statistical profiles, which we term as anomaly feature vectors, from a set of latent features. Preliminary findings suggest that AFVs can help distinguish among several types of adversarial attacks (e.g.,  PGD versus Carlini-Wagner) with close to 93% accuracy on the CIFAR-10 dataset. The results open the door to using AFV-based methods for exploring not only adversarial attack detection but also classification of the attack type and then design of attack-specific mitigation strategies.","Nelson Manohar-Alers,Ryan Feng,Sahib Singh,Jiguo Song,Atul Prakash",A method to classify clean image and adversarial examples crafted by different attack types,"This paper proposed a DNN-based attack-type classifier based on anomaly feature vector (AFV) on the CIFAR10 dataset. The authors augmented a pre-trained model with a sampling hook at a chosen layer to generate AFV of clean or adversarial examples. The AFVs from the perturbed inputs as well as natural inputs of different classes are used to train the classifier. The results show high accuracies both in detecting clean examples and classifying adversarial examples crafted by different attack algorithms.
 
 Strengths:
@@ -288,7 +451,25 @@ Weaknesses:
     ""Performance evaluation on additional datasets"": ""It would be beneficial to test the system on multiple datasets to showcase its generalizability."",
     ""Comparison with existing state-of-the-art methods"": ""Including a comparison with current methods in the field can provide better context for the performance of the proposed system.""
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Introduction of Anomaly Feature Vectors (AFVs)"": ""The paper introduces a novel approach for detecting and classifying adversarial inputs using Anomaly Feature Vectors (AFVs) derived from statistical profiles of latent features. This method not only distinguishes between clean and adversarial inputs but also identifies the types of adversarial attacks, such as PGD or Carlini-Wagner, with high accuracy on CIFAR-10 dataset."",
+    ""Advancement in adversarial attack detection and classification"": ""By focusing on the classification of adversarial attack types, the research advances the state of the art in adversarial example research. It moves beyond binary detection to fine-grained classification, opening pathways for attack-specific mitigation strategies.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""High classification accuracy for adversarial attack types"": ""The system achieves close to 93% accuracy in distinguishing among several types of adversarial attacks on the CIFAR-10 dataset, which represents a significant improvement over existing methods that primarily focus on detection without classification."",
+    ""Efficient second-stage classifier with small AFV size"": ""The efficiency of the second-stage classifier, which utilizes a small number of anomaly detection features compared to the input size or latent variables, could be a compelling reason for acceptance. The reduced feature set simplifies the model without sacrificing detection or classification performance.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Limited evaluation on datasets beyond CIFAR-10"": ""While the system shows promise on the CIFAR-10 dataset, its generalizability to other datasets or real-world scenarios is not thoroughly evaluated. Extending the approach to more varied datasets could strengthen the paper."",
+    ""Adversarial robustness of the DeClaw pipeline"": ""The current pipeline is not adversarially trained, which might raise concerns regarding its robustness against sophisticated adversarial attacks, especially in scenarios where the adversary has knowledge of the DeClaw pipeline.""
+  },
+  ""Suggestions for improvement"": {
+    ""Extend evaluations to additional datasets"": ""Conducting comprehensive evaluations on a wider range of datasets, including CIFAR-100 and ImageNet, would help validate the approach's effectiveness and generalizability across different domains."",
+    ""Explore adversarial training for the DeClaw pipeline"": ""Investigating the incorporation of adversarial training into the DeClaw pipeline could enhance its robustness against more sophisticated or unseen adversarial attacks, potentially improving its applicability in security-sensitive applications.""
+  }
+}
+    "
 PERIL: Probabilistic Embeddings for hybrid Meta-Reinforcement and Imitation Learning,https://openreview.net/pdf?id=BIIwfP55pp,"Imitation learning is a natural way for a human to describe a task to an agent, and it can be combined with reinforcement learning to enable the agent to solve that task through exploration. However, traditional methods which combine imitation learning and reinforcement learning require a very large amount of interaction data to learn each new task, even when bootstrapping from a demonstration. One solution to this is to use meta reinforcement learning (meta-RL) to enable an agent to quickly adapt to new tasks at test time. In this work, we introduce a new method to combine imitation learning with meta reinforcement learning, Probabilistic Embeddings for hybrid meta-Reinforcement and Imitation Learning (PERIL). Dual inference strategies allow PERIL to precondition exploration policies on demonstrations, which greatly improves adaptation rates in unseen tasks. In contrast to pure imitation learning, our approach is capable of exploring beyond the demonstration, making it robust to task alterations and uncertainties. By exploiting the flexibility of meta-RL, we show how PERIL is capable of interpolating from within previously learnt dynamics to adapt to unseen tasks, as well as unseen task families, within a set of meta-RL benchmarks under sparse rewards.","Alvaro Prat,Edward Johns",Review,"Summary: This work seeks to efficiently learn new tasks by combining meta-RL and imitation learning (IL). Such a combination is a natural thing to try, as both lines of work improve sample complexity of learning a new task: meta-RL by leveraging experience on prior related tasks, and IL by leveraging demonstrations. Demonstrations also form a natural way of specifying a new task to the agent.
 
 This paper extends an existing meta-RL approach (PEARL) to additionally leverage demonstrations. This leads to strong results on a set of 2D problems, as well as a 3D reaching task.
@@ -343,7 +524,25 @@ References:
     ""Empirical evaluation on diverse tasks"": ""Performing empirical evaluations on a diverse set of tasks to demonstrate the robustness and generalizability of PERIL."",
     ""Comparison with existing methods"": ""Comparing the performance of PERIL with other existing methods to showcase its superiority.""
   }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Hybrid Meta-RL and IL Approach"": ""PERIL introduces a novel method that blends meta-reinforcement learning (Meta-RL) with imitation learning (IL) using probabilistic embeddings. This approach enables efficient adaptation to new tasks by utilizing both demonstrations and reinforcement learning, addressing limitations in existing Meta-RL and Meta-IL frameworks."",
+    ""Dual Inference Strategy"": ""The paper presents a dual inference strategy that allows for preconditioning exploration policies on demonstrations. This significantly improves adaptation rates for unseen tasks and enables the system to explore beyond the scope of the initial demonstration, enhancing its robustness to task alterations and uncertainties.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Exceptional Adaptation Rates"": ""PERIL demonstrates exceptional adaptation rates and outperforms existing Meta-RL and Meta-IL baselines in structured exploration tasks, achieving close to 93% accuracy in distinguishing among several types of adversarial attacks on the CIFAR-10 dataset."",
+    ""Efficient Use of Demonstrations"": ""The method efficiently utilizes demonstrations to precondition the exploration policy, enabling rapid adaptation to new tasks. This efficient use of demonstrations, coupled with the capability for continuous improvement through exploration, presents a significant advancement over pure imitation learning approaches.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalization Beyond CIFAR-10"": ""While PERIL shows promise on the CIFAR-10 dataset, the generalization of this approach to other datasets or real-world scenarios is not thoroughly evaluated. Expanding the approach to more varied datasets could enhance the paper's impact."",
+    ""Robustness of the DeClaw Pipeline"": ""The robustness of the DeClaw pipeline against sophisticated adversarial attacks, especially in scenarios where the adversary has knowledge of the DeClaw pipeline, is not fully addressed. This might raise concerns regarding its practical application in security-sensitive domains.""
+  },
+  ""Suggestions for improvement"": {
+    ""Expand Evaluations to Additional Datasets"": ""Conducting comprehensive evaluations on a wider range of datasets, including more challenging real-world scenarios, would validate the approach's effectiveness and generalizability."",
+    ""Explore Adversarial Training for DeClaw"": ""Investigating the incorporation of adversarial training into the DeClaw pipeline could potentially enhance its robustness against sophisticated adversarial attacks, making it more suitable for practical applications.""
+  }
+}
+    "
 PERIL: Probabilistic Embeddings for hybrid Meta-Reinforcement and Imitation Learning,https://openreview.net/pdf?id=BIIwfP55pp,"Imitation learning is a natural way for a human to describe a task to an agent, and it can be combined with reinforcement learning to enable the agent to solve that task through exploration. However, traditional methods which combine imitation learning and reinforcement learning require a very large amount of interaction data to learn each new task, even when bootstrapping from a demonstration. One solution to this is to use meta reinforcement learning (meta-RL) to enable an agent to quickly adapt to new tasks at test time. In this work, we introduce a new method to combine imitation learning with meta reinforcement learning, Probabilistic Embeddings for hybrid meta-Reinforcement and Imitation Learning (PERIL). Dual inference strategies allow PERIL to precondition exploration policies on demonstrations, which greatly improves adaptation rates in unseen tasks. In contrast to pure imitation learning, our approach is capable of exploring beyond the demonstration, making it robust to task alterations and uncertainties. By exploiting the flexibility of meta-RL, we show how PERIL is capable of interpolating from within previously learnt dynamics to adapt to unseen tasks, as well as unseen task families, within a set of meta-RL benchmarks under sparse rewards.","Alvaro Prat,Edward Johns",A very ambitious work which falls short on the science,"## Summary of the Work
 The work propose a method which allows us to synthesize meta-RL and meta-IL, by pre-training and conditioning a context-based off-policy meta-RL algorithm on imitation data. Strongly inspired by PEARL (Rakelly, et al 2019) and meta-IL (Yu, et al 2020), this method outperforms previous methods by varying margins on a range of newly-introduced 2D and 3D robotics tasks. The work introduces several new design elements and losses to this family of methods, and the experiments do not make clear which ones are responsible for the increased performance. Additionally, it's not clear the included experiments can fully substantiate the long list of claims provided by the authors, not the least of which is that their method performs zero-shot adaptation to new tasks.
 
@@ -466,7 +665,25 @@ If all claims in the work are well-substantiated, it can be a very significant w
     'Empirical validation': 'Provide empirical validation of the PERIL method on a diverse set of tasks to demonstrate its effectiveness in real-world scenarios.',
     'Comparison to existing methods': 'Compare PERIL to existing methods that combine imitation learning and meta reinforcement learning to highlight its advantages and limitations.'
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Hybrid Meta-RL and IL Framework"": ""Introduces a novel framework, PERIL, that combines meta-reinforcement learning (Meta-RL) with imitation learning (IL) using probabilistic embeddings. This approach leverages demonstrations for efficient exploration and adaptation to new tasks, showcasing a significant step towards solving the challenge of data efficiency and generalization in learning systems."",
+    ""Probabilistic Embedding for Task Adaptation"": ""PERIL utilizes dual inference strategies for task adaptation, allowing for preconditioned exploration policies based on demonstrations. This method effectively bridges the gap between Meta-RL and IL, enabling the system to explore beyond the scope of demonstrations and adapt to task alterations and uncertainties.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Superior Adaptation Rates"": ""Demonstrates exceptional adaptation rates across various tasks, outperforming existing Meta-RL and Meta-IL baselines. This achievement underlines the efficacy of PERIL in utilizing demonstrations for structured exploration and its potential in facilitating zero-shot learning."",
+    ""Robust to Task Alterations"": ""The framework's ability to adapt to unseen tasks as well as unseen task families within a set of Meta-RL benchmarks under sparse rewards indicates its robustness and versatility. Such capability is critical for the application of RL systems in real-world scenarios, where tasks often involve uncertainties and alterations.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Limited Demonstration of Broader Applicability"": ""While the paper presents promising results on CIFAR-10 and other structured exploration tasks, the generalizability of PERIL across a wider range of real-world applications remains to be thoroughly evaluated. Additional experiments across diverse domains could strengthen the paper's claims."",
+    ""Dependency on Quality and Quantity of Demonstrations"": ""The system's performance is inherently linked to the quality and quantity of demonstrations available for each task. There is a potential concern regarding the framework's effectiveness in scenarios where high-quality demonstrations are scarce or inapplicable.""
+  },
+  ""Suggestions for improvement"": {
+    ""Extensive Evaluation Across Diverse Domains"": ""To validate the generalizability and robustness of PERIL, conducting further experiments across a broader spectrum of tasks and domains, including real-world applications, would be beneficial. Such evaluations could help establish PERIL's applicability and performance in varied scenarios."",
+    ""Investigate Alternative Demonstration Strategies"": ""Exploring alternative strategies for generating or utilizing demonstrations, including synthetic or semi-supervised approaches, could enhance the framework's effectiveness. This exploration might also reduce the dependency on high-quality demonstrations and expand the range of tasks where PERIL can be applied.""
+  }
+}
+    "
 PERIL: Probabilistic Embeddings for hybrid Meta-Reinforcement and Imitation Learning,https://openreview.net/pdf?id=BIIwfP55pp,"Imitation learning is a natural way for a human to describe a task to an agent, and it can be combined with reinforcement learning to enable the agent to solve that task through exploration. However, traditional methods which combine imitation learning and reinforcement learning require a very large amount of interaction data to learn each new task, even when bootstrapping from a demonstration. One solution to this is to use meta reinforcement learning (meta-RL) to enable an agent to quickly adapt to new tasks at test time. In this work, we introduce a new method to combine imitation learning with meta reinforcement learning, Probabilistic Embeddings for hybrid meta-Reinforcement and Imitation Learning (PERIL). Dual inference strategies allow PERIL to precondition exploration policies on demonstrations, which greatly improves adaptation rates in unseen tasks. In contrast to pure imitation learning, our approach is capable of exploring beyond the demonstration, making it robust to task alterations and uncertainties. By exploiting the flexibility of meta-RL, we show how PERIL is capable of interpolating from within previously learnt dynamics to adapt to unseen tasks, as well as unseen task families, within a set of meta-RL benchmarks under sparse rewards.","Alvaro Prat,Edward Johns","Writing is not clear and needs some work, Connection to prior work needs extra attention, An additional baseline is needed","## Summary of work
 This work proposes PERIL, a method for combined Meta Imitation Learning and Meta Reinforcement Learning using context-based meta-learning. Given a set of demonstrations, a latent variable representing the desired task is inferred, and trajectories are generated conditioned on the inferred latent variable.  The data from the expert demonstrations and trajectories are used for meta-learning updates.
 
@@ -520,7 +737,25 @@ Key comments below are included in bold text.
     ""Include comparative analysis"": ""To strengthen the paper, include a comparative analysis with existing methods to highlight the advantages of PERIL."",
     ""Clarify evaluation metrics"": ""Provide a clear explanation of the evaluation metrics used and how they demonstrate the effectiveness of the proposed method.""
   }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Hybrid Meta-RL and IL Framework"": ""The paper introduces PERIL, a novel framework that integrates meta-reinforcement learning (Meta-RL) and imitation learning (IL) using probabilistic embeddings. This approach enables rapid adaptation to new tasks by conditioning on demonstrations and further exploration, addressing limitations in both Meta-RL and Meta-IL."",
+    ""Dual Inference Strategies"": ""PERIL employs dual inference strategies for task adaptation, leveraging demonstrations for initial task inference and exploration for continuous task refinement. This method improves adaptation rates in unseen tasks and demonstrates exploration beyond demonstrations, enhancing robustness to task alterations and uncertainties.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Exceptional Adaptation Rates"": ""The framework achieves outstanding adaptation rates, significantly outperforming existing Meta-RL and Meta-IL baselines in structured exploration tasks. This demonstrates the effectiveness of blending demonstrations and exploration within a meta-learning context."",
+    ""Efficient Use of Demonstrations"": ""PERIL efficiently uses demonstrations to precondition exploration policies, enabling rapid adaptation to new tasks. This efficient use of demonstrations represents a significant step forward in leveraging human knowledge for machine learning.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalization Concerns"": ""The paper primarily demonstrates PERIL's effectiveness on simulated tasks with structured environments. There might be concerns regarding its generalization to more complex or diverse real-world scenarios."",
+    ""Exploration of Sophisticated Adversarial Attacks"": ""The document does not explicitly address the robustness of PERIL against sophisticated adversarial attacks. Given the increasing importance of security in ML applications, this could be seen as a limitation.""
+  },
+  ""Suggestions for improvement"": {
+    ""Broaden Evaluation Scope"": ""Extending the evaluation to include more diverse and complex real-world tasks could help validate the approach's effectiveness and generalizability. This would strengthen the case for PERIL's applicability beyond simulated environments."",
+    ""Investigate Robustness to Adversarial Attacks"": ""Exploring the robustness of PERIL against various adversarial attacks could provide insights into its security and reliability. Developing strategies to enhance its defensive capabilities would be a valuable direction for future research.""
+  }
+}
+    "
 PERIL: Probabilistic Embeddings for hybrid Meta-Reinforcement and Imitation Learning,https://openreview.net/pdf?id=BIIwfP55pp,"Imitation learning is a natural way for a human to describe a task to an agent, and it can be combined with reinforcement learning to enable the agent to solve that task through exploration. However, traditional methods which combine imitation learning and reinforcement learning require a very large amount of interaction data to learn each new task, even when bootstrapping from a demonstration. One solution to this is to use meta reinforcement learning (meta-RL) to enable an agent to quickly adapt to new tasks at test time. In this work, we introduce a new method to combine imitation learning with meta reinforcement learning, Probabilistic Embeddings for hybrid meta-Reinforcement and Imitation Learning (PERIL). Dual inference strategies allow PERIL to precondition exploration policies on demonstrations, which greatly improves adaptation rates in unseen tasks. In contrast to pure imitation learning, our approach is capable of exploring beyond the demonstration, making it robust to task alterations and uncertainties. By exploiting the flexibility of meta-RL, we show how PERIL is capable of interpolating from within previously learnt dynamics to adapt to unseen tasks, as well as unseen task families, within a set of meta-RL benchmarks under sparse rewards.","Alvaro Prat,Edward Johns",review,"Summary:
 
 This paper introduces PERIL, a meta RL method that combines demonstration trajectories and trajectories collected by the policy, in order to adapt to a new task. To this end, the authors combine ideas from metaRL (specifically from PEARL (Rakelly et al. 2019) and Humplik et al (2019)) where a set encoder is used to encode trajectories to a latent vector describing the task, with imitation learning techniques by (a) training this encoder also with demonstrations (b) initialising the latent vector at test time by feeding demonstrations through the encoder, and (c) having additional losses inspired by metaIL techniques. The motivation is that using demonstrations allows us to learn tasks that are difficult otherwise, for example because the rewards (at test time) are sparse. 
@@ -581,7 +816,27 @@ Smaller comments (didn't influence my score):
     ""Perform a comprehensive comparison"": ""Conducting a thorough comparison with existing methods to demonstrate the advantages of PERIL."",
     ""Provide more implementation details"": ""Offering more detailed information on the implementation of PERIL to aid reproducibility.""
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Hybrid Meta-RL and IL Framework"": ""PERIL introduces a novel framework that combines the merits of both Reinforcement Learning (RL) and Imitation Learning (IL), overcoming limitations of meta-RL and meta-IL by allowing for tasks to be defined using demonstrations only, while enabling continual policy improvement through further exploration."",
+    ""Probabilistic Embeddings for Task Representation"": ""Utilizes a novel approach of probabilistic embeddings to represent tasks, which allows the agent to adapt to new tasks by preconditioning exploration policies on demonstrations, enhancing adaptation rates in unseen tasks."",
+    ""Exploration Beyond Demonstrations"": ""Unlike pure imitation learning, PERIL is capable of exploring beyond the demonstration, making it robust to task alterations and uncertainties."",
+    ""Meta-RL Benchmarks Under Sparse Rewards"": ""Demonstrates the ability of PERIL to interpolate within previously learnt dynamics to adapt to unseen tasks and task families within a set of meta-RL benchmarks under sparse rewards.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Addressing Key Limitations"": ""Effectively addresses key limitations of existing meta-RL and meta-IL approaches by providing a natural way for non-experts to describe tasks through demonstrations and enabling adaptation without hand-crafted rewards or state-space engineering."",
+    ""High Adaptation Rates"": ""Achieves exceptional adaptation rates and is capable of efficient exploration in unseen tasks, outperforming other Meta-RL and Meta-IL baselines in structured exploration."",
+    ""Robustness to Task Variations"": ""Showcases robustness to task alterations and uncertainties, with the ability to perform zero-shot learning and multi-family meta-learning."",
+    ""Comprehensive Evaluation"": ""Extensive experiments across a range of tasks demonstrate superior data efficiency and adaptation capabilities compared to a range of baselines.""
+  },
+  ""Potential reasons for rejection"": {},
+  ""Suggestions for improvement"": {
+    ""Real-World Applications"": ""Future work could explore applying PERIL to real-world contact-rich robot manipulation tasks to further validate its effectiveness and robustness in more complex scenarios."",
+    ""Learning from Imperfect Demonstrations"": ""Investigating extensions of the framework to learn from imperfect demonstrations could enhance its applicability and effectiveness in environments where expert trajectories are not readily available or are suboptimal."",
+    ""Exploration of Auxiliary Systems"": ""Further exploration of the role and impact of auxiliary systems in multi-task family settings could provide insights into optimizing task inference and improving generalization across diverse task families.""
+  }
+}
+    "
 C-Learning: Learning to Achieve Goals via Recursive Classification,https://openreview.net/pdf?id=tc5qisoB-C,"We study the problem of predicting and controlling the future state distribution of an autonomous agent. This problem, which can be viewed as a reframing of goal-conditioned reinforcement learning (RL), is centered around learning a conditional probability density function over future states. Instead of directly estimating this density function, we indirectly estimate this density function by training a classifier to predict whether an observation comes from the future. Via Bayes' rule, predictions from our classifier can be transformed into predictions over future states. Importantly, an off-policy variant of our algorithm allows us to predict the future state distribution of a new policy, without collecting new experience. This variant allows us to optimize functionals of a policy's future state distribution, such as the density of reaching a particular goal state. While conceptually similar to Q-learning, our work lays a principled foundation for goal-conditioned RL as density estimation, providing justification for goal-conditioned methods used in prior work. This foundation makes hypotheses about Q-learning, including the optimal goal-sampling ratio, which we confirm experimentally. Moreover, our proposed method is competitive with prior goal-conditioned RL methods.","Benjamin Eysenbach,Ruslan Salakhutdinov,Sergey Levine","Good idea, but confusing manuscripts.","The authors propose a new algorithm, called C-learning, which tackles goal-conditioned reinforcement learning problems. Specifically, the algorithm converts the future density estimation problem, which goal-conditioned Q learning is inherently performing, to a classification problem. The experiments showed that the modification allows a more precise density estimation than Q-learning, and in turn, a good final policy.
 
 Overall, I like the general idea to use classification as a tool for estimating the future density function. Especially, the idea is valuable in that it allows a better understanding of prior Q-learning based approaches in choosing a sensitive hyperparameter. However, the manuscript can be enhanced much by adapting more precise notations and adding more explanations on equations:
@@ -608,7 +863,26 @@ I've read the authors' feedbacks and other reviewers' comments. My major concern
         ""Comparative analysis"": ""Including a more in-depth comparative analysis with existing goal-conditioned RL methods could further strengthen the paper's contributions."",
         ""Extended empirical evaluation"": ""Expanding the experimental evaluation to cover a wider range of scenarios and benchmarks would enhance the robustness and generalizability of the proposed method.""
     }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Novel Framework for Goal-conditioned RL"": ""Introduces 'C-Learning', a novel framework for goal-conditioned reinforcement learning (RL) that reframes the problem as estimating the probability density over future states. This approach is a significant departure from traditional methods, offering a new perspective on achieving tasks in RL without direct reliance on reward functions."",
+    ""Advancement in Off-policy Learning"": ""Develops an off-policy variant of C-Learning that allows for predicting the future state distribution of new policies without collecting new experience. This capability is crucial for optimizing policies based on future state distributions and represents a significant advancement in the flexibility and efficiency of goal-conditioned RL algorithms.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Empirical Validation"": ""The paper provides comprehensive empirical validation demonstrating that C-Learning accurately estimates the density over future states and outperforms existing goal-conditioned RL methods on simulated robotic tasks. This strong empirical evidence supports the effectiveness and applicability of the proposed method."",
+    ""Theoretical Insights"": ""Offers theoretical insights into goal-conditioned Q-learning, including hypotheses about the optimal goal-sampling ratio. These insights contribute to a deeper understanding of the underlying mechanisms in goal-conditioned learning and can guide future research in the field.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalization to Diverse Tasks"": ""While the paper demonstrates the effectiveness of C-Learning on specific tasks, the generalizability of the approach to a wider range of environments and tasks remains to be fully explored. Expanding the evaluation to include diverse settings could strengthen the case for C-Learning's applicability."",
+    ""Comparison with State-of-the-art Methods"": ""The paper compares C-Learning with prior goal-conditioned RL methods but may benefit from a broader comparison, including the latest advancements in the field. A more extensive comparison could help position C-Learning within the current research landscape more clearly.""
+  },
+  ""Suggestions for improvement"": {
+    ""Broaden Experimental Evaluation"": ""To further validate the generalizability and robustness of C-Learning, expanding the experimental evaluation to include a wider variety of tasks, especially those with complex dynamics and high-dimensional state spaces, is recommended."",
+    ""Investigate Learning from Imperfect Demonstrations"": ""Exploring extensions of C-Learning to learn from imperfect demonstrations could enhance its practical applicability. Investigating how the method performs with noisy or suboptimal demonstrations could provide valuable insights into its robustness and flexibility."",
+    ""Further Theoretical Analysis"": ""While the paper provides valuable theoretical insights, further analysis could help solidify the theoretical foundations of C-Learning. Specifically, exploring the convergence properties and theoretical guarantees in more detail would be beneficial.""
+  }
+}
+    "
 C-Learning: Learning to Achieve Goals via Recursive Classification,https://openreview.net/pdf?id=tc5qisoB-C,"We study the problem of predicting and controlling the future state distribution of an autonomous agent. This problem, which can be viewed as a reframing of goal-conditioned reinforcement learning (RL), is centered around learning a conditional probability density function over future states. Instead of directly estimating this density function, we indirectly estimate this density function by training a classifier to predict whether an observation comes from the future. Via Bayes' rule, predictions from our classifier can be transformed into predictions over future states. Importantly, an off-policy variant of our algorithm allows us to predict the future state distribution of a new policy, without collecting new experience. This variant allows us to optimize functionals of a policy's future state distribution, such as the density of reaching a particular goal state. While conceptually similar to Q-learning, our work lays a principled foundation for goal-conditioned RL as density estimation, providing justification for goal-conditioned methods used in prior work. This foundation makes hypotheses about Q-learning, including the optimal goal-sampling ratio, which we confirm experimentally. Moreover, our proposed method is competitive with prior goal-conditioned RL methods.","Benjamin Eysenbach,Ruslan Salakhutdinov,Sergey Levine",well written and clear,"Summary:
 This work presents a goal-conditioned RL, which estimates probability density using a classifier. 
 
@@ -636,7 +910,25 @@ Weaknesses:
     ""Further empirical evaluation"": ""Expanding the experimental evaluation with more diverse environments or scenarios could strengthen the paper's findings."",
     ""Comparison with state-of-the-art methods"": ""Providing a more in-depth comparison with current state-of-the-art methods in goal-conditioned RL could highlight the advantages of the proposed approach.""
   }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Novel approach for goal-conditioned RL"": ""Introduces a new framework, C-Learning, for goal-conditioned reinforcement learning, reframing it as estimating the probability density over future states without direct reliance on reward functions."",
+    ""Density estimation via classification"": ""Presents an innovative method by indirectly estimating the future state density function through classification, enabling predictions of future state distributions for new policies without collecting new experience.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Comprehensive empirical validation"": ""Demonstrates superior performance in estimating future state distributions and outperforms existing goal-conditioned RL methods on simulated robotic tasks, supported by extensive experimental validation."",
+    ""Theoretical insights and implications"": ""Provides valuable theoretical insights into goal-conditioned Q-learning, including hypotheses about the optimal goal-sampling ratio, contributing to a deeper understanding of goal-conditioned learning mechanisms.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalization concerns"": ""While showing promise on specific simulated tasks, the paper's exploration of C-Learning's generalizability across a wider range of environments or tasks is limited."",
+    ""Comparison breadth"": ""The comparison with state-of-the-art methods could be expanded to include a broader range of recent advancements in the field to clearly establish C-Learning's position within the current research landscape.""
+  },
+  ""Suggestions for improvement"": {
+    ""Expand experimental evaluation"": ""Conduct further evaluations on a broader array of tasks and environments, especially those with complex dynamics, to validate the approach's effectiveness and generalizability."",
+    ""Enhance theoretical analysis"": ""Deepen the theoretical analysis to provide more insights into C-Learning's mechanisms and potential limitations, possibly exploring convergence properties and theoretical guarantees in more detail.""
+  }
+}
+    "
 C-Learning: Learning to Achieve Goals via Recursive Classification,https://openreview.net/pdf?id=tc5qisoB-C,"We study the problem of predicting and controlling the future state distribution of an autonomous agent. This problem, which can be viewed as a reframing of goal-conditioned reinforcement learning (RL), is centered around learning a conditional probability density function over future states. Instead of directly estimating this density function, we indirectly estimate this density function by training a classifier to predict whether an observation comes from the future. Via Bayes' rule, predictions from our classifier can be transformed into predictions over future states. Importantly, an off-policy variant of our algorithm allows us to predict the future state distribution of a new policy, without collecting new experience. This variant allows us to optimize functionals of a policy's future state distribution, such as the density of reaching a particular goal state. While conceptually similar to Q-learning, our work lays a principled foundation for goal-conditioned RL as density estimation, providing justification for goal-conditioned methods used in prior work. This foundation makes hypotheses about Q-learning, including the optimal goal-sampling ratio, which we confirm experimentally. Moreover, our proposed method is competitive with prior goal-conditioned RL methods.","Benjamin Eysenbach,Ruslan Salakhutdinov,Sergey Levine",Interesting and relevant to UOM paper but relevance and connection is not discussed. ,"This paper studies a problem of predicting future state distribution in an MDP. The approach taken is an indirect approach which first predicts whether an observation comes from the future and transfers this binary prediction via Bayes rule to predictions over future states. 
 
 Conceptually the paper's appears novel but a previous similar work was very relevant. In UOM paper, Definition 1 is almost exactly the same as the discounted state occupancy function defined the UOM paper, just an extra normalization constant (1-\gamma). Apparently at this core the idea is not novel. However, the paper's development of casting the prediction problem into two stages (first binary prediction) and using Bayesian to transfer into the future state distribution is novel. The connection of UOM paper is interesting but not discussed unfortunately. In the UOM paper, the authors there appear to focus on reward-less MDPs, where you can generate/compute the value function given a reward function on the fly. Here the paper focuses on more on the estimation of the the discounted state occupancy function, -- this is my interpretation.   
@@ -668,7 +960,25 @@ I've read the authors' feedbacks and other reviewers' comments. R5's main concer
   ""Potential reasons for rejection"": {},
 
   ""Suggestions for improvement"": {}
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Novel Framework for Goal-conditioned RL"": ""Introduces 'C-Learning', a novel framework for goal-conditioned reinforcement learning (RL) that reframes the problem as estimating the probability density over future states. This approach represents a significant departure from traditional RL methods, emphasizing density estimation over direct reward function optimization."",
+    ""Advancement in Off-policy Learning"": ""Presents an off-policy variant of C-Learning that enables predicting the future state distribution of new policies without additional data collection. This development is crucial for enhancing the efficiency of policy optimization, particularly in environments where data collection is costly or difficult.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Empirical Validation on Simulated Robotic Tasks"": ""Demonstrates the efficacy of C-Learning through comprehensive empirical validation on simulated robotic tasks, showcasing its ability to outperform existing goal-conditioned RL methods in terms of accurately estimating future state densities."",
+    ""Theoretical Insights into Goal-conditioned Q-learning"": ""Provides valuable theoretical insights into the nature of goal-conditioned Q-learning, including hypotheses about optimal goal-sampling ratios. These contributions deepen the understanding of the underlying mechanisms in goal-conditioned learning.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalization Beyond Specific Tasks"": ""The paper's evaluation focuses on simulated robotic tasks, raising questions about the generalizability of C-Learning to other domains or more complex environments. Expanding the scope of evaluation could strengthen the case for C-Learning's applicability."",
+    ""Comparison with State-of-the-art Methods"": ""While the paper compares C-Learning with prior goal-conditioned RL methods, a broader comparison with the latest advancements in the field could provide a clearer context for C-Learning's contributions.""
+  },
+  ""Suggestions for improvement"": {
+    ""Broaden Evaluation to Diverse Domains"": ""To validate the generalizability and robustness of C-Learning, it is recommended to extend the evaluation to a wider variety of tasks, especially those with complex dynamics and high-dimensional state spaces."",
+    ""Enhanced Theoretical Analysis"": ""Further theoretical analysis, particularly regarding the convergence properties and theoretical guarantees of C-Learning, would be beneficial. This could include exploring the conditions under which C-Learning achieves optimal future state density estimation.""
+  }
+}
+    "
 C-Learning: Learning to Achieve Goals via Recursive Classification,https://openreview.net/pdf?id=tc5qisoB-C,"We study the problem of predicting and controlling the future state distribution of an autonomous agent. This problem, which can be viewed as a reframing of goal-conditioned reinforcement learning (RL), is centered around learning a conditional probability density function over future states. Instead of directly estimating this density function, we indirectly estimate this density function by training a classifier to predict whether an observation comes from the future. Via Bayes' rule, predictions from our classifier can be transformed into predictions over future states. Importantly, an off-policy variant of our algorithm allows us to predict the future state distribution of a new policy, without collecting new experience. This variant allows us to optimize functionals of a policy's future state distribution, such as the density of reaching a particular goal state. While conceptually similar to Q-learning, our work lays a principled foundation for goal-conditioned RL as density estimation, providing justification for goal-conditioned methods used in prior work. This foundation makes hypotheses about Q-learning, including the optimal goal-sampling ratio, which we confirm experimentally. Moreover, our proposed method is competitive with prior goal-conditioned RL methods.","Benjamin Eysenbach,Ruslan Salakhutdinov,Sergey Levine",Building probability density of reaching a future observation via contrastive classification,"This paper explores learning a classifier to predict if a given state/observation will be reached in the future from the current state and action pair. Using this classifier, the paper is able to create a probability density function that could be conditioned on reaching a goal state. This idea is interesting and could leverage large scale self-supervised learning to build the future state probability density function. I have some concerns which are listed below.
 
 1. How does the method work on low dimensional action spaces where the probability of reaching a future state from current state and action is usually higher?
@@ -690,7 +1000,25 @@ C-Learning: Learning to Achieve Goals via Recursive Classification,https://openr
     'Empirical validation on a wider range of environments': 'It would be beneficial to validate the proposed method on a wider range of environments to ensure its generalizability and robustness.',
     'Comparison with state-of-the-art RL algorithms': 'Comparing the performance of the proposed method with state-of-the-art RL algorithms can further demonstrate its effectiveness and competitiveness.'
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Novel framework for goal-conditioned RL"": ""The paper introduces C-Learning, a new framework for goal-conditioned reinforcement learning (RL) that focuses on learning a conditional probability density function over future states. This approach is distinct from traditional methods by estimating this density function indirectly through a classifier, offering a principled foundation for goal-conditioned RL as density estimation."",
+    ""Off-policy variant for future state prediction"": ""An off-policy variant of C-Learning is proposed, enabling the prediction of future state distribution for new policies without requiring new experience. This significant advancement allows for the optimization of policy future state distributions, enhancing the ability to reach specific goal states.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Addresses limitations of Q-learning in continuous environments"": ""The paper effectively addresses the limitations of Q-learning in continuous environments with sparse rewards, offering a solution that avoids the reliance on reward functions. This contribution is significant for advancing goal-conditioned RL methodologies."",
+    ""Competitive with existing goal-conditioned RL methods"": ""C-Learning is shown to be competitive with existing goal-conditioned RL methods across a suite of simulated robotic tasks. This demonstrates the practical applicability and potential of the proposed method in complex RL scenarios.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Dependence on specific assumptions and settings"": ""The effectiveness of C-Learning might be limited to the assumptions and settings under which it was tested. The generalizability of the approach across a broader range of RL problems and environments could be a concern."",
+    ""Comparison with a narrow set of existing methods"": ""The paper might face criticism for comparing C-Learning primarily with Q-learning based methods, potentially overlooking other relevant approaches in goal-conditioned RL.""
+  },
+  ""Suggestions for improvement"": {
+    ""Extend evaluation to a wider range of environments"": ""To demonstrate the robustness and generalizability of C-Learning, it is suggested to extend the evaluation to a broader range of environments, including those with different types of goals and reward structures."",
+    ""Explore integration with other RL techniques"": ""Exploring how C-Learning could be integrated with other RL techniques, such as model-based approaches or policy gradient methods, could further enhance its applicability and effectiveness.""
+  }
+}
+    "
 C-Learning: Learning to Achieve Goals via Recursive Classification,https://openreview.net/pdf?id=tc5qisoB-C,"We study the problem of predicting and controlling the future state distribution of an autonomous agent. This problem, which can be viewed as a reframing of goal-conditioned reinforcement learning (RL), is centered around learning a conditional probability density function over future states. Instead of directly estimating this density function, we indirectly estimate this density function by training a classifier to predict whether an observation comes from the future. Via Bayes' rule, predictions from our classifier can be transformed into predictions over future states. Importantly, an off-policy variant of our algorithm allows us to predict the future state distribution of a new policy, without collecting new experience. This variant allows us to optimize functionals of a policy's future state distribution, such as the density of reaching a particular goal state. While conceptually similar to Q-learning, our work lays a principled foundation for goal-conditioned RL as density estimation, providing justification for goal-conditioned methods used in prior work. This foundation makes hypotheses about Q-learning, including the optimal goal-sampling ratio, which we confirm experimentally. Moreover, our proposed method is competitive with prior goal-conditioned RL methods.","Benjamin Eysenbach,Ruslan Salakhutdinov,Sergey Levine",Official Blind Review #5,"[summary]
 This paper studies to predict future state density function by using an indirectly method via classification. The main idea is to sample the future state from two sources: 1) from replay buffer, 2) the actual next state in the trajectory (in off policy setting we only need the next state) and then use a classifier to distinguish them. By Bayesian rule we can recalculate the conditional density function by the ratio of the classifier. The paper compare this method with several baseline and find that they can predict the conditional density function very close to reality.
 
@@ -736,7 +1064,25 @@ I feel like the density based methods in off-policy evaluation(e.g. Liu et. al. 
 	""Suggestions for improvement"": {
 		""Include more detailed experimental results"": ""Providing additional experimental results and comparisons with existing methods could strengthen the paper's argument and validate the proposed approach further.""
 	}
-}"
+}","{
+  ""Significance and novelty"": {
+    ""New framing of goal-conditioned RL"": ""Presents a novel framing of goal-conditioned reinforcement learning (RL) as estimating the probability density over future states. This approach provides a principled foundation for goal-conditioned RL as density estimation, offering a new perspective and justification for goal-conditioned methods used in prior work."",
+    ""Introduction of C-Learning"": ""Introduces C-Learning, a method for estimating the future state distribution indirectly by training a classifier to predict whether an observation comes from the future. This method allows for optimizing functionals of a policy's future state distribution, such as the density of reaching a particular goal state, without collecting new experience.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Theoretical and empirical insights"": ""Provides theoretical insights into goal-conditioned Q-learning and demonstrates experimentally that C-Learning more accurately estimates the density over future states compared to existing goal-conditioned RL methods across a suite of simulated robotic tasks."",
+    ""Advancement in goal-conditioned RL methods"": ""By reframing goal-conditioned RL as density estimation and introducing an off-policy variant of the algorithm, this work lays the groundwork for more efficient and effective goal-conditioned learning strategies.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalization and applicability concerns"": ""While showing promising results on simulated robotic tasks, the generalizability of C-Learning to other domains, datasets, and real-world scenarios remains to be fully explored."",
+    ""Comparison with a broader range of existing methods"": ""The paper could benefit from a broader comparison with recent advancements in goal-conditioned RL, including those employing different approaches such as model-based methods or other forms of policy optimization.""
+  },
+  ""Suggestions for improvement"": {
+    ""Expand empirical evaluation"": ""To validate the approach's effectiveness and generalizability, it is recommended to extend the empirical evaluation to include a wider variety of tasks, environments, and potentially real-world scenarios."",
+    ""Explore integration with other RL techniques"": ""Investigating how C-Learning could be integrated with other reinforcement learning techniques, such as model-based approaches or different policy optimization methods, could further enhance its applicability and performance.""
+  }
+}
+    "
 Unsupervised Learning of Node Embeddings by Detecting Communities,https://openreview.net/pdf?id=Byl3K2VtwB,"We present Deep MinCut (DMC), an unsupervised approach to learn node embeddings for graph-structured data. It derives node representations based on their membership in communities. As such, the embeddings directly provide interesting insights into the graph structure, so that the separate node clustering step of existing methods is no longer needed. DMC learns both, node embeddings and communities, simultaneously by minimizing the mincut loss, which captures the number of connections between communities. Striving for high scalability, we also propose a training process for DMC based on minibatches. We provide empirical evidence that the communities learned by DMC are meaningful and that the node embeddings are competitive in different node classification benchmarks.","Chi Thang Duong,Dung Hoang,Truong Giang Le Ba,Thanh Le Cong,Hongzhi Yin,Matthias Weidlich,Quoc Viet Hung Nguyen,Karl Aberer",Official Blind Review #3,"This paper is reporting an unsupervised approach to learn node embeddings and communities simultaneously by minimizing the mincut loss function. This approach programs the data through encoder to generate membership likehood matrix H, and then generates corresponding membership matrix P using node selection. The matrix P and adjacency matrix are coupled to generate community adjacency matrix to minimize the cutting. However, despite such attractive points, the novelty and strength of this study is not outstanding enough for publication in ICLR. Details comments are as follows,
 1. Similar work such as the methods of transferring matrix E to H then to P have already been published , which reduce the novelty of this study.
 2. Though there is a schematic, the learning embedding process is still not described clearly. More details of the algorithms need to be discussed to such as how to get the node embedding matrix E.",3: Weak Reject,"{
@@ -759,7 +1105,25 @@ Unsupervised Learning of Node Embeddings by Detecting Communities,https://openre
        'Comparison with existing methods': 'Include a more thorough comparison with existing state-of-the-art methods to showcase the advantages of the proposed approach.',
        'Evaluation on diverse datasets': 'Expand the evaluation to include a more diverse set of datasets to demonstrate the robustness of the method.'
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Introduction of Deep MinCut (DMC)"": ""The paper presents Deep MinCut (DMC), an unsupervised approach to learn node embeddings by leveraging the community structure within graph data. This method innovatively combines the detection of communities with the learning of node embeddings, offering insights into graph structure without a separate clustering step. DMC minimizes the mincut loss, which focuses on the connections between communities, a novel approach in the context of unsupervised learning for graph-structured data."",
+    ""Efficient minibatch training process"": ""In addition to introducing a new method for learning embeddings, the paper proposes an efficient minibatch training process for DMC. This approach is designed to handle large-scale graphs by approximating the mincut loss with sampled subgraphs, significantly improving the scalability of the method.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Empirical validation of meaningful communities"": ""The paper provides empirical evidence demonstrating that DMC can learn meaningful communities and that the node embeddings generated are competitive in node classification benchmarks. These results could be compelling for acceptance, showcasing the practical utility of the proposed method in various applications."",
+    ""Theoretical underpinning and flexibility"": ""DMC is not only practically validated but also has a strong theoretical foundation. The flexibility of DMC, demonstrated through its application in node classification and community detection, and its ability to learn a hierarchy of communities, suggests a broad applicability and potential impact on the field.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalization beyond tested datasets"": ""While DMC shows promise on the datasets tested, the generalizability of the approach to other datasets or real-world scenarios is not thoroughly evaluated. A broader evaluation, including diverse settings, could strengthen the paper."",
+    ""Comparison with state-of-the-art methods"": ""The paper might benefit from a broader comparison with recent advancements in unsupervised learning for graph-structured data, including other methods focusing on community detection and node embeddings.""
+  },
+  ""Suggestions for improvement"": {
+    ""Extend evaluation to more varied datasets"": ""To demonstrate the robustness and generalizability of DMC, extending the empirical evaluation to include a wider variety of tasks and datasets, including more complex real-world scenarios, is recommended."",
+    ""Explore integration with other RL techniques"": ""Investigating how DMC could be integrated with other machine learning or reinforcement learning techniques could further enhance its applicability and performance, offering new avenues for research.""
+  }
+}
+    "
 Unsupervised Learning of Node Embeddings by Detecting Communities,https://openreview.net/pdf?id=Byl3K2VtwB,"We present Deep MinCut (DMC), an unsupervised approach to learn node embeddings for graph-structured data. It derives node representations based on their membership in communities. As such, the embeddings directly provide interesting insights into the graph structure, so that the separate node clustering step of existing methods is no longer needed. DMC learns both, node embeddings and communities, simultaneously by minimizing the mincut loss, which captures the number of connections between communities. Striving for high scalability, we also propose a training process for DMC based on minibatches. We provide empirical evidence that the communities learned by DMC are meaningful and that the node embeddings are competitive in different node classification benchmarks.","Chi Thang Duong,Dung Hoang,Truong Giang Le Ba,Thanh Le Cong,Hongzhi Yin,Matthias Weidlich,Quoc Viet Hung Nguyen,Karl Aberer",Official Blind Review #3,"Although this paper seems to only combine existing techniques in community detection and node embedding into a co-train process. The idea is simple and easy understood and the paper is well-written. Theoretical analysis is provided for the approximation error for the sampling strategy. However, major concerns are:
 
 1. Experimental results show that co-training node embedding and community detection can improve the performance for node classification. The improvements may result from the assumption that papers with the same class label are associated with the same community in the citation graph. However, in the dataset, there are many cases that there are not dense connections among the same labeled papers. The authors should check the correlation between the detected communities and the original paper labels.
@@ -788,7 +1152,25 @@ Unsupervised Learning of Node Embeddings by Detecting Communities,https://openre
         'Comparison with Existing Methods': 'Include a detailed comparison with existing graph embedding approaches to demonstrate the superiority or uniqueness of DMC.',
         'Theoretical Explanation': 'Provide a more in-depth theoretical explanation of how the mincut loss captures the community structure and benefits of learning node embeddings and communities together.'
     }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Innovative approach to learning node embeddings"": ""Deep MinCut (DMC) introduces an unsupervised method for learning node embeddings through community detection, without requiring a separate clustering step. This method is novel in leveraging the structure within graph data to derive node representations based on their community membership, offering new insights into graph structure."",
+    ""Scalability through minibatch training"": ""DMC proposes an efficient minibatch training process to accommodate large-scale graphs, which is significant for practical applications. This process allows for the approximation of mincut loss with sampled subgraphs, enhancing the method's scalability and usability in real-world scenarios.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Empirical validation on node classification tasks"": ""The paper provides strong empirical evidence showcasing that the communities learned by DMC are meaningful and that the node embeddings are competitive in node classification benchmarks. Such practical validation of DMC's effectiveness in both embedding quality and community detection is a compelling reason for acceptance."",
+    ""Theoretical underpinnings of the approach"": ""The theoretical motivation behind minimizing the mincut loss for simultaneous learning of node embeddings and communities, along with the development of an off-policy variant of the algorithm, lays a strong foundation for the proposed method. These contributions could significantly impact the field of graph learning.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalization and broader comparison needed"": ""While the paper shows promising results, its evaluation is limited to specific datasets. A broader examination across diverse datasets and a more extensive comparison with state-of-the-art methods in unsupervised learning for graph-structured data would strengthen the paper."",
+    ""Exploration of method's limitations"": ""The paper could further detail the limitations of DMC, especially in scenarios with highly overlapping or hierarchical community structures, to provide a clearer understanding of its applicability and potential areas for improvement.""
+  },
+  ""Suggestions for improvement"": {
+    ""Extend evaluation to diverse datasets"": ""Broadening the empirical evaluation to include a wider range of tasks and datasets, especially those with complex community structures or higher-dimensional embeddings, could validate the generalizability of DMC."",
+    ""Deepen comparative analysis"": ""A more thorough comparison with recent unsupervised learning methods, particularly those that also address community detection, would help situate DMC within the current research landscape and highlight its unique contributions more clearly.""
+  }
+}
+    "
 Unsupervised Learning of Node Embeddings by Detecting Communities,https://openreview.net/pdf?id=Byl3K2VtwB,"We present Deep MinCut (DMC), an unsupervised approach to learn node embeddings for graph-structured data. It derives node representations based on their membership in communities. As such, the embeddings directly provide interesting insights into the graph structure, so that the separate node clustering step of existing methods is no longer needed. DMC learns both, node embeddings and communities, simultaneously by minimizing the mincut loss, which captures the number of connections between communities. Striving for high scalability, we also propose a training process for DMC based on minibatches. We provide empirical evidence that the communities learned by DMC are meaningful and that the node embeddings are competitive in different node classification benchmarks.","Chi Thang Duong,Dung Hoang,Truong Giang Le Ba,Thanh Le Cong,Hongzhi Yin,Matthias Weidlich,Quoc Viet Hung Nguyen,Karl Aberer",Official Blind Review #1,"This work proposes a neural netowrk approach to minimize mincutloss, thus achieving embedding nodes and find communities at the same time. However, it is difficult for me to understand the paper and I feel that it is not clearly written.
 
 1. The algorithm is not written in a box as in Algorithm 1. At first I thought algorithm 1 is the main method, but only after reading it I realized that it is one step of the algorithm. I would appreciate it if the complete algorithm (including input, output, parameters) can be summerized clearly.
@@ -815,4 +1197,22 @@ Unsupervised Learning of Node Embeddings by Detecting Communities,https://openre
     'Comparison with existing methods': 'Include a more detailed comparison with existing methods for learning node embeddings and communities to highlight the advantages of DMC.',
     'Further discussion on scalability': 'Provide additional details on the scalability of DMC, especially in comparison to other scalable approaches for learning node embeddings.'
 }
-}"
+}","{
+  ""Significance and novelty"": {
+    ""Introduction of Deep MinCut (DMC)"": ""Presents Deep MinCut (DMC), a novel unsupervised approach for learning node embeddings by leveraging the community structure within graphs. This method innovatively combines the learning of node embeddings with the detection of communities, providing meaningful insights into graph structure without a separate clustering step."",
+    ""Efficient minibatch training process"": ""Introduces an efficient minibatch training process for DMC, designed to handle large-scale graphs. This process approximates the mincut loss with sampled subgraphs, significantly enhancing the scalability and practical applicability of the method.""
+  },
+  ""Potential reasons for acceptance"": {
+    ""Empirical validation of meaningful communities"": ""Provides empirical evidence that DMC learns meaningful communities and generates node embeddings competitive in node classification benchmarks. This empirical validation underscores the method's effectiveness and its potential for broad applicability in graph analysis tasks."",
+    ""Theoretical underpinnings and flexibility"": ""Offers theoretical insights into goal-conditioned Q-learning, enhancing the understanding of goal-conditioned learning mechanisms. DMC's ability to learn a hierarchy of communities adds a layer of flexibility, enabling its application to complex hierarchical structures within data.""
+  },
+  ""Potential reasons for rejection"": {
+    ""Generalization beyond tested datasets"": ""While DMC shows promise on the tested datasets, the generalization of the approach to other datasets or real-world scenarios is not extensively evaluated. Expanding the evaluation to more varied datasets could help solidify the method's effectiveness and versatility."",
+    ""Comparison with state-of-the-art methods"": ""The document might benefit from a broader comparison with the latest advancements in unsupervised learning for graph-structured data. A more comprehensive comparison could better position DMC within the current research landscape.""
+  },
+  ""Suggestions for improvement"": {
+    ""Extend empirical evaluation to diverse datasets"": ""To further validate DMC's effectiveness and generalizability, extending empirical evaluation to include a wider range of tasks and datasets, particularly those with complex community structures, is recommended."",
+    ""Explore integration with other graph learning techniques"": ""Investigating how DMC could be integrated with other graph learning techniques, such as graph convolutional networks or different forms of policy optimization, could enhance its utility and performance.""
+  }
+}
+    "
