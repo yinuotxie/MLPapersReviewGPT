@@ -1,4 +1,4 @@
-title,content
+title,content,review
 C-Learning: Learning to Achieve Goals via Recursive Classification,"[TITLE]
 C-Learning: Learning to Achieve Goals via Recursive Classification
 
@@ -50,6 +50,21 @@ Section Title: Predicting the goal sampling ratio for goal conditioned RL
 
 Section Title: CONCLUSION
   CONCLUSION A goal-oriented agent should be able to predict and control the future state of its environment. In this paper, we used this idea to reformulate the standard goal-conditioned RL problem as one of estimating and optimizing the future state density function. We showed that Q-learning does not directly solve this problem in (stochastic) environments with continuous states, and hindsight relabeling produces, at best, a mediocre solution for an unclear objective function. In contrast, C- learning yields more accurate solutions. Moreover, our analysis makes two hypotheses about when and where hindsight relabeling will most effectively solve this problem, both of which are validated in our experiments. Our experiments also demonstrate that C-learning scales to high-dimensional continuous controls tasks, where performance is competitive with state-of-the-art goal conditioned RL methods while offering an automatic and principled mechanism for hindsight relabeling.
+","[Significance and novelty]
+<Use of classification for estimating future density function> The use of classification as a tool for estimating the future density function is considered novel and insightful, offering a new perspective on addressing goal-conditioned reinforcement learning problems.
+<Indirect approach for predicting future state distribution> The method's use of an indirect approach to predict future state distribution, utilizing a binary prediction and Bayesian transfer technique, presents a unique and conceptually novel approach to the problem.
+
+[Potential reasons for acceptance]
+<Solid theory and experiments> The paper's theoretical framework and experimental results are robust and convincing, showcasing comparable performance to prior Q-learning-based methods without in-depth hyperparameter tuning.
+
+[Potential reasons for rejection]
+<Notation and clarity issues> Several reviewers expressed concerns about the clarity of the manuscript and its use of notation, indicating potential issues with understanding key concepts and derivations.
+<Limited improvement in performance> Despite competitive results, the paper's performance could be considered limited in terms of substantially surpassing existing baselines, which may raise questions about its practical impact.
+
+[Suggestions for improvement]
+<Clarity and notation refinement> The authors should consider revising and refining the paper's notation to address confusion and enhance clarity for readers, particularly in the derivation of key equations.
+<Further exploration of performance improvement> Exploring avenues for significantly improving performance beyond the competitive results, as suggested by one of the reviewers, could strengthen the practical impact of the proposed method.
+
 "
 Pre-Training by Completing Point Clouds,"[TITLE]
 Pre-Training by Completing Point Clouds
@@ -154,6 +169,21 @@ Section Title: PRE-TRAINING FOR POINT CLOUDS
 Section Title: DISCUSSION
   DISCUSSION In this work, we have demonstrated that why and how the Occlusion Completion (OcCo) learns the representations on point clouds that are more transformation invariant, more accurate in few-shot learning, and in various classification and segmentation fine tuning tasks, compared to prior work. In future, it would be interesting to design a completion model that is explicitly aware the view-point of the occlusion. A model like this would likely converge even quicker, and require fewer parameters, as this knowledge could act as a stronger inductive bias during learning. In general, we advocate for structuring deep models using graphical constraints as an inductive bias to improve learning.
   We noticed that the random initialised/pre-trained model in ( Sauder & Sievers, 2019 ) (mIoU=40.3/41.2) did not achieve the similar results as the original DGCNN (mIoU=56.1). They consider a transductive setting which is not directly comparable to ours, so here we stick to the supervised setting and report our reproduced scores.
+","[Significance and novelty]
+<Pre-training on point cloud completion> The paper proposes using point cloud completion as a pre-training step for point cloud processing methods, which is considered a novel idea within the field of 3D recognition. However, some reviewers argue that the novelty of this contribution may be limited due to its similarity to techniques used in other fields such as NLP and computer vision.
+
+[Potential reasons for acceptance]
+<Experimental results> The experimental results demonstrate the effectiveness of the pre-training on point cloud completion in improving various downstream applications. Reviewers note that the results show promising performance improvements, indicating the potential significance of the proposed approach.
+<Clear presentation> Reviewers appreciate the clarity and presentation of the paper, noting that the authors effectively describe the pre-training method and experimental setup, which contributes to the paper's potential acceptance.
+
+[Potential reasons for rejection]
+<Limited novelty> Some reviewers express concerns about the limited novelty of the proposed approach, suggesting that similar techniques have been used in other domains such as NLP and computer vision. They question the significant methodological advancement provided by the paper's contribution.
+<Weak experimental results> The experimental results are considered modest by some reviewers, who raise concerns about the significance of the performance gains and the lack of information on run-to-run variance, indicating potential weaknesses in the experimental evaluation.
+
+[Suggestions for improvement]
+<In-depth analysis of method effectiveness> Reviewers suggest providing a deeper analysis of why the pre-training on point cloud completion is effective, including visualizing the learned features and addressing why this particular task was chosen over other potential pre-training strategies.
+<Additional experimental details> Including crucial information needed to understand the experimental results, such as details on training the networks for different tasks, significance of improvements over baselines, and addressing run-to-run variance, is recommended to strengthen the paper's experimental evaluation.
+
 "
 PERIL: Probabilistic Embeddings for hybrid Meta-Reinforcement and Imitation Learning,"[TITLE]
 PERIL: Probabilistic Embeddings for hybrid Meta-Reinforcement and Imitation Learning
@@ -222,6 +252,22 @@ Section Title: Probabilistic Kernel
 
 Section Title: Conditioning on Demonstrations
   Conditioning on Demonstrations We minimise the conditioned mutual information term by enduring the following deconstruction process. In order to optimise the two terms in (13), we define L bc and L inf o as the leftmost and rightmost distribution expectancies respectively. In this definition, the expectancies are not differentiable and requires parametric manipulation. The first step is to adapted this objective into a meta-RL form, by approximating the conditional p(τ |z) with the policy p θ (τ |z). We define the first term L bc (θ) as the conditional behavioural cloning loss.
+","[Significance and novelty]
+<Combines meta-RL and imitation learning> The paper introduces a method that combines meta-RL and imitation learning to efficiently adapt to new tasks, which is a significant and novel contribution to the field.
+
+[Potential reasons for acceptance]
+<Strong experimental results> The paper presents strong experimental results showcasing the method's outperformance of baselines, which adds weight to the significance of the findings.
+<Addresses important problems in adaptive RL> The paper addresses several important problems in adaptive RL, including generalizing to complex tasks and using demonstrations to avoid costly random exploration.
+
+[Potential reasons for rejection]
+<Complexity and lack of clarity> The method is quite complex, consisting of many different parts and loss terms, which may impact the overall clarity and comprehensibility of the paper.
+<Inconsistencies and unpolished notation> The notation and mathematical formulation in the paper are not polished enough, with inconsistencies, variable name clashes, and some parts of the objective function not properly introduced and explained.
+
+[Suggestions for improvement]
+<Simplify the approach and clarify necessity of components> The paper could benefit from a clear analysis of the necessity of each component and potential simplification of the method, including ablations and additional baselines to understand the roles of different parts.
+<Polish notation and mathematical formulation> It's important to address inconsistencies and variable name clashes, and to carefully explain and introduce all parts of the objective function to enhance the overall clarity and readability of the paper.
+<Address problem formulation and solution alignment> The paper should align the problem formulation with the proposed solution, ensuring consistency in the understanding of the underlying concepts and methods.
+
 "
 "Using Anomaly Feature Vectors for Detecting, Classifying and Warning of Outlier Adversarial Examples","[TITLE]
 Using Anomaly Feature Vectors for Detecting, Classifying and Warning of Outlier Adversarial Examples
@@ -316,4 +362,20 @@ Section Title: A.12. Nearest Neighbor Classification Support Features
 
 Section Title: Annex Figures
   Annex Figures   Table 1:   Table 1: Attack classes used in the baseline experiment. In the non-clustered attack mode, 12 classes were used. In the clustered attack classification mode, those 12 classes were grouped into 6 cluster groups based on a transitive closure against either FPR or FNR > 25%. Attack classes that are too difficult to discriminate between each other (and thus have high inter-class FPR or FNR) are then assigned to the same cluster. This clustering-by-FPR/FNR threshold technique is discussed in Section A.3.           Table 2:   Table 2: DeClaW's command line hyper-parameters.           Table 3:   Table 3: Best performing parameters and their resulting accuracy metrics (F1 values for natural and across classes as well as average observed accuracy for detection and clas- sification mode over a grid parameter evaluation. Attack classes were grouped into clusters based on a proxy to sim- ilarity, the corresponding F N R and F P R rates between two attack classes. A transitive closure reduced a dozen attack classes into six. Using this criteria, all models are in a plateau, whose maximal point is 94.2% for classification Acc C+A k and 90.8% for detection Acc)C|A.           Table 4:   Table 4: The basic anomaly detection building block fea- tures based on region-based aggregations.           Table 5:   Table 5: Twenty five additional features are used to identify whether a given feature value f r (l i ) from Table 4 represent extrema events with respect to the overall distribution and percentiles of feature values obtained for normative natural samples.           fig_7 Figure 7:   Figure 7: To compare the observed distribution z i values against the expected distribution of z N i values histograms are used. We use 23 bins and construct features that measure discrepancies between observed and expected bincounts as well as symmetry between selected regions R x and R y of the compated distributions.       Table 6:   Table 6: P-values resulting from the application of several statistical tests are used as features. These tests compare a random small subsample of the population of 40960 ob- served layer input values against a random small subsample of the population of 40960 normative layer input values.        
+","[Significance and novelty]
+<DNN-based attack-type classifier> The proposed method of using a DNN-based attack-type classifier to classify clean images and adversarial examples is a significant contribution to the field of image classification and security.
+<Anomaly feature vector (AFV) on CIFAR10 dataset> The use of anomaly feature vectors on the CIFAR10 dataset for classifying different attack types adds novelty to the approach.
+
+[Potential reasons for acceptance]
+<Well-organized paper> The well-organized structure of the paper and the illustration of statistical differences between attack algorithms contribute to its potential acceptance.
+<High accuracies in classifying attack types> The achievement of high accuracies in classifying different attack types is a strong point in favor of acceptance.
+
+[Potential reasons for rejection]
+<Clarity of attack type classification> The lack of clarity in the meaning of classifying different attack types might be a potential reason for rejection.
+<Unreliable results based on clustering algorithm> The reliance on a clustering algorithm for defining composite classes, leading to potentially unreliable results, could be a reason for rejection.
+
+[Suggestions for improvement]
+<Clarify attack type classification> The authors should focus on providing a clearer explanation of the meaning and implications of classifying different attack types.
+<Reduce reliance on additional clustering algorithms> To improve the reliability of the results, the paper should aim to reduce reliance on additional clustering algorithms for defining composite classes.
+
 "
