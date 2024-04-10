@@ -1,6 +1,5 @@
 # data
-papers/
-reviews/ 
+data/*.jsonl
 
 # env 
 cis6200/
