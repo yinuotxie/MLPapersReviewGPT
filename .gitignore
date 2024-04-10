@@ -2,7 +2,7 @@
 data/*.jsonl
 
 # env 
-cis6200/
+academic_gpt/
 
 # DS store
 .DS_Store
