@@ -177,29 +177,35 @@ def prepare_training(args: argparse.Namespace,
     """
     training_args = TrainingArguments(
         output_dir=args.output_dir,
+        # training arguments
         num_train_epochs=args.num_of_epochs,
         per_device_train_batch_size=args.per_device_train_batch_size,
         per_device_eval_batch_size=args.per_device_eval_batch_size,
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         gradient_checkpointing=args.gradient_checkpointing,
+        auto_find_batch_size=args.auto_find_batch_size,
+        # optimization arguments
         optim=args.optim,
+        learning_rate=args.learning_rate,
+        max_grad_norm=args.max_grad_norm,
+        # Scheduler and fine-tuning arguments
+        max_steps=args.max_steps,
+        warmup_ratio=args.warmup_ratio,
+        lr_scheduler_type=args.lr_scheduler_type,
+        # mixed precision training
+        fp16=args.fp16,
+        # Logging and saving arguments
         logging_steps=args.logging_steps,
         eval_steps=args.eval_steps,
         evaluation_strategy=args.evaluation_strategy,
         save_steps=args.save_steps,
         save_strategy=args.save_strategy,
-        learning_rate=args.learning_rate,
-        fp16=args.fp16,
-        max_grad_norm=args.max_grad_norm,
-        warmup_ratio=args.warmup_ratio,
-        lr_scheduler_type=args.lr_scheduler_type,
+        # Miscellaneous arguments
         push_to_hub=args.push_to_hub,
         load_best_model_at_end=args.load_best_model_at_end,
         report_to="wandb",
         run_name=args.run_name,
-        # Ensure hub_model_id and auto_find_batch_size are valid args attributes
-        hub_model_id=getattr(args, 'hub_model_id', None),
-        auto_find_batch_size=getattr(args, 'auto_find_batch_size', False),
+        hub_model_id=args.hub_model_id,
     )
 
     peft_config = LoraConfig(
