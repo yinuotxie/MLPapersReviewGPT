@@ -1,8 +1,9 @@
 # data
-data/*.jsonl
+data/*
 
 # env 
 academic_gpt/
+cis6200/
 
 # model
 model/
