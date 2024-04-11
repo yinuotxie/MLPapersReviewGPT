@@ -4,5 +4,11 @@ data/*.jsonl
 # env 
 academic_gpt/
 
+# model
+model/
+wandb/
+logs/
+config.json
+
 # DS store
 .DS_Store
