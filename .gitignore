@@ -11,5 +11,8 @@ wandb/
 logs/
 config.json
 
+# pycache
+__pycache__/
+
 # DS store
 .DS_Store

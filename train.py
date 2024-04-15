@@ -50,7 +50,7 @@ def parse_arguments() -> argparse.Namespace:
     # Training arguments
     parser.add_argument("--num_of_epochs", type=int, default=2,
                         help="Number of epochs to train the model for")
-    parser.add_argument("--max_seq_length", type=int, default=1024,
+    parser.add_argument("--max_seq_length", type=int, default=12800,
                         help="Maximum sequence length for the model")
     parser.add_argument("--per_device_train_batch_size", type=int, default=1,
                         help="Batch size per device during training")
@@ -145,18 +145,26 @@ def initialize_model(model_name: str, use_flash_attn: bool) -> Tuple[AutoModelFo
         
         device_string = PartialState().process_index
         
-        model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            torch_dtype=torch.bfloat16,
-            quantization_config=bnb_config,
-            use_cache=False,
-            device_map={'': device_string}
-        )
-        
         if use_flash_attn:
-            model.attn_implementation = "flash_attention_2"
+            model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                torch_dtype=torch.bfloat16,
+                quantization_config=bnb_config,
+                use_cache=False,
+                device_map={'': device_string},
+                attn_implementation="flash_attention_2"
+            )
+        else:
+            model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                torch_dtype=torch.bfloat16,
+                quantization_config=bnb_config,
+                use_cache=False,
+                device_map={'': device_string}
+            )
         
         tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
+        
         if use_flash_attn:
             tokenizer.padding_side = 'left'
         else:
