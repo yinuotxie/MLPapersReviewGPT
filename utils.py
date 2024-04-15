@@ -3,6 +3,30 @@ import json
 import logging
 import os
 
+    
+def setup_logger(name: str, log_file: str, level=logging.INFO) -> logging.Logger:
+    """
+    Function to setup loggers.
+    
+    Args:
+        name (str): The name of the logger.
+        log_file (str): The file path to the log file.
+        level (int): The logging level.
+        
+    Returns:
+        logging.Logger: The logger object.
+    """
+    handler = logging.FileHandler(log_file)        
+    formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
+    handler.setFormatter(formatter)
+
+    logger = logging.getLogger(name)
+    logger.setLevel(level)
+    logger.addHandler(handler)
+    
+    return logger
+
+
 def load_configuration() -> None:
     """
     Load configuration from the 'config.json' file and set environment variables.

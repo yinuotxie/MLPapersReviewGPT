@@ -1,10 +1,10 @@
 import argparse
-import logging
 import os
 from datetime import datetime
 
 import torch
 import wandb
+from accelerate import PartialState
 from datasets import load_dataset, Dataset
 from huggingface_hub import login
 from transformers import (
@@ -17,7 +17,10 @@ from transformers import (
 from peft import LoraConfig, get_peft_model
 from trl import SFTTrainer, setup_chat_format
 from typing import Tuple
-from utils import load_configuration, print_training_args
+from utils import load_configuration, print_training_args, setup_logger
+
+info_logger = setup_logger("info_logger", "logs/train_info.log")
+error_logger = setup_logger("error_logger", "logs/train_error.log")
 
     
 def parse_arguments() -> argparse.Namespace:
@@ -41,19 +44,21 @@ def parse_arguments() -> argparse.Namespace:
                         help="Model name to use for training")
     parser.add_argument("--output_dir", type=str, default="model/mistral_7b_academic",
                         help="Output directory to save the model")
+    parser.add_argument("--flash_attention", action="store_true",
+                        help="Use Flash Attention instead of regular attention")
 
     # Training arguments
-    parser.add_argument("--num_of_epochs", type=int, default=1,
+    parser.add_argument("--num_of_epochs", type=int, default=2,
                         help="Number of epochs to train the model for")
-    parser.add_argument("--max_seq_length", type=int, default=8000,
+    parser.add_argument("--max_seq_length", type=int, default=1024,
                         help="Maximum sequence length for the model")
-    parser.add_argument("--per_device_train_batch_size", type=int, default=8,
+    parser.add_argument("--per_device_train_batch_size", type=int, default=1,
                         help="Batch size per device during training")
-    parser.add_argument("--per_device_eval_batch_size", type=int, default=8,
+    parser.add_argument("--per_device_eval_batch_size", type=int, default=1,
                         help="Batch size per device during evaluation")
-    parser.add_argument("--gradient_accumulation_steps", type=int, default=2,
+    parser.add_argument("--gradient_accumulation_steps", type=int, default=1,
                         help="Number of steps before performing a backward/update pass")
-    parser.add_argument("--gradient_checkpointing", action="store_true",
+    parser.add_argument("--gradient_checkpointing", action="store_false",
                         help="Use gradient checkpointing to save memory")
     parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility")
     parser.add_argument("--auto_find_batch_size", action="store_true", 
@@ -68,13 +73,13 @@ def parse_arguments() -> argparse.Namespace:
                         help="Max gradient norm")
 
     # Logging and saving arguments
-    parser.add_argument("--logging_steps", type=int, default=10,
+    parser.add_argument("--logging_steps", type=int, default=100,
                         help="Log every N steps")
-    parser.add_argument("--save_steps", type=int, default=100,
+    parser.add_argument("--save_steps", type=int, default=1000,
                         help="Save checkpoint every N steps")
     parser.add_argument("--save_strategy", type=str, default="steps",
                         help="Save strategy to use")
-    parser.add_argument("--eval_steps", type=int, default=100,
+    parser.add_argument("--eval_steps", type=int, default=1000,
                         help="Evaluate every N steps")
     parser.add_argument("--evaluation_strategy", type=str, default="steps",
                         help="Evaluation strategy to use")
@@ -88,15 +93,15 @@ def parse_arguments() -> argparse.Namespace:
                         help="Type of learning rate scheduler")
 
     # Mixed precision training
-    parser.add_argument("--fp16", action="store_true",
+    parser.add_argument("--fp16", action="store_false",
                         help="Enable mixed precision training")
 
     # Miscellaneous arguments
-    parser.add_argument("--push_to_hub", action="store_true",
+    parser.add_argument("--push_to_hub", action="store_false",
                         help="Whether to push the model to the hub")
     parser.add_argument("--hub_model_id", type=str, default="travis0103/mistral_7b_paper_review_lora", 
                         help="Model ID on the huggingface hub")
-    parser.add_argument("--load_best_model_at_end", action="store_true",
+    parser.add_argument("--load_best_model_at_end", action="store_false",
                         help="Load the best model at the end of training")
     parser.add_argument("--run_name", type=str, default="train",
                         help="Name of the run")
@@ -113,21 +118,22 @@ def print_num_trainable_parameters(model: AutoModelForCausalLM, perf_config: Lor
         perf_config (LoraConfig): The peft configuration for the model.
     """
     model = get_peft_model(model, perf_config)
-    logging.info(model.print_trainable_parameters())
+    info_logger.info(model.print_trainable_parameters())
 
 
-def initialize_model(model_name: str) -> Tuple[AutoModelForCausalLM, AutoTokenizer]:
+def initialize_model(model_name: str, use_flash_attn: bool) -> Tuple[AutoModelForCausalLM, AutoTokenizer]:
     """
     Initialize the model and tokenizer with specified configurations.
 
     Args:
         model_name (str): The name or path of the model to initialize.
+        use_flash_attn (bool): Whether to use Flash Attention or not.
 
     Returns:
         Tuple[AutoModelForCausalLM, AutoTokenizer]: The initialized model and tokenizer.
     """
     try:
-        logging.info(f"Loading model and tokenizer from {model_name}...")
+        info_logger.info(f"Loading model and tokenizer from {model_name}...")
         
         # Configure model for 4-bit quantization with BitsAndBytes
         bnb_config = BitsAndBytesConfig(
@@ -136,16 +142,25 @@ def initialize_model(model_name: str) -> Tuple[AutoModelForCausalLM, AutoTokeniz
             bnb_4bit_quant_type="nf4", 
             bnb_4bit_compute_dtype=torch.bfloat16
         )
-
+        
+        device_string = PartialState().process_index
+        
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            device_map="auto",
             torch_dtype=torch.bfloat16,
-            quantization_config=bnb_config
+            quantization_config=bnb_config,
+            use_cache=False,
+            device_map={'': device_string}
         )
         
+        if use_flash_attn:
+            model.attn_implementation = "flash_attention_2"
+        
         tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
-        tokenizer.padding_side = 'right'
+        if use_flash_attn:
+            tokenizer.padding_side = 'left'
+        else:
+            tokenizer.padding_side = 'right'
         tokenizer.pad_token = tokenizer.unk_token
         tokenizer.pad_token_id = tokenizer.unk_token_id
 
@@ -153,8 +168,7 @@ def initialize_model(model_name: str) -> Tuple[AutoModelForCausalLM, AutoTokeniz
 
         return model, tokenizer
     except Exception as e:
-        logging.error("An error occurred while setting up the model and tokenizer.", exc_info=True)
-        raise
+        error_logger.info(f"An error occurred while setting up the model and tokenizer. {e}", exc_info=True)
 
 
 def prepare_training(args: argparse.Namespace, 
@@ -183,6 +197,7 @@ def prepare_training(args: argparse.Namespace,
         per_device_eval_batch_size=args.per_device_eval_batch_size,
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         gradient_checkpointing=args.gradient_checkpointing,
+        gradient_checkpointing_kwargs={'use_reentrant':False},
         auto_find_batch_size=args.auto_find_batch_size,
         # optimization arguments
         optim=args.optim,
@@ -194,6 +209,7 @@ def prepare_training(args: argparse.Namespace,
         lr_scheduler_type=args.lr_scheduler_type,
         # mixed precision training
         fp16=args.fp16,
+        fp16_full_eval=True,
         # Logging and saving arguments
         logging_steps=args.logging_steps,
         eval_steps=args.eval_steps,
@@ -209,16 +225,26 @@ def prepare_training(args: argparse.Namespace,
     )
 
     peft_config = LoraConfig(
-        lora_alpha=128,
+        lora_alpha=16,
         lora_dropout=0.05,
-        r=256,
+        r=64,
         bias="none",
-        target_modules=["q_proj", "v_proj", "all_linear"],
+        target_modules=[
+            "q_proj",
+            "k_proj",
+            "v_proj",
+            "o_proj",
+            "gate_proj",
+            "up_proj",
+            "down_proj",
+            "lm_head",
+        ],
         task_type="CAUSAL_LM",
     )
 
     trainer = SFTTrainer(
         model=model,
+        max_seq_length=args.max_seq_length,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=test_dataset,
@@ -227,49 +253,72 @@ def prepare_training(args: argparse.Namespace,
         dataset_kwargs={"add_special_tokens": False, "append_concat_token": False}
     )
     
-    print_num_trainable_parameters(model, peft_config)
+    info_logger.info(print_num_trainable_parameters(model, peft_config))
 
     return trainer
 
 
 def main():
-    load_configuration()
     args = parse_arguments()
-    print_training_args(args)
+    
+    # check if the gpu supports flash attention v2
+    if args.flash_attention:
+        if not torch.cuda.is_available():
+            error_logger.info("Flash Attention v2 requires a GPU to run.")
+            return
+        if not torch.cuda.get_device_properties(0).major >= 8:
+            error_logger.info("Flash Attention v2 requires a GPU with compute capability >= 8.0.")
+            return
+        
+    # check if the gpu supports fp16 mixed precision training
+    if args.fp16:
+        if not torch.cuda.is_available():
+            error_logger.info("Mixed precision training requires a GPU to run.")
+            return
+        if not torch.cuda.get_device_properties(0).major >= 7:
+            error_logger.info("Mixed precision training requires a GPU with compute capability >= 7.0.")
+            return
+        
+    load_configuration()
+        
+    info_logger.info(print_training_args(args))
 
-    logging.info("Loading datasets...")
+    info_logger.info("Loading datasets...")
     train_dataset = load_dataset("json", data_files=args.train_file, split="train")
     test_dataset = load_dataset("json", data_files=args.test_file, split="train")  
-    logging.info("Datasets loaded successfully.")
-    logging.info("Training dataset size: %d", len(train_dataset))
-    logging.info("Testing dataset size: %d", len(test_dataset))
-    logging.info("=" * 30)
+    info_logger.info("Datasets loaded successfully.")
+    info_logger.info("Training dataset size: %d", len(train_dataset))
+    info_logger.info("Testing dataset size: %d", len(test_dataset))
+    info_logger.info("=" * 30)
 
-    logging.info("Logging to Weights & Biases...")
-    wandb.init(project="cis6200_academic_gpt", config=vars(args))
-    logging.info("Logging to Hugging Face...")
+    info_logger.info("Logging to Weights & Biases...")
+    wandb.init(project="cis6200_academic_gpt", config=vars(args), name=args.run_name, group="DDP")
+    info_logger.info("Logging to Hugging Face...")
     login(token=os.getenv("HUGGINGFACE_ACCESS_TOKEN"))
-    logging.info("Logging setup completed.")
-    logging.info("=" * 30)
+    info_logger.info("Logging setup completed.")
+    info_logger.info("=" * 30)
+    
+    # Clear CUDA cache
+    torch.cuda.empty_cache()
 
-    logging.info("Initializing model and tokenizer...")
-    model, tokenizer = initialize_model(args.model_name)
-    logging.info("Model and tokenizer initialized successfully.")
-    logging.info("=" * 30)
+    info_logger.info("Initializing model and tokenizer...")
+    model, tokenizer = initialize_model(args.model_name, args.flash_attention)
+    info_logger.info("Model and tokenizer initialized successfully.")
+    info_logger.info("=" * 30)
 
-    logging.info("Preparing training...")
+    info_logger.info("Preparing training...")
     trainer = prepare_training(args, model, tokenizer, train_dataset, test_dataset)
-    logging.info("Training prepared successfully.")
-    logging.info("=" * 30)
+    info_logger.info("Training prepared successfully.")
+    info_logger.info("=" * 30)
 
     start = datetime.now()
-    logging.info(f"Starting training at {start:%Y-%m-%d %H:%M:%S}")
+    info_logger.info(f"Starting training at {start:%Y-%m-%d %H:%M:%S}")
     trainer.train()
     end = datetime.now()
-    logging.info(f"Training completed at {end:%Y-%m-%d %H:%M:%S}")
+    info_logger.info(f"Training completed at {end:%Y-%m-%d %H:%M:%S}")
     training_duration = end - start
-    logging.info(f"Training duration: {training_duration}")
-    logging.info("=" * 30)
+    info_logger.info(f"Training duration: {training_duration}")
+    info_logger.info("=" * 30)
 
 if __name__ == "__main__":
     main()
