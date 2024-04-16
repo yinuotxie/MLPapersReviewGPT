@@ -1,18 +1,21 @@
 # data
-data/
+data/*
 
 # env 
 academic_gpt/
 cis6200/
 
 # model
-model/
-wandb/
-logs/
-config.json
+model/*
+wandb/*
+logs/*
 
-# pycache
-__pycache__/
+# config
+config.json
+gpt_config.json
+
+# cache
+__pycache__/ 
 
 # DS store
 .DS_Store
