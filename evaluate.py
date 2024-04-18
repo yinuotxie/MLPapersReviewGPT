@@ -81,7 +81,14 @@ def count_hits(matched_reviews: str, threshold: int = 7) -> int:
 # gpt_reviews = ["review 1", "review 2", "review 3"]
 # title = "Attention is All You Need"
 # client = openai.Client()
-# human_summary, human_summary_length = summary_reviews(human_reviews, title, client)
-# gpt_summary, gpt_summary_length = summary_reviews(gpt_reviews, title, client)
+# human_summary, total_human_reviews = summary_reviews(human_reviews, title, client)
+# gpt_summary, total_gpt_reviews = summary_reviews(gpt_reviews, title, client)
 # matched_reviews, matched_reviews_length = match_reviews(human_summary, gpt_summary, client)
 # hit_count = count_hits(matched_reviews)
+
+# Calculate metrics:
+# from metric import calculate_hit_rate, calculate_jaccard_index, calculate_sorensen_dice_coefficient, calculate_szymkiewicz_simpson_coefficient
+# print("Hit Rate:", calculate_hit_rate(hit_count, total_human_reviews))
+# print("Jaccard Index:", calculate_jaccard_index(hit_count, total_human_reviews, total_gpt_reviews))
+# print("Sørensen-Dice Coefficient:", calculate_sorensen_dice_coefficient(hit_count, total_human_reviews, total_gpt_reviews))
+# print("Szymkiewicz-Simpson Coefficient:", calculate_szymkiewicz_simpson_coefficient(hit_count, total_human_reviews, total_gpt_reviews))
