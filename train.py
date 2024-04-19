@@ -18,7 +18,7 @@ from transformers import (
 from peft import LoraConfig, get_peft_model
 from trl import SFTTrainer, setup_chat_format
 from typing import Tuple
-from utils import print_args, setup_logger
+from utils import log_training_args, setup_logger
 
 info_logger = setup_logger("info_logger", "logs/train_info.log")
 error_logger = setup_logger("error_logger", "logs/train_error.log")
@@ -68,13 +68,13 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--train_file",
         type=str,
-        default="data/train_dataset.json",
+        default="demo/data/abstract_dataset/train.json",
         help="Path to the training dataset",
     )
     parser.add_argument(
         "--test_file",
         type=str,
-        default="data/valid_dataset.json",
+        default="demo/data/abstract_dataset/test.json",
         help="Path to the testing dataset",
     )
 
@@ -88,7 +88,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--output_dir",
         type=str,
-        default="model/mistral_7b_academic",
+        default="model/mistral_7b_lora_paper_review",
         help="Output directory to save the model",
     )
     parser.add_argument(
@@ -101,25 +101,25 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--num_of_epochs",
         type=int,
-        default=2,
+        default=3,
         help="Number of epochs to train the model for",
     )
     parser.add_argument(
         "--max_seq_length",
         type=int,
-        default=12800,
+        default=1280,
         help="Maximum sequence length for the model",
     )
     parser.add_argument(
         "--per_device_train_batch_size",
         type=int,
-        default=1,
+        default=2,
         help="Batch size per device during training",
     )
     parser.add_argument(
         "--per_device_eval_batch_size",
         type=int,
-        default=1,
+        default=2,
         help="Batch size per device during evaluation",
     )
     parser.add_argument(
@@ -155,16 +155,16 @@ def parse_arguments() -> argparse.Namespace:
 
     # Logging and saving arguments
     parser.add_argument(
-        "--logging_steps", type=int, default=100, help="Log every N steps"
+        "--logging_steps", type=int, default=45, help="Log every N steps"
     )
     parser.add_argument(
-        "--save_steps", type=int, default=1000, help="Save checkpoint every N steps"
+        "--save_steps", type=int, default=450, help="Save checkpoint every N steps"
     )
     parser.add_argument(
         "--save_strategy", type=str, default="steps", help="Save strategy to use"
     )
     parser.add_argument(
-        "--eval_steps", type=int, default=1000, help="Evaluate every N steps"
+        "--eval_steps", type=int, default=450, help="Evaluate every N steps"
     )
     parser.add_argument(
         "--evaluation_strategy",
@@ -279,6 +279,7 @@ def initialize_model(
             tokenizer.padding_side = "left"
         else:
             tokenizer.padding_side = "right"
+            
         tokenizer.pad_token = tokenizer.unk_token
         tokenizer.pad_token_id = tokenizer.unk_token_id
 
@@ -408,7 +409,7 @@ def main():
 
     load_configuration()
 
-    info_logger.info(print_args(args))
+    log_training_args(args, info_logger)
 
     info_logger.info("Loading datasets...")
     train_dataset = load_dataset("json", data_files=args.train_file, split="train")
@@ -430,9 +431,6 @@ def main():
     info_logger.info("Logging setup completed.")
     info_logger.info("=" * 30)
 
-    # Clear CUDA cache
-    torch.cuda.empty_cache()
-
     info_logger.info("Initializing model and tokenizer...")
     model, tokenizer = initialize_model(args.model_name, args.flash_attention)
     info_logger.info("Model and tokenizer initialized successfully.")
@@ -451,7 +449,11 @@ def main():
     training_duration = end - start
     info_logger.info(f"Training duration: {training_duration}")
     info_logger.info("=" * 30)
-
-
+    
+    # Save the model
+    trainer.save_model(args.output_dir)    
+    info_logger.info("Model saved successfully.")
+    info_logger.info("=" * 30)
+    
 if __name__ == "__main__":
     main()

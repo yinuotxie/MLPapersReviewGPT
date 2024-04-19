@@ -25,17 +25,18 @@ def setup_logger(name: str, log_file: str, level=logging.INFO) -> logging.Logger
     return logger
 
 
-def print_args(args: argparse.Namespace) -> None:
+def log_training_args(args: argparse.Namespace, logger: logging.Logger) -> None:
     """
     Print the training arguments to the log.
 
     Args:
         args (argparse.Namespace): The parsed arguments containing training configurations.
+        logger (logging.Logger): The logger object to log the arguments.
     """
-    logging.info("Training arguments:")
+    logger.info("Training arguments:")
     for arg, value in vars(args).items():
-        logging.info(f"  {arg}: {value}\n")
-    logging.info("=" * 30)
+        logger.info(f"  {arg}: {value}\n")
+    logger.info("=" * 30)
 
 
 def clean_json_output(output: str) -> str:
