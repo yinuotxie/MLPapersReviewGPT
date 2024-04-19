@@ -54,19 +54,6 @@ def captions_to_string(captions: dict) -> str:
     return "\n".join(f"{key}: {value}" for key, value in captions.items())
 
 
-def clean_caption(caption: str) -> str:
-    """
-    Clean a caption by removing prefixes and leading/trailing whitespace.
-
-    Args:
-        caption (str): The caption string to clean.
-
-    Returns:
-        str: Cleaned caption.
-    """
-    return " ".join(caption.split(":")[2:]).strip()
-
-
 def parse_pdf_content(pdf_dict: dict) -> dict:
     """
     Extract structured information from a PDF content dictionary.
@@ -87,10 +74,10 @@ def parse_pdf_content(pdf_dict: dict) -> dict:
         figure_type = figure["figure_type"]
         caption = figure["figure_caption"]
         if figure_type == "figure":
-            captions[f"Figure {num_figures + 1}"] = clean_caption(caption)
+            captions[f"Figure {num_figures + 1}"] = caption
             num_figures += 1
         elif figure_type == "table":
-            captions[f"Table {num_tables + 1}"] = clean_caption(caption)
+            captions[f"Table {num_tables + 1}"] = caption
             num_tables += 1
 
     result.update(
@@ -110,7 +97,7 @@ def parse_pdf_content(pdf_dict: dict) -> dict:
     return result
 
 
-def parse_pdf_abstract(pdf_dict: dict) -> str:
+def parse_pdf_abstract(pdf_dict: dict) -> dict:
     """
     Extract the abstract from a PDF content dictionary.
 
@@ -123,7 +110,12 @@ def parse_pdf_abstract(pdf_dict: dict) -> str:
     title = pdf_dict.get("title")
     abstract = pdf_dict.get("abstract")
 
-    return normalize_text(abstract)
+    result = {
+        "[TITLE]": normalize_text(title),
+        "[ABSTRACT]": normalize_text(abstract),
+    }
+    
+    return result
 
 
 def generate_user_input(article_dict: dict) -> str:

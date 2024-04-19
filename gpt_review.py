@@ -6,10 +6,12 @@ just the abstract of the papers, with support for both standard and one-shot rev
 
 import argparse
 import os
+import openai
 import scipdf
-from openai import OpenAI
+import time
 from prompts import SYSTEM_PROMPT
 from pdf_parser import parse_pdf_content, parse_pdf_abstract, generate_user_input
+from utils import setup_logger
 
 ONE_SHOT_USER = """
 [TITLE]\nOn the optimal precision of GANs\n\n[ABSTRACT]\nGenerative adversarial networks (GANs) are known to face model misspecification when learning disconnected distributions. Indeed, continuous mapping from a unimodal latent distribution to a disconnected one is impossible, so GANs necessarily generate samples outside of the support of the target distribution. In this paper, we make the connection between the performance of GANs and their latent space configuration. In particular, we raise the following question: what is the latent space partition that minimizes the measure of out-of-manifold samples? Building on a recent result of geometric measure theory, we prove there exist optimal GANs when the dimension of the latent space is larger than the number of modes. In particular, we show that these generators structure their latent space as a `simplicial cluster' - a Voronoi partition where centers are equally distant.  We derive both an upper and a lower bound on the optimal precision of GANs learning disconnected manifolds. Interestingly, these two bounds have the same order of decrease: $\\sqrt{\\log m}$, $m$ being the number of modes. Finally, we perform several experiments to exhibit the geometry of the latent space and experimentally show that GANs have a geometry with similar properties to the theoretical one."
@@ -20,32 +22,20 @@ ONE_SHOT_ASSISTANT = """
 """
 
 
-def inference(pdf_file: str, model: str, method: str, one_shot: bool) -> str:
+def inference(user_input: str, model: str, one_shot: bool, client: openai.Client) -> str:
     """
     Generate reviews for a given PDF paper using the specified GPT model.
     This function handles PDF parsing, content extraction, and interfacing with the OpenAI API to generate the review.
 
     Args:
-        pdf_file (str): The path to the PDF file to be reviewed.
+        user_input (str): Formatted user input for the model.
         model (str): The OpenAI GPT model identifier to use for generating the review.
-        method (str): Specifies whether to use 'full' content or just 'abstract' for the review.
         one_shot (bool): Determines if one-shot mode is used, requiring special handling.
+        client (openai.Client): OpenAI client instance for sending requests.
 
     Returns:
         str: The generated review as a string.
     """
-    # Parse the PDF content
-    pdf_dict = scipdf.parse_pdf_to_dict(pdf_file)
-    content = (
-        parse_pdf_abstract(pdf_dict)
-        if method == "abstract"
-        else parse_pdf_content(pdf_dict)
-    )
-
-    # Generate user input
-    user_input = generate_user_input(content)
-
-    client = OpenAI()
     try:
         if one_shot:
             messages = [
@@ -78,8 +68,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model",
         type=str,
-        choices=["gpt-3.5-turbo", "gpt-4.0-turbo"],
-        default="gpt-4.0-turbo",
+        choices=["gpt-3.5-turbo", "gpt-4-turbo"],
+        default="gpt-4-turbo",
         help="The GPT model to use for inference.",
     )
     parser.add_argument(
@@ -96,6 +86,7 @@ if __name__ == "__main__":
         "--one_shot", action="store_true", help="Use one-shot mode if set."
     )
 
+    output_logger = setup_logger("output_logger", "output.log")
     args = parser.parse_args()
 
     if args.one_shot and args.method == "full":
@@ -103,6 +94,24 @@ if __name__ == "__main__":
         args.method = "abstract"
 
     os.environ["OPENAI_API_KEY"] = args.openai_api_key
-
-    reviews = inference(args.pdf_file, args.model, args.method, args.one_shot)
-    print(reviews)
+    
+    # Parse the PDF content
+    output_logger.info("Parsing PDF file...")
+    pdf_dict = scipdf.parse_pdf_to_dict(args.pdf_file)
+    content = parse_pdf_abstract(pdf_dict) if args.method == "abstract" else parse_pdf_content(pdf_dict)
+        
+    # Generate user input
+    user_input = generate_user_input(content)
+    output_logger.info(user_input)
+    output_logger.info("=" * 50)
+    client = openai.Client()
+    
+    # Generate the review
+    output_logger.info("Generating review...")
+    start_time = time.time()
+    reviews = inference(user_input, args.model, args.one_shot, client)
+    end_time = time.time()
+    output_logger.info(f"Review generated in {end_time - start_time:.2f} seconds.")
+    output_logger.info("=" * 50)
+    
+    output_logger.info(reviews)
