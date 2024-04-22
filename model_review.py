@@ -3,6 +3,7 @@ This script provides functionality to generate reviews for academic papers forma
 It allows for conditional quantization of the model for performance optimization on supported devices.
 """
 
+import os
 import re
 import argparse
 import time
@@ -14,6 +15,8 @@ from prompts import SYSTEM_PROMPT
 from pdf_parser import parse_pdf_abstract, generate_user_input
 from utils import setup_logger
 
+from dotenv import load_dotenv
+load_dotenv()
 
 def load_model(model_id: str, quantize: bool, device: str) -> tuple:
     """
@@ -40,9 +43,10 @@ def load_model(model_id: str, quantize: bool, device: str) -> tuple:
             torch_dtype=torch.bfloat16,
             quantize_config=bnb_config,
             device_map=device,
+            token=os.getenv('HF_TOKEN')
         )
     else:
-        model = AutoPeftModelForCausalLM.from_pretrained(model_id, device_map=device)
+        model = AutoPeftModelForCausalLM.from_pretrained(model_id, device_map=device, token=os.getenv('HF_TOKEN'))
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
 

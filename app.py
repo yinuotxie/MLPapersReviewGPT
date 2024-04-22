@@ -8,10 +8,11 @@
 
     docker pull grobid/grobid:0.8.0
     docker run --rm --gpus all --init --ulimit core=0 -p 8070:8070 grobid/grobid:0.8.0
-    
+
     To run the app:
         python app.py
 '''
+from dotenv import load_dotenv
 import os
 import dash
 from dash import html, dcc, Input, Output, State
@@ -27,6 +28,7 @@ import openai
 import torch
 
 spacy.load('en_core_web_sm')
+load_dotenv()
 
 # uploaded file directory
 uploaded_directory = "C:/Users/cresc/Downloads"
@@ -35,18 +37,19 @@ uploaded_directory = "C:/Users/cresc/Downloads"
 output_logger = setup_logger("output_logger", "logs/output.log")
 
 # device
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-else:
-    device = torch.device("cpu")
-print("device:", torch.cuda.get_device_name(0))
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print("device:", device)
+model_id = "travis0103/mistral_7b_paper_review_lora"
+quantize = True
 
 # load model
-client = openai.Client()
 openai.api_key = os.getenv('OPENAI_API_KEY')
+client = openai.Client()
+gpt_model = "gpt-4-turbo"
+one_shot = False
 
 # review-model
-model, tokenizer = model_review.load_model(args.model_id, args.quantize, device)
+model, tokenizer = model_review.load_model(model_id, quantize, device)
 output_logger.info("=" * 50)
 
 # app
@@ -107,14 +110,14 @@ def update_output(contents, filename, date):
     output_logger.info("Generating review...")
 
     start_time = time.time()
-    gpt_reviews = gpt_review.inference(user_input, args.model, args.one_shot, client)
+    gpt_reviews = gpt_review.inference(user_input, gpt_model, one_shot, client)
     end_time = time.time()
     output_logger.info(f"GPT Review generated in {end_time - start_time:.2f} seconds.")
     output_logger.info("GPT Review:")
     output_logger.info(gpt_reviews)
 
     start_time = time.time()
-    model_reviews = model_review.inference(user_input, model, tokenizer, args.device)
+    model_reviews = model_review.inference(user_input, model, tokenizer, device)
     end_time = time.time()
     output_logger.info(f"Model Review generated in {end_time - start_time:.2f} seconds.")
     output_logger.info("=" * 50)
@@ -139,10 +142,10 @@ def update_output(contents, filename, date):
 # Run the app
 if __name__ == '__main__':
 
-    # app.run_server(debug=True)
+    app.run_server(debug=True)
 
-    filename = "1611.03530.pdf"
-    article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)
-    parsed_abstract = parse_pdf_abstract(article_dict)
-    parsed_article = parse_pdf_content(article_dict)
-    print(generate_user_input(parsed_article))
+    # filename = "1611.03530.pdf"
+    # article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)
+    # parsed_abstract = parse_pdf_abstract(article_dict)
+    # parsed_article = parse_pdf_content(article_dict)
+    # print(generate_user_input(parsed_article))
