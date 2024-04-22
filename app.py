@@ -40,7 +40,7 @@ output_logger = setup_logger("output_logger", "logs/output.log")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("device:", device)
 model_id = "travis0103/mistral_7b_paper_review_lora"
-quantize = True
+quantize = False
 
 # load model
 openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -104,6 +104,8 @@ def update_output(contents, filename, date):
     article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)
     content = parse_pdf_abstract(article_dict)
     user_input = generate_user_input(content)
+    output_logger.info(content["[TITLE]"])
+    output_logger.info(content["[ABSTRACT]"])
 
     # send to backend model
     output_logger.info("=" * 50)
@@ -125,7 +127,7 @@ def update_output(contents, filename, date):
     # get response from backend
     output_logger.info("Model Review:")
     output_logger.info(model_reviews)
-    return gpt_reviews + "\n" + model_reviews
+    return content["[TITLE]"] + "\n" + content["[ABSTRACT]"] + "\n"+ gpt_reviews + "\n" + model_reviews
 
 
     # from base64 import b64decode
