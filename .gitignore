@@ -6,6 +6,7 @@ data/*.json
 # env 
 academic_gpt/
 cis6200/
+.env
 
 # model
 model/*

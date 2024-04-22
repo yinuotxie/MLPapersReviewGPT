@@ -1,9 +1,55 @@
+'''
+    Generate UI for uploading pdf and feeding into gpt model and review model to generate reviews for given paper.
+    Commands of setting up environment after pip install -r requirements:
+
+    pip install dash dash-bootstrap-components
+    pip install git+https://github.com/titipata/scipdf_parser
+    python -m spacy download en_core_web_sm
+
+    docker pull grobid/grobid:0.8.0
+    docker run --rm --gpus all --init --ulimit core=0 -p 8070:8070 grobid/grobid:0.8.0
+    
+    To run the app:
+        python app.py
+'''
+import os
 import dash
-from dash import html, dcc, Input, Output
+from dash import html, dcc, Input, Output, State
 import dash_bootstrap_components as dbc
 from pdf_parser import *
+import scipdf
+import spacy
+import time
+from utils import setup_logger
+from prompts import SYSTEM_PROMPT
+import model_review, gpt_review
+import openai
+import torch
 
+spacy.load('en_core_web_sm')
 
+# uploaded file directory
+uploaded_directory = "C:/Users/cresc/Downloads"
+
+# set up logger
+output_logger = setup_logger("output_logger", "logs/output.log")
+
+# device
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+else:
+    device = torch.device("cpu")
+print("device:", torch.cuda.get_device_name(0))
+
+# load model
+client = openai.Client()
+openai.api_key = os.getenv('OPENAI_API_KEY')
+
+# review-model
+model, tokenizer = model_review.load_model(args.model_id, args.quantize, device)
+output_logger.info("=" * 50)
+
+# app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.layout = html.Div([
@@ -38,9 +84,12 @@ app.layout = html.Div([
 
 @app.callback(
     Output('output-text', 'value'),
-    Input('upload-pdf', 'contents')
+    Input('upload-pdf', 'contents'),
+    State('upload-pdf', 'filename'),
+    State('upload-pdf', 'last_modified')
 )
-def update_output(contents):
+def update_output(contents, filename, date):
+    print("filename",  filename)
     if contents is None:
         return 'No PDF file uploaded.'
     content_type, content_string = contents.split(',')
@@ -48,12 +97,33 @@ def update_output(contents):
         return 'File is not a PDF. Please upload a PDF file.'
     
     # extract input from pdf
+    output_logger.info("Parsing PDF file...")
+    article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)
+    content = parse_pdf_abstract(article_dict)
+    user_input = generate_user_input(content)
 
     # send to backend model
+    output_logger.info("=" * 50)
+    output_logger.info("Generating review...")
+
+    start_time = time.time()
+    gpt_reviews = gpt_review.inference(user_input, args.model, args.one_shot, client)
+    end_time = time.time()
+    output_logger.info(f"GPT Review generated in {end_time - start_time:.2f} seconds.")
+    output_logger.info("GPT Review:")
+    output_logger.info(gpt_reviews)
+
+    start_time = time.time()
+    model_reviews = model_review.inference(user_input, model, tokenizer, args.device)
+    end_time = time.time()
+    output_logger.info(f"Model Review generated in {end_time - start_time:.2f} seconds.")
+    output_logger.info("=" * 50)
 
     # get response from backend
+    output_logger.info("Model Review:")
+    output_logger.info(model_reviews)
+    return gpt_reviews + "\n" + model_reviews
 
-    
 
     # from base64 import b64decode
     # import io
@@ -68,4 +138,11 @@ def update_output(contents):
 
 # Run the app
 if __name__ == '__main__':
-    app.run_server(debug=True)
+
+    # app.run_server(debug=True)
+
+    filename = "1611.03530.pdf"
+    article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)
+    parsed_abstract = parse_pdf_abstract(article_dict)
+    parsed_article = parse_pdf_content(article_dict)
+    print(generate_user_input(parsed_article))
