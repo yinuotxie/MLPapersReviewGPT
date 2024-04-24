@@ -10,7 +10,7 @@ import openai
 import scipdf
 import time
 from prompts import SYSTEM_PROMPT
-from pdf_parser import parse_pdf_content, parse_pdf_abstract, generate_user_input
+from pdf_parser import parse_pdf_content, parse_pdf_abstract, generate_input
 from utils import setup_logger
 
 ONE_SHOT_USER = """
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     content = parse_pdf_abstract(pdf_dict) if args.method == "abstract" else parse_pdf_content(pdf_dict)
         
     # Generate user input
-    user_input = generate_user_input(content)
+    user_input = generate_input(content)
     output_logger.info(user_input)
     output_logger.info("=" * 50)
     client = openai.Client()

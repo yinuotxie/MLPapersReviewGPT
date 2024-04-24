@@ -118,7 +118,7 @@ def parse_pdf_abstract(pdf_dict: dict) -> dict:
     return result
 
 
-def generate_user_input(article_dict: dict) -> str:
+def generate_input(article_dict: dict) -> str:
     """
     Generate a structured user input string from an article dictionary.
 

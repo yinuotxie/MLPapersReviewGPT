@@ -21,3 +21,6 @@ __pycache__/
 
 # DS store
 .DS_Store
+
+# docker
+docker

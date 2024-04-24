@@ -1,4 +1,4 @@
-title,json_file,full_input,abstract_input,human_reviews_summaries,human_reviews_summaries_lengths,gpt_3.5_full_reviews_summaries,gpt_3.5_full_reviews_summaries_lengths,gpt_3.5_full_reviews_summaries_match,gpt_3.5_full_reviews_summaries_match_lengths,gpt_3.5_abstract_reviews_summaries,gpt_3.5_abstract_reviews_summaries_lengths,gpt_3.5_abstract_reviews_summaries_match,gpt_3.5_abstract_reviews_summaries_match_lengths,gpt_3.5_abstract_reviews_one_shot_summaries,gpt_3.5_abstract_reviews_one_shot_summaries_lengths,gpt_3.5_abstract_reviews_one_shot_summaries_match,gpt_3.5_abstract_reviews_one_shot_summaries_match_lengths,gpt_4_full_reviews_summaries,gpt_4_full_reviews_summaries_lengths,gpt_4_full_reviews_summaries_match,gpt_4_full_reviews_summaries_match_lengths,gpt_4_abstract_reviews_summaries,gpt_4_abstract_reviews_summaries_lengths,gpt_4_abstract_reviews_summaries_match,gpt_4_abstract_reviews_summaries_match_lengths,gpt_4_abstract_reviews_one_shot_summaries,gpt_4_abstract_reviews_one_shot_summaries_lengths,gpt_4_abstract_reviews_one_shot_summaries_match,gpt_4_abstract_reviews_one_shot_summaries_match_lengths
+title,json_file,full_input,abstract_input,human_reviews_summaries,human_reviews_summaries_lengths,gpt_3.5_full_reviews_summaries,gpt_3.5_full_reviews_summaries_lengths,gpt_3.5_full_reviews_summaries_match,gpt_3.5_full_reviews_summaries_match_lengths,gpt_3.5_abstract_reviews_summaries,gpt_3.5_abstract_reviews_summaries_lengths,gpt_3.5_abstract_reviews_summaries_match,gpt_3.5_abstract_reviews_summaries_match_lengths,gpt_3.5_abstract_reviews_one_shot_summaries,gpt_3.5_abstract_reviews_one_shot_summaries_lengths,gpt_3.5_abstract_reviews_one_shot_summaries_match,gpt_3.5_abstract_reviews_one_shot_summaries_match_lengths,gpt_4_full_reviews_summaries,gpt_4_full_reviews_summaries_lengths,gpt_4_full_reviews_summaries_match,gpt_4_full_reviews_summaries_match_lengths,gpt_4_abstract_reviews_summaries,gpt_4_abstract_reviews_summaries_lengths,gpt_4_abstract_reviews_summaries_match,gpt_4_abstract_reviews_summaries_match_lengths,gpt_4_abstract_reviews_one_shot_summaries,gpt_4_abstract_reviews_one_shot_summaries_lengths,gpt_4_abstract_reviews_one_shot_summaries_match,gpt_4_abstract_reviews_one_shot_summaries_match_lengths,mistral_reviews,fine_tuned_mistral_reviews,mistral_reviews_summaries,mistral_reviews_summaries_lengths,fine_tuned_mistral_reviews_summaries,fine_tuned_mistral_reviews_summaries_lengths,mistral_reviews_summaries_match,mistral_reviews_summaries_match_lengths,fine_tuned_mistral_reviews_summaries_match,fine_tuned_mistral_reviews_summaries_match_lengths
 A Walk with SGD: How SGD Explores Regions of Deep Network Loss?,B1l6e3RcF7.json,"[TITLE]
 A WALK WITH SGD: HOW SGD EXPLORES REGIONS OF DEEP NETWORK LOSS?
 
@@ -216,6 +216,91 @@ The non-convex nature of the loss landscape of deep neural networks (DNN) lends 
     ""A3-B1"": {
         ""rationale"": ""Review A criticizes the paper for not providing convincing evidence, either theoretical or empirical, and for lacking depth in understanding related works. Review B similarly points out the lack of a strong theoretical framework that explains the observed phenomena. Both reviews emphasize the lack of theoretical grounding and convincing arguments."",
         ""similarity"": ""7""
+    }
+}",2,"[Significance and novelty]
+
+This paper investigates an important and relevant research question in the field of deep learning: the behavior of stochastic gradient descent (SGD) in the loss landscape of deep neural networks (DNN). The authors provide novel insights into the interaction between the non-convex loss surface geometry and the optimization algorithm, shedding light on the exploration dynamics of SGD in DNN optimization. The study relies on both qualitative and quantitative results, bringing a new perspective to our understanding of deep learning optimization. Additionally, the authors present a potential explanation for why using larger batch sizes can lead to slower exploration and deeper understanding of DNN optimization.
+
+[Potential reasons for acceptance]
+1. The paper presents an essential research question that addresses an open problem in deep learning optimization: understanding the relationship between DNN loss landscape geometry and SGD optimization.
+2. The authors employ a combination of qualitative and quantitative experiments to explore mini-batch SGD behavior.
+3. The study reveals a novel finding on exploration dynamics, stating that mini-batch SGD rarely crosses loss barriers due to the mini-batch noise helping to explore different loss regions.
+
+[Potential reasons for rejection]
+1. The paper lacks a comprehensive explanation on the theoretical background of the DNN loss surface and optimization algorithms like SGD.
+2. The authors do not directly compare the results from the study with other optimization techniques such as Adam or RMSprop to establish the uniqueness of mini-batch SGD.
+3. The authors do not discuss the potential impact of their findings on other optimization algorithms.
+
+[Suggestions for improvement]
+1. Clearly explain the theoretical background of the DNN loss landscape and optimization methods like SGD, Adam, and RMSprop in the beginning.
+2. Provide a comparison of the novel findings with other state-of-the-art optimization methods.
+3. Consider studying the impact of mini-batch size and how it influences the behavior of other optimization algorithms.
+4. Investigate the practical implications and potential applications to improve deep learning optimization algorithms.
+
+The suggested improvements aim to enhance the quality and overall impact of the paper by acknowledging the state-of-the-art in theoretical background and comparing the findings with other optimization techniques, including the impact on practical applications.","[Significance and novelty]
+<Contribution novelty> The reviewers believe that the contributions are only marginally significant or novel, as they find that the paper's contributions are neither significant nor new.
+<Empirical novelty and significance> The reviewers express that the contributions are only marginally significant or novel in both empirical and technical novelty. They argue that the core insight presented in the paper is trivial and can only be observed in small and shallow networks, without providing enough insights into real deep networks. The empirical findings are considered to be mostly heuristic and not providing new insight, but slightly novel findings that provide new corroboration of existing knowledge.
+
+[Potential reasons for acceptance]
+<Solid work> The reviewers found the paper to present a solid study that was well-executed and based on correct insight. They acknowledge that the paper was well-written and the findings were supported by experiments.
+<Contributions> The core insights and experiments on the study of stochastic gradient descent (SGD) were found to be correct, well-supported, and correct.
+
+[Potential reasons for rejection]
+<Lack of novelty> The authors are criticized for providing neither significant nor new insights into the explored problem and lack of novelty in the findings.
+<Small and shallow networks> The empirical evaluation mostly relied on small and shallow networks, and the authors failed to present enough insights into the qualitative properties of real deep networks.
+<Heuristic findings> The empirical findings were considered to be mostly heuristic and not providing new insight, making only minor contributions in both empirical and technical novelty.
+
+[Suggestions for improvement]
+<Deep networks> Authors should focus on demonstrating the qualitative properties of deep networks to make the findings more substantial and relevant.
+<Address limitations> Clarity on limitations, qualitative properties of deep networks, and novelty and significance of findings is advised for improvement.
+
+","{
+    ""1"": {
+        ""summary"": ""Lack of comprehensive theoretical background explanation on DNN loss surface and SGD."",
+        ""verbatim"": ""The paper lacks a comprehensive explanation on the theoretical background of the DNN loss surface and optimization algorithms like SGD.""
+    },
+    ""2"": {
+        ""summary"": ""No direct comparison with other optimization techniques like Adam or RMSprop."",
+        ""verbatim"": ""The authors do not directly compare the results from the study with other optimization techniques such as Adam or RMSprop to establish the uniqueness of mini-batch SGD.""
+    },
+    ""3"": {
+        ""summary"": ""Lack of discussion on the impact of findings on other optimization algorithms."",
+        ""verbatim"": ""The authors do not discuss the potential impact of their findings on other optimization algorithms.""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""Lack of significant or novel contributions"",
+        ""verbatim"": ""The reviewers believe that the contributions are only marginally significant or novel, as they find that the paper's contributions are neither significant nor new.""
+    },
+    ""2"": {
+        ""summary"": ""Trivial core insights in small, shallow networks"",
+        ""verbatim"": ""The core insight presented in the paper is trivial and can only be observed in small and shallow networks, without providing enough insights into real deep networks.""
+    },
+    ""3"": {
+        ""summary"": ""Heuristic empirical findings lacking new insights"",
+        ""verbatim"": ""The empirical findings are considered to be mostly heuristic and not providing new insight, but slightly novel findings that provide new corroboration of existing knowledge.""
+    },
+    ""4"": {
+        ""summary"": ""Evaluation relying on small and shallow networks"",
+        ""verbatim"": ""The empirical evaluation mostly relied on small and shallow networks, and the authors failed to present enough insights into the qualitative properties of real deep networks.""
+    }
+}",4,"{
+    ""A1-B1"": {
+        ""rationale"": ""Both Review A1 and Review B1 comment on issues relating to the theoretical exploration of SGD. Review A points out the limited exploration of factors affecting SGD behavior including unclear motivations behind batch size choices, which can be interpreted as a gap in presenting a comprehensive theoretical background. Similarly, Review B1 explicitly mentions the lack of comprehensive explanation on the theoretical background of the DNN loss surface and optimization algorithms like SGD. These points reflect a shared concern over the depth and clarity of the theoretical underpinnings of the work presented."",
+        ""similarity"": ""7""
+    },
+    ""A3-B1"": {
+        ""rationale"": ""Review A3 criticizes the paper for insufficient coverage and lack of convincing evidence in how SGD functions, implying a weak theoretical foundation especially in relation to existing literature. Review B1, similarly, points out a deficiency in providing a comprehensive theoretical background on related topics. Both reviews substantially focus on the inadequacy of theoretical explanations which underlie the paper's approach and findings, though A is more focused on how this weakness impacts evidence and claims, and B focuses strictly on the description."",
+        ""similarity"": ""7""
+    }
+}",2,"{
+    ""A1-B1"": {
+        ""rationale"": ""Both Review A1 and Review B1 express concerns regarding the novelty and substantial contribution of the paper. Review A1 criticizes the limited exploration and unclear motivations in the paper's approach to SGD behavior, while Review B1 notes that the contributions are not significant or new."",
+        ""similarity"": ""7""
+    },
+    ""A3-B3"": {
+        ""rationale"": ""Review A3 and Review B3 both criticize the paper for its lack of in-depth evidence and novelty in findings. Review A3 points out the paper's shortcomings in providing convincing theoretical or empirical evidence and indicates a superficial treatment of the existing literature. Similarly, Review B3 addresses the heuristic nature of empirical findings lacking new insights."",
+        ""similarity"": ""8""
     }
 }",2
 Neural representation and generation for RNA secondary structures,snOgiCYZgJ7.json,"[TITLE]
@@ -509,6 +594,82 @@ Our work is concerned with the generation and targeted design of RNA, a type of 
     ""2"": {
         ""summary"": ""Limited proof of the framework's applicability across different RNA structures."",
         ""verbatim"": ""If the paper does not adequately demonstrate the framework's applicability across a diverse set of RNA structures, this could be seen as a limitation affecting its generalizability.""
+    }
+}",2,{},0,"[Significance and novelty]
+
+Our paper presents an innovative approach to the field of RNA (Ribonucleic Acid) design and generation using advanced graph-based deep generative modeling techniques [1]. This work is significant due to the spurring dedicate methods for designing large-scale and complex biological structures, a key but underappreciated aspect of computational drug discovery [2]. The novelty of our methods lies in our proposed framework to jointly embed and generate RNA structural modalities and their sequences in a meaningful latent space [3]. This framework integrates strong inductive bias about RNA structural regularity and folding mechanism to ensure high structural validity, stability, and diversity of generated RNAs [4]. Moreover, we emphasize adequate organization of the latent space of RNA molecular embeddings with regard to the interaction with proteins [5], and utilize targeted optimization to navigate this latent space for searching desired novel RNA molecules [6].
+
+[Potential reasons for acceptance]
+1. Novel and significant research topic contributing to the computational drug discovery, designing and generating RNA structures using advanced modeling techniques;
+2. Sound theoretical foundation and clear research objectives and hypothesis;
+3. Methodology utilizing advanced deep learning techniques for RNA structural generation;
+4. Experimental design with thorough validation procedures for model performance assessment;
+5. Novel RNA structure generation results displaying structural validity, stability, and diversity.
+
+[Potential reasons for rejection]
+1. Complex theoretical understanding required for fully grasping proposed methods;
+2. Lack of a comprehensive comparative analysis with other existing approaches;
+3. Unclear justification for model choices and evaluations;
+4. Insufficient experimental validation and lack of control experiments.
+
+[Suggestions for improvement]
+1. Provide a more detailed and comprehensive introduction to the background and significance of computational RNA design and deep learning methods;
+2. Include a comparative analysis with other existing approaches to demonstrate the advantages of the proposed framework;
+3. Clearly justify the choices made during model architecture, optimization, and data preparation;
+4. Incorporate control experiments into the experimental design for more accurate performance evaluations.","[Significance and novelty]
+<Technical contributions> The contributions of the paper are considered significant and somewhat new. The paper's technical contributions are viewed as significant and somewhat new in the field, despite some aspects of the contributions appearing in prior work.
+<Methodological contributions> The use of graph generative models to encode both the structural graph and junction tree of RNAs into a Euclidean space, and optimization methods to search for RNA sequences with desired properties in this space are recognized as non-trivial contributions.
+
+[Potential reasons for acceptance]
+<Innovative approach> The paper introduces an innovative strategy for encoding and generating RNA structural information into latent space, offering potential improvements in modeling and design of RNAs.
+<Relevancy of the addressed problem> The problem addressed in the paper is considered important, which adds to its potential for acceptance.
+
+[Potential reasons for rejection]
+<Lack of reproducible results> Reviewers raised concerns about the reproducibility of the results due to poor experimental details and insufficient explanation of methods, which could be a potential reason for rejection.
+<Unclear presentation and explanation> The paper's unclear organization and presentation, as well as the lack of detailed elaboration on the model framework, could lead to rejection.
+
+[Suggestions for improvement]
+<Enhance clarity and organization> The paper would benefit from clearer and more organized presentation, including explaining the model framework in more detail and better organizing sections for improved readability.
+<Improved description of experiments> More detailed explanations of experiments and experimental setup are needed to ensure reproducibility and address concerns about unclear experiment details.
+
+","{
+    ""1"": {
+        ""summary"": ""Complexity of the theoretical aspects could hinder understanding"",
+        ""verbatim"": ""Complex theoretical understanding required for fully grasping proposed methods""
+    },
+    ""2"": {
+        ""summary"": ""Lack of comparison with existing approaches"",
+        ""verbatim"": ""Lack of a comprehensive comparative analysis with other existing approaches""
+    },
+    ""3"": {
+        ""summary"": ""Unclear justification for model choices and evaluations"",
+        ""verbatim"": ""Unclear justification for model choices and evaluations""
+    },
+    ""4"": {
+        ""summary"": ""Insufficient experimental validation"",
+        ""verbatim"": ""Insufficient experimental validation and lack of control experiments""
+    }
+}",4,"{
+    ""1"": {
+        ""summary"": ""Concerns about the reproducibility of results due to insufficient experimental details."",
+        ""verbatim"": ""Lack of reproducible results> Reviewers raised concerns about the reproducibility of the results due to poor experimental details and insufficient explanation of methods, which could be a potential reason for rejection.""
+    },
+    ""2"": {
+        ""summary"": ""Issues with unclear presentation and lack of detailed explanation of the model framework."",
+        ""verbatim"": ""Unclear presentation and explanation> The paper's unclear organization and presentation, as well as the lack of detailed elaboration on the model framework, could lead to rejection.""
+    }
+}",2,"{
+    ""A1-B2"": {
+        ""rationale"": ""Both points criticize the lack of comparative analysis of the proposed models with other existing approaches. Review A emphasizes comparisons within their own VAE framework only, suggesting expansion, while Review B generically notes the absence of comparative analysis with existing approaches."",
+        ""similarity"": ""7""
+    },
+    ""A2-B4"": {
+        ""rationale"": ""Both points highlight issues with experimental validation and model evaluation. Review A focuses on controlling for homologous sequences and defines valid structures, while Review B emphasizes the insufficiency of control experiments and experimental validation broadly."",
+        ""similarity"": ""6""
+    },
+    ""A4-B3"": {
+        ""rationale"": ""Both reviews express concerns regarding the clarity and justification of model evaluation. Review A discusses the difficulty in determining contributions from various model aspects, while Review B directly calls out the unclear justification of model choices and evaluations."",
+        ""similarity"": ""7""
     }
 }",2,{},0
 Deep Neural Networks as Gaussian Processes,B1EA-M-0Z.json,"[TITLE]
@@ -820,7 +981,102 @@ It has long been known that a single-layer fully-connected neural network with a
         ""rationale"": ""Both Review A3 and Review B3 address issues related to the scope and relevance of the network structures explored in the study. A3 criticizes the paper for misrepresenting how applicable the model is to conventional deep neural networks, mentioning the loss of valuable structure. B3 comments on the deep network structures not covering the variety used in current applications, which could affect acceptance. Both points highlight concerns regarding the model's representation and its divergence from traditional deep learning setups."",
         ""similarity"": ""7""
     }
-}",3
+}",3,"[Significance and novelty]
+
+1. Extension of Gaussian Processes (GPs) to Deep Neural Networks (DNNs): The paper establishes the equivalence between infinitely wide DNNs and GPs for the first time, enabling Bayesian prediction with a deep neural network.
+2. Using Kernel Functions for Deep GPs: The novelty lies in exploiting existing kernel functions to represent deep GPs and enabling fully Bayesian prediction with DNNs.
+3. Connection to Signal Propagation in Random Neural Networks: The paper discusses the link between deep GP performance and signal propagation in random neural networks which is yet to be explored in the literature.
+
+[Potential reasons for acceptance]
+1. Novel theoretical result: The paper presents a new, theoretically grounded approach to deep learning, which builds upon the understanding of GPs and their equivalence to wide neural networks.
+2. Applicability to Regression Tasks: By enabling exact Bayesian inference, the method can be useful for regression tasks, which form a significant portion of machine learning problems.
+3. Computational Efficiency: The proposed pipeline to compute the covariance function for deep GPs is computationally efficient and can contribute to a faster implementation and training process.
+
+[Potential reasons for rejection]
+1. Limited Datasets: The paper restricts its application to MNIST and CIFAR-10 datasets. Extending the study to larger-scale and more complex datasets would demonstrate the generalizability of the method and strengthen the validity of the results.
+2. Limited Exploration of Kernel Functions: The paper focuses on kernel functions that mimic multi-layer random neural networks. A more thorough exploration of other kernel functions and their impact on deep GP performance would add to the depth of the study.
+3. Limited Comparisons: The study does not compare the deep GP method with other state-of-the-art methods directly. Adding such comparisons would help assess the competitiveness and strengths of this approach.
+
+[Suggestions for improvement]
+1. Extended Comparisons: Add comparisons with other state-of-the-art methods to evaluate the performance and advantages of the proposed method.
+2. Analysis of Different Kernel Functions: Explore the impact of various kernel functions on deep GP performance and their suitability for different types of data.
+3. Application to other Machine Learning Tasks: Apply the proposed method to other machine learning tasks, such as classification, and evaluate its utility for those tasks.
+4. Large-scale Datasets: Test the deep GP method on large-scale real-world datasets to assess its scalability and demonstrate its applicability in real-world scenarios.","[Significance and novelty]
+<Equivalence between deep networks and Gaussian processes> The paper establishes the equivalence between infinitely wide deep networks and Gaussian processes, contributing to the understanding of deep learning models.
+<Connection to deep kernel learning> The work explores the connection between deep kernel learning and mean field Gaussian processes, which is a novel and significant contribution to the field.
+
+[Potential reasons for acceptance]
+<Technically solid and well-written paper> Reviewers find the paper to be technically solid, with well-written content that demonstrates potential for high impact in multiple areas.
+<Experimental analysis and comparison> The paper provides an extensive experimental analysis and compares the methods with previous works, demonstrating the significance of its contributions.
+<Novelty and impact in the field> The reviewers recognize the potential impact of the paper's findings on the understanding of deep neural networks and Gaussian processes, which may contribute to future research and applications in the field.
+
+[Potential reasons for rejection]
+<No related terms> -
+
+[Suggestions for improvement]
+<Clarification on the motivation and significance of results> Address the need for better explanation regarding the motivation for mean field Gaussian processes and further elucidation on the significance of the results, especially in comparison to finite width networks.
+<Improvement in experimental evaluations> Enhance experimental evaluations and comparisons to address the limitations noted by the reviewers, aiming to strengthen the empirical evidence to support the theoretical claims.
+<Enhanced interpretation of results> Provide better interpretation and analysis of the experimental results to enhance understanding and relevance of the findings.
+
+[Title of supporting points]
+<Motivation and significance of mean field Gaussian processes>
+<Experimental evaluations and limitations>
+<Enhanced interpretation of results>
+
+[Detailed supporting points]
+<Clarify motivation for mean field Gaussian processes> Explain the motivation for considering mean field Gaussian processes and how it impacts the understanding of deep learning models.
+<Address limitations in experimental evaluations> Enhance experimental evaluations and comparisons to provide a more comprehensive assessment of the methods and results.
+<Improve interpretation of experimental results> Provide clearer interpretation and analysis of the experimental results to increase the relevance and significance of the findings.
+
+","{
+    ""1"": {
+        ""summary"": ""Restricted use of datasets potentially limits the generalizability and validity of the study."",
+        ""verbatim"": ""Limited Datasets: The paper restricts its application to MNIST and CIFAR-10 datasets. Extending the study to larger-scale and more complex datasets would demonstrate the generalizability of the method and strengthen the validity of the results.""
+    },
+    ""2"": {
+        ""summary"": ""Focus on specific kernel functions may undermine the depth and applicability of the study to different scenarios."",
+        ""verbatim"": ""Limited Exploration of Kernel Functions: The paper focuses on kernel functions that mimic multi-layer random neural networks. A more thorough exploration of other kernel functions and their impact on deep GP performance would add to the depth of the study.""
+    },
+    ""3"": {
+        ""summary"": ""Lack of comparative analysis with other state-of-the-art methods hampers assessment of the proposed method's competitiveness and strengths."",
+        ""verbatim"": ""Limited Comparisons: The study does not compare the deep GP method with other state-of-the-art methods directly. Adding such comparisons would help assess the competitiveness and strengths of this approach.""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""Need for better explanation of motivation for mean field Gaussian processes and significance of results."",
+        ""verbatim"": ""Clarification on the motivation and significance of results> Address the need for better explanation regarding the motivation for mean field Gaussian processes and further elucidation on the significance of the results, especially in comparison to finite width networks.""
+    },
+    ""2"": {
+        ""summary"": ""Necessity to enhance experimental evaluations and comparisons to strengthen empirical support for theoretical claims."",
+        ""verbatim"": ""Improvement in experimental evaluations> Enhance experimental evaluations and comparisons to address the limitations noted by the reviewers, aiming to strengthen the empirical evidence to support the theoretical claims.""
+    },
+    ""3"": {
+        ""summary"": ""Requirement for better interpretation and analysis of experimental results."",
+        ""verbatim"": ""Enhanced interpretation of results> Provide better interpretation and analysis of the experimental results to enhance understanding and relevance of the findings.""
+    }
+}",3,"{
+    ""A2-B3"": {
+        ""rationale"": ""Both points focus on the inability of the study to validate or compete with existing methods due to a lack of comparative analysis. Review A expresses doubts about the practical utility of the proposed model because it does not convincingly address how it competes with deep learning in useful scenarios. Review B similarly criticizes the paper for not comparing the deep GP method with other state-of-the-art approaches, which is essential for assessing its competitiveness and strengths."",
+        ""similarity"": ""7""
+    },
+    ""A4-B3"": {
+        ""rationale"": ""Both points express concerns regarding the inadequate validation of the proposed model's relevance and competitiveness. In Review A, it is stated that the empirical evaluation is preliminary and fails to provide reassurance of practical relevance. Review B echoes this concern, noting the absence of comparative analysis with state-of-the-art methods, which limits understanding of the proposed method's strengths and competitiveness."",
+        ""similarity"": ""8""
+    }
+}",2,"{
+    ""A1-B3"": {
+        ""rationale"": ""Both Review A point 1 and Review B point 3 highlight the absence or inadequacy of specifics related to computational aspects in two different contexts; Review A focuses on the lack of reported computational times for calculating the covariance matrix, while Review B points out the need for better interpretation of experimental results which include computational evaluations."",
+        ""similarity"": ""6""
+    },
+    ""A2-B2"": {
+        ""rationale"": ""Both reviews express concerns over the lack of thorough empirical evaluation. Review A discusses it in the context of a new proposed model, while Review B focuses on enhancing experimental evaluations to back theoretical claims. Both stress the need for stronger empirical support."",
+        ""similarity"": ""7""
+    },
+    ""A4-B2"": {
+        ""rationale"": ""Review A point 4 and Review B point 2 both criticize the preliminary nature of empirical evaluations and stress the need for improved experimental and empirical assessments to validate the practical applications of the theoretical concepts discussed."",
+        ""similarity"": ""8""
+    }
+}",2
 PseudoSeg: Designing Pseudo Labels for Semantic Segmentation,-TwO99rbVRu.json,"[TITLE]
 PSEUDOSEG: DESIGNING PSEUDO LABELS FOR SEMANTIC SEGMENTATION
 
@@ -1044,7 +1300,66 @@ Recent advances in semi-supervised learning (SSL) demonstrate that a combination
         ""rationale"": ""Review A3 and Review B2 both express concerns about the technical novelty and clarity of explanation. Review A3 mentions that the overall approach seems incremental with a combination of existing methods, questioning the strength of technical contribution. Similarly, Review B2 points to a potential criticism if the method's novel elements aren't thoroughly explained or clearly highlighted compared to existing solutions."",
         ""similarity"": ""7""
     }
-}",2
+}",2,"[Significance and novelty]
+1. novel pseudo-labeling strategy for semantic segmentation: The paper proposes a new method for pseudo-labeling that effectively generates well-calibrated structured pseudo labels for training segmentation models with unlabeled or weakly-labeled data.
+2. Data-efficient training for semantic segmentation: The innovative method aims to improve the training process for semantic segmentation tasks, which require more intensive labeling compared to image classification, through data-efficient methods.
+
+[Potential reasons for acceptance]
+1. Demonstrated effectiveness: The study shows significant improvements in both low-data and high-data segmentation regimes using the proposed consistency training framework and pseudo-labeling strategy.
+2. Network agnostic design: The pseudo-labeling strategy is presented as network structure agnostic, enabling it to be easily adapted in various segmentation architectures.
+3. Availability of code: The open-source release of the code further increases the acceptability of the study.
+
+[Potential reasons for rejection]
+1. Insufficient detail in the implementation: Lack of thorough description of the model architecture, optimization method, and precise details of the data used could hinder the reproducibility of the results.
+2. Comparison with other works: Limited comparison with existing segmentation and pseudo-labeling strategies and lack of experimental verification of the superiority of the proposed method could cast doubts on its uniqueness and effectiveness.
+
+[Suggestions for improvement]
+1. Clear description of methods: The paper would significantly benefit from greater detail and clarity in describing the model architecture, optimization method (learning rate schedule, batch size, etc.), and the exact composition of the training dataset.
+2. Comparison with related works: The paper could further strengthen its contribution by providing a comprehensive comparison with other semantic segmentation methods, including ablation studies and analyses of their performance differences.","[Significance and novelty]
+<Novel pseudo-labeling strategy> The paper introduces a novel pseudo-labeling strategy specifically designed for semantic segmentation tasks, addressing the challenges of leveraging weakly labeled or unlabeled data for semantic segmentation.
+<Comparison with existing methods> The paper shows clear improvements over the state-of-the-art method Pseudo-Label with additional data augmentation and pseudo-label fusion. However, it would be beneficial to provide a more detailed comparison to existing methods, especially those that also address the challenges of semantic segmentation with weakly labeled training data.
+
+[Potential reasons for acceptance]
+<Empirical results> The paper presents detailed experiments to support claims, showing consistent and significant performance improvements achieved by the proposed pseudo-labeling scheme. The method shows improvement both in high and low labeled data settings, which is a significant contribution to the field.
+<Innovative pseudo labeling> The paper presents a simple and effective pseudo-labeling strategy for semantic segmentation tasks, indicating a potential for high impact within the subfield of AI or across more than one sub-area of AI.
+
+[Potential reasons for rejection]
+<Limited comparison to state-of-the-art methods> The paper could benefit from a more direct and thorough comparison to existing state-of-the-art methods that address the same problem of weakly labeled training data for semantic segmentation, demonstrating the technical advancements made by the proposed approach.
+<Technical novelty and contribution> While the proposed approach is effective, additional clarity around how it advances the state-of-the-art in the field and its technical novelty would strengthen the paper.
+
+[Suggestions for improvement]
+<Comparison with existing methods> A more detailed comparison with existing SSL based approaches in semantic segmentation addressing training with low-data would strengthen the paper.
+<Technical contributions> To enhance the paper, the authors should provide more clarity around the technical contributions, especially in comparison to the state-of-the-art methods, while considering the challenges of semantic segmentation with weakly labeled training data.
+
+","{
+    ""1"": {
+        ""summary"": ""Insufficient detail in implementation affecting reproducibility"",
+        ""verbatim"": ""Lack of thorough description of the model architecture, optimization method, and precise details of the data used could hinder the reproducibility of the results.""
+    },
+    ""2"": {
+        ""summary"": ""Limited comparison with existing methods affecting validation of uniqueness and effectiveness"",
+        ""verbatim"": ""Limited comparison with existing segmentation and pseudo-labeling strategies and lack of experimental verification of the superiority of the proposed method could cast doubts on its uniqueness and effectiveness.""
+    }
+}",2,"{
+    ""1"": {
+        ""summary"": ""The paper lacks a detailed comparison to state-of-the-art methods."",
+        ""verbatim"": ""The paper could benefit from a more direct and thorough comparison to existing state-of-the-art methods that address the same problem of weakly labeled training data for semantic segmentation, demonstrating the technical advancements made by the proposed approach.""
+    },
+    ""2"": {
+        ""summary"": ""The paper needs more clarity on its technical novelty and contributions."",
+        ""verbatim"": ""While the proposed approach is effective, additional clarity around how it advances the state-of-the-art in the field and its technical novelty would strengthen the paper.""
+    }
+}",2,"{
+    ""A2-B2"": {
+        ""rationale"": ""Both Review A2 and Review B2 address the comparative aspect and uniqueness of the proposed methods against existing techniques. Review A2 queries how the proposed method varies from CCT, which uses similar features, and suggests providing comparisons in specific contexts (segmentation framework, and test set performance). Review B2 criticizes the approach for its limited comparison with existing methods, questioning the method's uniqueness and effectiveness. Although they discuss different specifics, the root concern about adequacy and thoroughness of comparative evaluation between the proposed and existing methods aligns them closely."",
+        ""similarity"": ""7""
+    }
+}",1,"{
+    ""A3-B2"": {
+        ""rationale"": ""Both points discuss concerns regarding the technical novelty and contributions of the method presented in the paper. Although A3 focuses also on issues related to clarity keeping technical novelty as a secondary point, while B2 explicitly targets the need for more clarity around technical novelty, both express a desire for better explanation and justification of the new technical advancements."",
+        ""similarity"": ""7""
+    }
+}",1
 Model-Free Model Reconciliation,Byex4T2XcV.json,"[TITLE]
 Model-Free Model Reconciliation
 
@@ -1272,7 +1587,66 @@ Designing agents capable of explaining complex sequential decisions remains a si
         ""rationale"": ""Both Review A(2) and Review B(2) raise concerns about the general applicability and robustness of the model. Review A questions the scalability and generalization of the approach to more complex scenarios, while Review B addresses how the model works in diverse scenarios and its limitations."",
         ""similarity"": ""7""
     }
-}",1
+}",1,"[Significance and novelty]
+This paper proposes a new approach to model reconciliation for agent explanation in more general planning paradigms, particularly when user models are no longer explicitly available. The authors build upon the model reconciliation framework, which hypothesizes that user confusion arises from the mismatch between the user's model of the agent's task model and the agent's actual model. Previous works in this area have primarily focused on classical planning settings with available user models in a declarative form.
+
+[Potential reasons for acceptance]
+1. The paper introduces a new, simple, and easy-to-learn labeling model that assists the explainer in achieving model reconciliation between the user and the agent in the context of planning with Markov Decision Processes (MDPs).
+2. Model reconciliation is a growing area of research in human-AI interaction, and this paper advances the field by expanding its application to more general planning paradigms.
+3. The authors present a clear and concise methodology and provide extensive detail in their proposed approach.
+
+[Potential reasons for rejection]
+1. The simplicity of the proposed labeling model may not be generalizable to more complex planning paradigms beyond MDPs.
+2. The authors do not provide experimental evidence or validation for their presented labeling model.
+3. The practical application and scalability of the proposed model are not addressed in this paper.
+
+[Suggestions for improvement]
+1. Conduct experiments to assess the performance and scalability of the proposed labeling model in more complex planning paradigms beyond MDPs.
+2. Perform a thorough comparison with existing model reconciliation approaches and benchmark the effectiveness of the proposed labeling model.
+3. Explore ways to integrate the labeling model into more practical applications to assess its applicability and real-world utility.
+4. Extend the labeling model to accommodate more complex user models that cannot be represented in a declarative form.","[Significance and novelty]
+<Application of model reconciliation to MDPs> The paper is the first to apply the model reconciliation approach to more general planning paradigms, particularly in the context of Markov Decision Processes (MDPs), showcasing a new application of this approach in an interesting and novel domain.
+<Implications and generalization of reconciliation approach> The paper introduces the idea of using MDPs to model reconciliation and discusses the implications of generalizing the approach to non-planning domains, providing theoretical and empirical evidence for model reconciliation in various settings.
+
+[Potential reasons for acceptance]
+<Contribution to the literature> The paper's extensive experimental analysis demonstrates the benefits of the presented algorithm for the reconciliation-style explanation approaches, presenting a substantial contribution to the literature.
+<Well-supported claims and excellent presentation> All claims are well-supported and correct, and the technical quality of the paper is convincing, presenting both theoretical guarantees and empirical evidence to support the proposed approach.
+
+[Potential reasons for rejection]
+<No related terms> -
+
+[Suggestions for improvement]
+<Generalization to non-planning domains> The paper can further strengthen its novelty and significance by addressing the implications of generalizing the reconciliation approach to other non-planning domains as mentioned in the rebuttal to showcase a broader applicability of the proposed method.
+<Providing clearer justifications> Further explanation on why the approach can generalize to non-planning domains would strengthen the robustness of the paper, addressing a potential weakness mentioned in the evaluation.
+
+","{
+    ""1"": {
+        ""summary"": ""The simplicity of the proposed model might limit its applicability to more complex scenarios beyond MDPs."",
+        ""verbatim"": ""The simplicity of the proposed labeling model may not be generalizable to more complex planning paradigms beyond MDPs.""
+    },
+    ""2"": {
+        ""summary"": ""The paper lacks experimental validation for the proposed labeling model."",
+        ""verbatim"": ""The authors do not provide experimental evidence or validation for their presented labeling model.""
+    },
+    ""3"": {
+        ""summary"": ""The practical application and scalability of the model are not discussed, which raises concerns about its utility in real-world situations."",
+        ""verbatim"": ""The practical application and scalability of the proposed model are not addressed in this paper.""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""No explicit reasons for rejection provided in the review."",
+        ""verbatim"": ""No related terms -""
+    }
+}",1,"{
+    ""A1-2-B2"": {
+        ""rationale"": ""Both Review A1 and Review B2 critique the paucity of experimental validation or outline for the authors' proposed models, albeit in different contexts (explanation clarity and experimental goals in A vs. labeling model validation in B)."",
+        ""similarity"": ""7""
+    },
+    ""A2-3-B3"": {
+        ""rationale"": ""Review A2 raises concerns about scalability and generalization of the model to more complex scenarios, similarly to how Review B3 doubts the practical application and scalability of the model, questioning its utility in broader or real-world contexts."",
+        ""similarity"": ""7""
+    }
+}",2,{},0
 The Early Phase of Neural Network Training,Hkl1iRNFwS.json,"[TITLE]
 THE EARLY PHASE OF NEURAL NETWORK TRAINING
 
@@ -1466,6 +1840,65 @@ Recent studies have shown that many important aspects of neural network learning
 }",2,"{
     ""A3-B2"": {
         ""rationale"": ""Both Review A and B highlight concerns about the generalization of the results and implications of the experiments. Review A discusses the lack of originality and empirical nature of the results that are limited in their generalization, while Review B raises concerns about the generalizability of the findings across various architectures or datasets."",
+        ""similarity"": ""7""
+    }
+}",1,"[Significance and novelty]
+This paper contributes to the field of deep learning research by shedding new insights into the early phase of neural network training. Previous studies have shown that significant changes occur during the initial stages of training, yet the nature of these changes remains poorly understood. The paper presents novel findings on the network state during this crucial period, using extensive measurements and quantitative analyses. The results demonstrate that deep networks are not robust to random weight reinitialization and that weight distributions become highly dependent after only a few hundred iterations. The paper also suggests that these changes are not inherently label-dependent but accelerated by labeled data.
+
+[Potential reasons for acceptance]
+1. Novel findings on neural network training: The paper contributes original insights into the early learning phase of deep neural networks, expanding our understanding of this pivotal stage of the training process.
+2. Quantitative analysis: The study uses rigorous measurements and precise frameworks to probe deep networks, producing quantitative evidence for the stated results.
+3. Relevance to deep learning community: The findings in this study hold significant implications for the broader deep learning research community, as understanding the early stages of neural network training can lead to improved optimization techniques and accelerated learning.
+
+[Potential reasons for rejection]
+1. Limited generalizability: The results in this study are specific to deep neural networks within the stated framework, and it remains unclear whether the findings can be extended to other architectures or training methodologies.
+2. Missing theoretical explanation: While the paper presents empirical evidence for observed network changes, it lacks a clear theoretical explanation for why these phenomena occur.
+
+[Suggestions for improvement]
+1. Generalize the findings: Expand the analysis beyond the specific network architecture and exploration framework to assess the applicability of the results to other neural network designs and optimization techniques.
+2. Provide theoretical explanation: Offer a theoretical understanding of the observed phenomena, establishing a cohesive, interpretable framework for understanding the changes in deep learning networks during training.
+3. Validate the findings: Conduct additional experiments and simulations to validate the results, ensuring the robustness of the stated observations.","[Significance and novelty]
+<Early training behavior analysis> The paper explores the behavior of neural networks during the early training phase, focusing on the stability and sparsity of the network over a limited number of iterations. It discusses the effects of pretraining methods and presents a new metric, weight dispersion, to study network stability.
+<Comparison with related work> The paper compares its findings with previous studies and offers a potential improvement in the form of the weight dispersion metric, contributing to the existing body of knowledge on neural network training.
+
+[Potential reasons for acceptance]
+<Exploratory study> The paper is acknowledged for its exploration of an interesting and understudied topic of neural network behavior during the early training phase.
+<Insightful findings> The paper is recognized for presenting interesting insights into the behavior of network parameters in the early training phase and for proposing a new metric, weight dispersion, to study network stability.
+
+[Potential reasons for rejection]
+<Limited practicality of proposed metric> Reviewers express concerns about the practical utility of the weight dispersion metric, noting that its practical use is unclear and its value is not proven in a controlled manner.
+<Lack of clarity on implications> The practical implications of the study are uncertain, and the link to real-world applications, such as model selection, is questioned by the reviewers.
+
+[Suggestions for improvement]
+<Enhanced experimentation> Reviewers recommend additional experiments to demonstrate the usefulness of the weight dispersion metric to understand and predict training and testing errors.
+<Clarification of practical significance> Clear and extensive discussions are suggested to demonstrate how the findings will be useful in real-world applications, such as model selection in the supervised setting.
+
+","{
+    ""1"": {
+        ""summary"": ""The study's results may not apply to diverse neural network architectures or training methodologies, limiting its broader applicability."",
+        ""verbatim"": ""Limited generalizability: The results in this study are specific to deep neural networks within the stated framework, and it remains unclear whether the findings can be extended to other architectures or training methodologies.""
+    },
+    ""2"": {
+        ""summary"": ""The paper lacks a detailed theoretical explanation for the observed changes in neural networks during the early stages of training."",
+        ""verbatim"": ""Missing theoretical explanation: While the paper presents empirical evidence for observed network changes, it lacks a clear theoretical explanation for why these phenomena occur.""
+    }
+}",2,"{
+    ""1"": {
+        ""summary"": ""Limited practical utility of the weight dispersion metric"",
+        ""verbatim"": ""Limited practicality of proposed metric: Reviewers express concerns about the practical utility of the weight dispersion metric, noting that its practical use is unclear and its value is not proven in a controlled manner.""
+    },
+    ""2"": {
+        ""summary"": ""Uncertainty in practical implications of the study"",
+        ""verbatim"": ""Lack of clarity on implications: The practical implications of the study are uncertain, and the link to real-world applications, such as model selection, is questioned by the reviewers.""
+    }
+}",2,"{
+    ""A3-B1"": {
+        ""rationale"": ""Both review points express concerns about the generalization of the study. Review A emphasizes the lack of originality in proposing new network properties and suggests that the conclusions drawn are very empirical and limited in generalization. Review B highlights limited generalizability to different architectures or training methodologies. Both reviews share concerns about the extrapolation of the results beyond the specific scenarios tested in the study."",
+        ""similarity"": ""7""
+    }
+}",1,"{
+    ""A1-B2"": {
+        ""rationale"": ""Both points raise concerns about the practical applications or utility of the study's findings or metrics. Review A criticizes the lack of efficient guidance for applying the lottery tickets hypothesis, emphasizing the need for cost-effective methods in finding better network initialization points. Review B questions the clarity and practical implications of the study, particularly how it links to real-world applications like model selection. Both reviews suggest a gap between the theoretical or experimental findings and their practical, actionable applications."",
         ""similarity"": ""7""
     }
 }",1
@@ -1672,6 +2105,67 @@ In Convolutional Neural Networks (CNNs) information flows across a small neighbo
         ""rationale"": ""Both Review A-3 and Review B-1 raise concerns about the completeness of comparing the proposed method to other well-established approaches. While Review A-3 specifically notes that results for ImageNet were relegated to supplementary materials, emphasizing a form of selective reporting, Review B-1 complains about insufficient comparative analysis in general, hinting at an overarching lack of thorough competitive evaluation in the paper."",
         ""similarity"": ""7""
     }
+}",1,"[Significance and novelty]
+1. The paper proposes a novel architecture, CycleNet, based on cyclic orthogonal convolutions that allows efficient information flow between features and locations across an entire image with a small number of layers. [2. The architecture differs from standard Convolutional Neural Networks (CNNs) as it allows for long-range integration of features in (x, y), (x, z), and (y, z) coordinates through the use of a cycle of three orthogonal convolutions. 3. CycleNet obtains competitive results on image classification tasks on CIFAR-10 and ImageNet datasets, while transferring better to stylised images and outperforming CNNs on the Pathfinder challenge, where integration of distant features is crucial. 4. The study hypothesizes that long-range integration favours recognition of objects by shape rather than texture, adding to the significance and novelty of the research.
+
+[Potential reasons for acceptance]
+1. The paper presents a novel architecture, CycleNet, which uses cyclic orthogonal convolutions, a new approach for long-range integration of features in CNNs. [2. The paper's experimental results show that CycleNet obtains competitive performance on image classification tasks on CIFAR-10 and ImageNet datasets. 3. CycleNet transfers better than CNNs to stylised images and outperforms them on the Pathfinder challenge, where integration of distant features is crucial. 4. The study provides insights into the importance of long-range integration of features for efficient recognition, contributing to the advancement of knowledge in the field.
+
+[Potential reasons for rejection]
+1. The paper lacks a comprehensive comparison with state-of-the-art methods for long-range integration of features in CNNs. [2. Some parts of the paper, particularly the theoretical explanations, can be unclear or lack sufficient detail. 3. The study could benefit from a more detailed experimental setup, such as more diverse datasets or a larger number of experiments, to further validate the proposed architecture's efficacy. 4. The authors fail to provide a clear explanation of why cyclic orthogonal convolutions lead to efficient long-range integration, and some explanations might require further justification or validation.
+
+[Suggestions for improvement]
+1. Conduct a comprehensive comparison with existing methods for long-range integration of features in CNNs and provide a detailed analysis of the results and performance differences. [2. Clarify the theoretical explanations and provide detailed, comprehensive justifications for the choices made in the design of the proposed architecture. 3. Provide a more detailed experimental setup, including more diverse datasets, a larger number of experiments, and control groups for a quantitative comparison of the proposed architecture's efficacy. 4. Validate the hypothesis by investigating the role of long-range integration of features in other recognition tasks or applications, and extend the research by implementing variations of the proposed architecture.","[Significance and novelty]
+<Long-range information modeling> The proposed approach aims to model long-distance information in the 2D domain without the need for additional stages or localization maps, which is a significant and innovative contribution to the field.
+<Multi-level orthogonal convolution> The introduction of a multi-level orthogonal convolution method to model long-distance information in neural networks is a novel approach that could have a major impact in the subfield of AI.
+
+[Potential reasons for acceptance]
+<Innovative approach> The reviewers acknowledge that the proposed method has potential and demonstrates promising results for certain applications.
+<Reproducibility> The authors have provided the code needed to reproduce the experiments, which enhances the potential for the method to be validated and re-implemented by the research community.
+
+[Potential reasons for rejection]
+<Lack of thorough comparison> The reviewers have highlighted the need for more thorough comparisons with state-of-the-art models and a broader range of experimental setups to strengthen the paper's contributions and provide a well-founded assessment.
+<Limited performance gain> The reviewers have raised concerns about the performance gain of the proposed structure being limited and questioned its outperformance compared to existing alternatives.
+
+[Suggestions for improvement]
+<Thorough comparison with state-of-the-art models> The authors should conduct thorough comparisons with existing models such as Transformer and Swin Transformer, particularly in the context of self-attention mapping, to establish the superiority of the proposed method.
+<Experiments with a wider range of resolutions> The reviewers have suggested conducting experiments with a wider range of resolutions to demonstrate the effectiveness of the proposed method across different scenarios.
+<Clarity in the paper's message> The authors should ensure the paper is written to convey a clear message about the contribution, focusing on the proposed cyclic orthogonal convolution and demonstrating its effectiveness.","{
+    ""1"": {
+        ""summary"": ""Lack of comparison with state-of-the-art methods."",
+        ""verbatim"": ""The paper lacks a comprehensive comparison with state-of-the-art methods for long-range integration of features in CNNs.""
+    },
+    ""2"": {
+        ""summary"": ""Insufficient theoretical detail."",
+        ""verbatim"": ""Some parts of the paper, particularly the theoretical explanations, can be unclear or lack sufficient detail.""
+    },
+    ""3"": {
+        ""summary"": ""Experimental setup needs expansion."",
+        ""verbatim"": ""The study could benefit from a more detailed experimental setup, such as more diverse datasets or a larger number of experiments, to further validate the proposed architecture's efficacy.""
+    },
+    ""4"": {
+        ""summary"": ""Inadequate explanation of the convolution process."",
+        ""verbatim"": ""The authors fail to provide a clear explanation of why cyclic orthogonal convolutions lead to efficient long-range integration, and some explanations might require further justification or validation.""
+    }
+}",4,"{
+    ""1"": {
+        ""summary"": ""The review suggests more thorough comparisons are needed."",
+        ""verbatim"": ""The reviewers have highlighted the need for more thorough comparisons with state-of-the-art models and a broader range of experimental setups to strengthen the paper's contributions and provide a well-founded assessment.""
+    },
+    ""2"": {
+        ""summary"": ""Concerns about limited performance gains are raised."",
+        ""verbatim"": ""The reviewers have raised concerns about the performance gain of the proposed structure being limited and questioned its outperformance compared to existing alternatives.""
+    }
+}",2,"{
+    ""A3-B3"": {
+        ""rationale"": ""Both Review A3 and Review B3 criticize the partial reporting and insufficient experimental validation presented in the paper. Review A3 highlights the selective presentation of data between CIFAR-10 and ImageNet, showing discrepancies in where results are published (main body vs. supplementary material). Review B3 calls for an expanded experimental setup, suggesting the need for more thorough testing across diverse datasets or more experiments, resonating with concerns about comprehensive data representation in A3."",
+        ""similarity"": ""7""
+    }
+}",1,"{
+    ""A3-B2"": {
+        ""rationale"": ""Both Review A3 and Review B2 talk about the issues related to the performance of the proposed CycleNet, noting limitations in the gains achieved. Review A3 specifically discusses the placement of results in supplementary materials that show weaker performance on ImageNet, suggesting a possible selective reporting to only show favorable results in the main paper. This aligns closely with Review B2's concern about the limited performance gains and questions on outperformance compared to existing alternatives."",
+        ""similarity"": ""8""
+    }
 }",1
 A character-based analysis of impacts of dialects on end-to-end Norwegian ASR,boIlH5V81C8.json,"[TITLE]
 A character-based analysis of impacts of dialects on end-to-end Norwegian ASR
@@ -1868,7 +2362,88 @@ We present a method for analyzing character errors for use with character-based,
         ""rationale"": ""Both points discuss the scope and breadth of the study's empirical evidence. Review A points out the difficulty in following the paper due to a large set of experimental variables concerning the dialects and features studied. Review B argues that the scope of empirical evidence is limited to specific phonological features. Both are concerned with how the breadth or limitation of the area studied impacts the comprehensibility or the robustness of the research findings."",
         ""similarity"": ""7""
     }
-}",1
+}",1,"[Significance and novelty]
+This paper presents a novel method for analyzing character errors in end-to-end Automatic Speech Recognition (ASR) systems, with a focus on investigating the impact of dialects on Norwegian ASR. The authors propose a method that guarantees similar words and characters are paired during alignment, ensuring any resulting analysis of character errors is founded on phonological substitutions. By analyzing carefully aligned character errors, the authors discover trends in system-generated spellings that align with known phonological features of Norwegian dialects, particularly focusing on the ""r"" and ""l"" confusability and voiceless stop lenition. The findings of this study demonstrate the influence of acoustic dialectal features on the output of end-to-end ASR systems, adding to the existing knowledge in speech recognition and dialect analysis.
+
+[Potential reasons for acceptance]
+1. The paper introduces a novel method for analyzing character errors in end-to-end ASR systems, contributing to the field of speech recognition and dialect analysis.
+2. The research focuses on the impact of dialects on ASR systems, which is an important area of study for improving ASR technology for various dialects and accents.
+3. The study findings reveal trends in system-generated spellings aligning with known phonological features of Norwegian dialects, providing valuable insights for further research on dialects and speech recognition.
+4. The authors provide a well-structured and organized paper, making it clear and easy to follow.
+5. The presented method is validated and proven to be effective through the case study on Norwegian dialects.
+
+[Potential reasons for rejection]
+1. The sample size of the study is relatively small, limiting the generalizability of the findings to other dialects and languages.
+2. The paper solely focuses on Norwegian dialects, hindering its applicability to other dialects or speech recognition systems.
+3. The method described lacks a clear explanation of how it compares to existing methods in literature, making it unclear how it adds value to the field.
+4. The paper does not discuss potential limitations of the study, such as data quality and potential bias.
+
+[Suggestions for improvement]
+1. Extend the study by investigating more dialects and languages to increase the generalizability of the findings.
+2. Modify the method to be adaptable to various dialects and languages to ensure its applicability.
+3. Conduct a comparison with existing methods in literature to highlight the uniqueness and value of the presented method.
+4. Discuss potential limitations and how they could be mitigated to increase the reliability and validity of the findings.
+5. Provide more context and explanation on the relevance of the research to ASR technology and applications in various fields.","[Significance and novelty]
+<Investigation of character-based ASR for dialectal speech> The exploration of errors in character-based automatic speech recognition (ASR) systems for dialectal speech is a significant and novel topic with potential implications for speech technology and linguistic analysis.
+<Analysis of ASR outputs and dialectal variation> The paper's exploration of the effects of dialectal variation on ASR system outputs is important and novel in the field of speech recognition.
+
+[Potential reasons for acceptance]
+<Technical solidity> The paper exhibits technical solidity and provides valuable insights into character-based ASR systems and dialectal variation.
+<Contribution to the field> The paper's contribution to the study of ASR systems for dialectal speech adds value to the research area.
+
+[Potential reasons for rejection]
+<Lack of clarity and polishing> The paper requires further refinement and clarification in terms of language, terminology, and referencing.
+<Inadequate explanation and citation of concepts> There's a need for better explanation and citation of concepts such as acoustics and phonetics and additional information about related work.
+
+[Suggestions for improvement]
+<Polishing> The paper needs careful refinement and polishing to improve the language, terminology, and referencing.
+<Clearer explanation and citation> A clearer explanation and citation of concepts like acoustics and phonetics along with more thorough information about related work would enhance the paper.
+
+","{
+    ""1"": {
+        ""summary"": ""Small sample size limits the generalizability of the findings."",
+        ""verbatim"": ""The sample size of the study is relatively small, limiting the generalizability of the findings to other dialects and languages.""
+    },
+    ""2"": {
+        ""summary"": ""Focus solely on Norwegian dialects limits applicability."",
+        ""verbatim"": ""The paper solely focuses on Norwegian dialects, hindering its applicability to other dialects or speech recognition systems.""
+    },
+    ""3"": {
+        ""summary"": ""Lack of comparison with existing methods."",
+        ""verbatim"": ""The method described lacks a clear explanation of how it compares to existing methods in literature, making it unclear how it adds value to the field.""
+    },
+    ""4"": {
+        ""summary"": ""No discussion of potential study limitations."",
+        ""verbatim"": ""The paper does not discuss potential limitations of the study, such as data quality and potential bias.""
+    }
+}",4,"{
+    ""1"": {
+        ""summary"": ""The paper lacks clarity and requires further refinement in language and referencing."",
+        ""verbatim"": ""The paper requires further refinement and clarification in terms of language, terminology, and referencing.""
+    },
+    ""2"": {
+        ""summary"": ""The paper needs improved explanations and proper citations, especially for concepts like acoustics and phonetics."",
+        ""verbatim"": ""There's a need for better explanation and citation of concepts such as acoustics and phonetics and additional information about related work.""
+    }
+}",2,"{
+    ""A1-B3"": {
+        ""rationale"": ""Both points emphasize the need for comparison between the proposed method and existing methods. Review A requests a comparison with other approaches and seeks clarification on whether the proposed approach is better, while Review B points out that the method lacks a clear explanation of how it compares to existing methods."",
+        ""similarity"": ""7""
+    },
+    ""A3-B3"": {
+        ""rationale"": ""Both points highlight a significant concern regarding the lack of comparative analysis of the methods. Review A suggests the proper establishment of metrics and comparison models, while Review B expresses the absence of comparative discussion to existing methods, impacting the value addition to the field."",
+        ""similarity"": ""9""
+    }
+}",2,"{
+    ""A1-B2"": {
+        ""rationale"": ""Both Review A1 and Review B2 emphasize the need for improved explanations and preferential methodology, as well as better explanations and citations. Review A1 specifically asks for additional examples or a flowchart, and a comparison with other methodologies, while Review B2 desires better explanation and literature citation specifically around the concepts of acoustics and phonetics."",
+        ""similarity"": ""7""
+    },
+    ""A3-B2"": {
+        ""rationale"": ""Both points A3 from Review A and B2 from Review B express a concern about the adequacy of the methodology and the clarity of the explanation surrounding it. Review A3 specifically critiques the scientific method used and suggests a different approach to improve it, while Review B2 seeks improved explanation and citation on fundamental concepts that could include methodologies like those critiqued in A3."",
+        ""similarity"": ""7""
+    }
+}",2
 Multi-Time Attention Networks for Irregularly Sampled Time Series,4c0J6lwQ4_.json,"[TITLE]
 MULTI-TIME ATTENTION NETWORKS FOR IRREGULARLY SAMPLED TIME SERIES
 
@@ -2101,6 +2676,80 @@ Irregular sampling occurs in many time series modeling applications where it pre
     ""2"": {
         ""summary"": ""Potential overfitting on specific datasets may be a point of criticism leading to rejection if the experimental setup is not rigorously designed."",
         ""verbatim"": ""<Potential overfitting on specific datasets> If the experimental setup is not rigorously designed to prevent overfitting, particularly with multiple datasets, this could be a point of criticism leading to rejection.""
+    }
+}",2,{},0,"Significance:
+
+The paper presents an innovative approach to time series modeling using deep learning techniques, specifically Multi-Time Attention Networks. The main contribution of the paper is the introduction of a new deep learning framework for irregular time series modeling, which addresses the challenges of sparsely sampled, multivariate, and irregular data.
+
+2. [/SIGNIFICANCE AND NOVELTY:
+The paper's innovation lies in its application of time series modeling using deep learning framework, specifically Multi-Time Attention Networks. The paper presents a new approach to learn an embedding of continuous time values and uses an attention mechanism to produce a fixed-length representation of a time series. The novelty of this method lies in its application to irregularly sampled and multivariate time series, which are common in various fields such as finance, engineering and physics.
+
+3. [/POTENTIAL REASONS FOR ACCEPTANCE:
+The paper's methods and findings demonstrate the potential for acceptance in the field of time series analysis, specifically in irregularly sampled time series data. The paper compares the performance of Multi-Time Attention Networks with current state-of-the-art methods on interpolation and classification tasks, showing significant improvements in accuracy.
+
+4. [/SUGGESTIONS FOR IMPROVEMENT:
+The paper suggests improvements to current time series methods through the use of deep learning techniques and its Multi-Time Attention Networks. The suggested improvements include faster training times and the ability to handle irregularly sampled and multivariate time series data.
+
+Therefore, the paper's contribution lies in the development of a new deep learning framework, Multi-Time Attention Networks, that effectively addresses the challenges of modeling irregular time series data. The approach show significant improvements in accuracy compared to current baseline models, while offering faster training times than recently proposed methods. The proposed approach has the potential for wide applications in various fields such as finance, engineering and physics due to its ability to handle irregularly sampled and multivariate time series data.
+
+Reviewers' suggestions for improvement include explorining the adaptability of the model to various data distributions and irregular sampling patterns. Additionally, investigating the impact of different architectural modifications on the performance of the network and considering the effect of different optimization techniques on its training times.","[Potential reasons for acceptance]
+The paper is considered to present an interesting new model and evaluation and appears to bring important contributions in the field of time series modeling. The proposed Multi-Time Attention Networks are considered innovative and the paper presents new approaches for irregular time series. The approach appears to outperform baseline methods in interpolation and classification. The paper is well done, and the empirical analyses are sound, while it is considered to make positive contributions
+
+[Potential reasons for rejection]
+The paper's evaluation is considered to be unfair due to the utilization of rooted mean squared error (RMSE) as the end-to-end evaluation metric, making unbiased the comparison of the model performances, especially in interpolation. The work is considered to be incomplete and the evaluation part is problematic, lacking details of the parameters and methods of the experiments.  The clarity of the paper is insufficient, and the technical details of the implementation lacks descriptions.
+
+[Suggestions for improvement]
+The authors should provide more details of the technical implementation, including the architecture of the neural networks and any assumptions made in the experiments. More discussion as to how to improve the evaluation metrics and fairness in the comparison of models is necessary. The paper should also include details of the datasets and their properties, as well as the performance metrics for baselines and the proposed methods. Additionally, a code release is advisable to allow for the reproducibility of the results, as well as for further experimentation to improve the evaluation method
+
+The paper could be improved by addressing the following: 
+1. Address concerns about the evaluation metrics and fairness of comparisons with baselines. 
+2. Provide more information, such as the architecture and parameters of the neural networks utilized in the experiments. 
+3. Add more details of the datasets used in the experiments and performance metrics of baselines. 
+
+The paper's quality could be improved by addressing these concerns and focusing on the points made by the reviewers. The evaluation metrics, technical details and completeness in the document should be improved, and the clarity of the presentation should be enhaned to meet the requirements set by the conference.
+
+[TITLE] The paper introduces a new model to process time-series data, addressing the problem of irregularly sampled time-series found in many time series applications. The proposed framework of Multi-Time Attention Networks (MTANs) utilizes a time embedding approach for processing time-series data. The approach offers a good performance in interpolation and classification, outperforms similar models.
+
+[ABSTRACT] The paper is considered to present a good model to process a series data, introducing a new architecture, Multi-Time Attention Networks (MTANs). The approach offers a potentially useful contribution and empirical analysis that appears sound.
+
+[TITLE] The work is considered to make an important contribution in the field of time-series modeling by introducing a deep learning approach. The paper makes a good evaluation and empirical analysis while outperforming recent baselines.","{
+    ""1"": {
+        ""summary"": ""The paper introduces a novel deep learning framework for irregular time series modeling using Multi-Time Attention Networks."",
+        ""verbatim"": ""The main contribution of the paper is the introduction of a new deep learning framework for irregular time series modeling, which addresses the challenges of sparsely sampled, multivariate, and irregular data.""
+    },
+    ""2"": {
+        ""summary"": ""Novelty described as addressing the specific challenges of irregularly sampled and multivariate time series."",
+        ""verbatim"": ""The novelty of this method lies in its application to irregularly sampled and multivariate time series, which are common in various fields such as finance, engineering and physics.""
+    },
+    ""3"": {
+        ""summary"": ""No explicit reasons for rejection provided in the review."",
+        ""verbatim"": """"
+    },
+    ""4"": {
+        ""summary"": ""Suggestions focus on exploring model adaptability to different data distributions and the impact of architectural changes."",
+        ""verbatim"": ""Reviewers' suggestions for improvement include explorining the adaptability of the model to various data distributions and irregular sampling patterns. Additionally, investigating the impact of different architectural modifications on the performance of the network and considering the effect of different optimization techniques on its training times.""
+    }
+}",4,"{
+    ""1"": {
+        ""summary"": ""Unfair evaluation due to inappropriate metric choice"",
+        ""verbatim"": ""The paper's evaluation is considered to be unfair due to the utilization of rooted mean squared error (RMSE) as the end-to-end evaluation metric, making unbiased the comparison of the model performances, especially in interpolation.""
+    },
+    ""2"": {
+        ""summary"": ""Incomplete evaluation with lack of experimental details"",
+        ""verbatim"": ""The work is considered to be incomplete and the evaluation part is problematic, lacking details of the parameters and methods of the experiments.""
+    },
+    ""3"": {
+        ""summary"": ""Insufficient clarity and lack of technical implementation details"",
+        ""verbatim"": ""The clarity of the paper is insufficient, and the technical details of the implementation lacks descriptions.""
+    }
+}",3,"{
+    ""A1-B2"": {
+        ""rationale"": ""Both points discuss the handling of irregular and sparsely sampled time-series data within the proposed model. While Review A focuses on the lack of specific discussion in the methodology section regarding sparsity and irregular sampling, Review B acknowledges the novelty of the method in addressing these particular facets."",
+        ""similarity"": ""7""
+    },
+    ""A2-B4"": {
+        ""rationale"": ""Review A raises concerns about the appropriateness of using a Gaussian noise assumption for irregularly sampled data, suggesting potential issues in the framework's adaptability to real-world data distributions. Review B suggests improving the model by exploring its adaptability to various data distributions, which is relevant to the concern in Review A about the Gaussian assumption possibly being unfit for skewed distributions in real data."",
+        ""similarity"": ""8""
     }
 }",2,{},0
 Bounds on Over-Parameterization for Guaranteed Existence of Descent Paths in Shallow ReLU Networks,BkgXHTNtvS.json,"[TITLE]
@@ -2544,7 +3193,41 @@ We study the landscape of squared loss in neural networks with one-hidden layer 
         ""rationale"": ""Both Review A1 and Review B2 express concerns about the limitation of theoretical analysis to two-layer ReLU networks, questioning its broader applicability or extension to more complex or varied network architectures. Review A1 worries about the extension to deep networks and whether the theory applies in more natural settings, while Review B2 specifically speaks to the limited applicability due to the network architecture constraints that focus only on single hidden layer ReLU networks."",
         ""similarity"": ""8""
     }
-}",1
+}",1,"
+
+Significance:
+This paper provides a deep understanding of the concept of over-parameterization in neural networks with only one hidden layer. The authors identify existence of local minima with poor curvature in small training sets using the analysis of the loss landscape. The results of the study contributes to a better understanding of why good initialization schemes for neural networks are essential for to converge to global optima.
+
+Potential reasons for acceptance:
+The paper's findings provide new insights on the importance of proper initialization schemes in deep learning. The experimental design is a well-structured one, and the results are presented in a clear manner. The use of mathematical analysis to investigate the problem contributes to the understanding of over-parameterization in deep learning.
+
+Potential reasons for rejection:
+The experimental design is not comprehensive enough, as the study only investigate neural networks with only one hidden layer. There is need for extension to investigate the effect of over-parameterization in neural networks with more than one hidden layer.
+
+Suggestions for improvement:
+The authors may extend the study by investigating the effects of over-parameterization in neural networks with multiple hidden layers. Additionally, the authors may explore other neural architectures, such as recurrent or convolutional neural networks, to compare the behaviors of over-parameterization in various types of architectures.
+
+",,"{
+    ""1"": {
+        ""summary"": ""The scope of the study is too limited as it only investigates neural networks with a single hidden layer."",
+        ""verbatim"": ""The experimental design is not comprehensive enough, as the study only investigate neural networks with only one hidden layer.""
+    },
+    ""2"": {
+        ""summary"": ""The study needs to include neural networks with multiple hidden layers for better generalizability of the findings."",
+        ""verbatim"": ""There is need for extension to investigate the effect of over-parameterization in neural networks with more than one hidden layer.""
+    }
+}",2,"{
+    ""1"": {""summary"": ""Review content is missing"", ""verbatim"": ""nan""}
+}",1,"{
+    ""A1-B1"": {
+        ""rationale"": ""Both points criticize the limited scope of the neural network's configuration being studied, specifically the constraint to networks with only one or two layers."",
+        ""similarity"": ""8""
+    },
+    ""A1-B2"": {
+        ""rationale"": ""Both points express concerns about the need to extend the theoretical or experimental analysis to neural networks with multiple layers to improve the applicability or generalizability of the findings."",
+        ""similarity"": ""7""
+    }
+}",2,{},0
 The Sooner The Better: Investigating Structure of Early Winning Lottery Tickets,BJlNs0VYPB.json,"[TITLE]
 THE SOONER THE BETTER: INVESTIGATING STRUCTURE OF EARLY WINNING LOTTERY TICKETS
 
@@ -2783,7 +3466,72 @@ The recent success of the lottery ticket hypothesis by Frankle & Carbin (2018) s
         ""summary"": ""There are concerns about the generalizability of the findings across different architectures or datasets."",
         ""verbatim"": ""There might be concerns about the generalizability of the early winning ticket findings across different architectures or datasets outside those specifically tested.""
     }
-}",2,{},0
+}",2,{},0,"[Significance and novelty]
+
+1. The paper investigates an under-explored aspect of the winning ticket hypothesis: the structure of the sparsified model.
+2. The authors reveal that there exist early winning tickets which achieve high accuracy before the regular training schedule finishes, improving our understanding of the lottery ticket hypothesis.
+3. They provide novel insights into the emergence of lottery tickets under stochastic gradient descent and the importance of model capacity for early winning tickets.
+4. The paper also proposes a new approach to discover early winning tickets through memorization capacity analysis, contributing to the development of more efficient pruning strategies.
+
+[Potential reasons for acceptance]
+1. The research advances the understanding of the lottery ticket hypothesis by shedding new light on the structure of winning tickets.
+2. The findings are significant because they present a new way to discover winning tickets without relying on computationally expensive iterative pruning, improving efficiency and reducing training time.
+3. The paper showcases the state-of-the-art accuracy achieved with early winning tickets on CIFAR10 and ImageNet at a high pruning rate.
+
+[Potential reasons for rejection]
+1. The experimental setup only focuses on specific architectures, limiting the generalizability of the findings to other types of neural networks.
+2. The paper might be considered to replicate prior work, as the authors also confirm the necessity of initialization, rewinding, and sign of initial weights.
+3. The paper does not provide enough justification for why early winning tickets are necessarily better than regular winning tickets, leaving some ambiguity.
+
+[Suggestions for improvement]
+1. To strengthen the paper, the authors could expand their investigations to a broader range of neural network architectures, making their findings more universally applicable.
+2. To improve the paper's discussion on the significance of early winning tickets, the authors could showcase specific advantages of early winning tickets over regular winning tickets, such as faster convergence rates, memory efficiency, or other desirable properties.
+3. To further support their claims, the authors could include more thorough ablation studies and additional evaluation metrics, providing a more complete assessment of the advantages and disadvantages of early winning tickets.","[Significance and novelty]
+<Investigation of winning tickets> The paper investigates the structure of winning tickets obtained by iterative magnitude pruning, focusing on the timing of pruning and the impact of pruning on the ability to learn complex patterns.
+<Empirical findings on early winning tickets> The study provides significant empirical findings on early winning tickets, demonstrating that a winning ticket can be identified as early as 22% of the total epochs used for iterative pruning.
+
+[Potential reasons for acceptance]
+<Clear and focused writing> The paper has been praised for its clear and focused writing, making the research findings easy to understand and follow.
+<Empirical contributions> The paper's strong empirical contributions have been highlighted, particularly in demonstrating the emergence of winning tickets early in training and the impact of gradual pruning methods.
+
+[Potential reasons for rejection]
+<Lack of theoretical depth> Reviewers have pointed out the paper's lack of theoretical depth and rigorous analysis, suggesting the need for more formal justifications and theoretical guarantees for the proposed methods and findings.
+<Incomplete experimental analysis> Concerns have been raised about the completeness of the experimental analysis, particularly in terms of the thoroughness of the ablation studies and the use of non-standard hyperparameters.
+
+[Suggestions for improvement]
+<Theoretical foundation> The paper could benefit from a more solid theoretical foundation, including formal justifications and theoretical guarantees for the proposed methods and empirical findings.
+<Comprehensive ablation studies> Address concerns related to the completeness of the ablation studies by conducting more thorough and standardized analyses to support the empirical findings.","{
+    ""1"": {
+        ""summary"": ""The paper's experimental setup is limited to specific architectures, which may restrict the generalization of the findings to other neural network types."",
+        ""verbatim"": ""The experimental setup only focuses on specific architectures, limiting the generalizability of the findings to other types of neural networks.""
+    },
+    ""2"": {
+        ""summary"": ""The paper might be seen as redundant because it confirms previously known aspects about the importance of initialization, rewinding, and sign of initial weights in neural networks."",
+        ""verbatim"": ""The paper might be considered to replicate prior work, as the authors also confirm the necessity of initialization, rewinding, and sign of initial weights.""
+    },
+    ""3"": {
+        ""summary"": ""The paper lacks sufficient justification for the superiority of early winning tickets over regular winning tickets, leaving some ambiguity."",
+        ""verbatim"": ""The paper does not provide enough justification for why early winning tickets are necessarily better than regular winning tickets, leaving some ambiguity.""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""The paper lacks theoretical depth and rigorous analysis."",
+        ""verbatim"": ""<Lack of theoretical depth> Reviewers have pointed out the paper's lack of theoretical depth and rigorous analysis, suggesting the need for more formal justifications and theoretical guarantees for the proposed methods and findings.""
+    },
+    ""2"": {
+        ""summary"": ""The experimental analysis is incomplete, particularly in terms of ablation studies and use of non-standard hyperparameters."",
+        ""verbatim"": ""<Incomplete experimental analysis> Concerns have been raised about the completeness of the experimental analysis, particularly in terms of the thoroughness of the ablation studies and the use of non-standard hyperparameters.""
+    }
+}",2,{},0,"{
+    ""A1-B1"": {
+        ""rationale"": ""Both points address the lack of depth or insight in the research work. Review A critizes the paper for lack of originality and not offering much insight into the structure of sparse subnetworks, while Review B emphasizes a general lack of theoretical depth and rigorous analysis."",
+        ""similarity"": ""7""
+    },
+    ""A2-B2"": {
+        ""rationale"": ""Review A is concerned with the robustness and reliability of the findings due to randomness in early winning tickets and requires more convincing analysis, using error bars and averages of experiments. Review B points out issues with the completeness of the experimental analysis, specifically mentioning the need for thorough ablation studies and issues with non-standard hyperparameters. Both points highlight deficiencies in the experimental rigor and validation."",
+        ""similarity"": ""7""
+    }
+}",2
 Assessing the validity of saliency maps for abnormality localization in medical imaging,02X3kfP6W4.json,"[TITLE]
 Assessing the validity of saliency maps for abnormality localization in medical imaging
 
@@ -2882,7 +3630,84 @@ Saliency maps have become a widely used method to assess which areas of the inpu
         ""summary"": ""Potential methodological shortcomings in the study"",
         ""verbatim"": ""The paper might face criticism for not addressing potential biases in the model training or the selection of saliency methods, which can significantly affect the reproducibility and reliability of the results.""
     }
-}",2,{},0
+}",2,{},0,"Our study compared several state-of-the-art methods, including U-Net, ResNet, and VGG-16, using the RSNA Pneumonia dataset. The experiments showed that GradCAM had the best overall performance, with the highest accuracy, specificity and sensitivity across all the classes. However, we identified several challenges in using saliency maps, including the need for more training data to improve the model's performance, and limitations in the ability to handle class imbalance in the data, as well as the small size of the dataset which reduces the confidence in the performance. [/Suggestons for improvement] To improve the performance of GradCAM, one approach that can be taken is to use additional training data. Another approach is to employ ensemblesion, where multiple saliency models are trained on the same data. This can help improve robustness and reduce overfitting. A third approach that could be taken is to use data augmentation, which involves generating synthetic data from the real data for training the model. Lastly, using transfer learning, which involve using a pretrained model on new data, can be used to improve performance on new data. Each of these approaches can be beneficial to improve performance and make saliency maps more effective in medical imaging applications. However, there is challenges remain in implementing these approaches in clinical practice due to limited availability and the high cost of acquiring and annotating large datasets and the complexity of implementing the techniques in real clinical workflows. Ongoing forward, continued research and developing will be needed to address these challenges and further improve the efficacy and robustness of saliency mapping techniques in clinical settings.
+
+In the field of medical imaging, saliency maps have gained significant attention due to their ability to improve the diagnostic and prognostic accuracy in various medical conditions. These maps are computerized representations of medical images that can be used to assist radiologists in making more accurate diagnoseses and improving overall patient care. In medical imaging, saliency maps are often used to detect lesions, segment tumors, and diagnose diseases such as brain abnormalities.
+
+However, there are limitations to saliency mapping techniques, including the need for large and high quality training datasets, the ability to handle class imbalance in the data, and limitations in the availability of these techniques in real clinical practice. To improve the performance of saliency maps, several approaches can be taken. One approach is to use additional training data to increase the size of the existing datasets, which can help improve the model's performance and reduce overfitting. Another approach is to employ ensemblesion, which involves training multiple saliency models on the same dataset and producing a consensus output to improve the model's robustness and reduce overfitting. A third approach is to use transfer learning, which involves using a pretrained model on new data to improve performance on new data. Furthermore, developing new and more advanced deep learning algorithms and techniques can be used to improve the perfomality of saliency maps.
+
+In our study, we explored the validity and novelty of existing saliency map methods by comparing their performanacy on the RSNA Pneumonia dataset using the GradCAM, U-Net, and ResNet models. Our results showed that GradCAM outperformed the other methods in overall performance, specifically in terms of accuracy, specificity, sensitivity, and Matthews correlation coefficient. However, there are challenges in applying saliency maps in clinical practice due to their complexitiness and high cost of acquiring and annotating large datasets, as well as the limitations in handling class imbalance and size of the dataset which reduces the confidence in the performance. To improve the perfomality and robustness of saliency maps, several approaches can be taken. One approach is to use additional training data to increase the size of the existing datasets, thereby reducing overfitting and improving the model's performance. Another approach is to employ ensemblesion, which involves training multiple saliency models on the same dataset to generate consensus output and improve the model's robustness. A third approach is to use transfer learning, which involves using a pretrained model on new data to improve performance on new datasets.
+
+The use of saliency maps in medical imaging applications has gained significant attention due to their ability to improve diagnostic and prognostic accuracy in various medical conditions. Medical imaging applications of saliency maps include lesion detection, tumor segmentation, and disease diagnoses, specifically in conditions such as brain abnormalities.
+
+The limitations of saliency mapping techniques include the need for large and high quality training datasets, the ability to handle class imbalance in the data, and the availability of these techniques in clinical practice. To improve the performance and robustness of saliency maps, several approaches can be taken. One approach","[Potential reasons for acceptance]
+The study's scope is limited to specific applications in medical imaging. The method is not novel, however the comparision of the proposed method with state-of-the-art methods is limited. The evaluation and contributions are suggested to have more clarity and details. The comparison to state-of-the-art methods in medical imaging is needed.
+
+[Suggestions for improvement]
+The paper needs more extensive experiments and analysis to strengthen its contributions, particularly in the section of discussing the validity of the proposed method and evaluation. The authors should expand discussion of comparision and application of the proposed method with other state-of-the-art methods in the field. Additional citations sources is needed within application of the proposed method in medical imaging.
+
+[Concluding] The paper presents a method which leverages saliency maps for medical imaging based applications, but the study is limited only to one specific area. The paper should expand its scope by including other imaging applications in which saliency maps could be useful. The authors need to proof and reference all claims and statements in the paper. The paper could benefit from more extensive experimentation and analysis to strengthen the contributions. Additioinal citations are required in other applications beyond medical imaging. The authors need more details and clarrity in discussion of proposed method with other state-ofthe-art methods, in the field. Additionally, the study is limited to specific evaluations in medical imaging where the proposed method was applied. Further studies are suggested for generalization techniques and application of the proposed method beyond medical imaging and segmentation in magnetic resonance imaging.
+
+","{
+    ""1"": {
+        ""summary"": ""Small dataset size reduces confidence in model performance"",
+        ""verbatim"": ""the small size of the dataset which reduces the confidence in the performance""
+    },
+    ""2"": {
+        ""summary"": ""High cost and complexity of acquiring and annotating large datasets"",
+        ""verbatim"": ""the high cost of acquiring and annotating large datasets and the complexity of implementing the techniques in real clinical workflows""
+    },
+    ""3"": {
+        ""summary"": ""Need for large and high quality training datasets"",
+        ""verbatim"": ""the need for large and high quality training datasets""
+    },
+    ""4"": {
+        ""summary"": ""Challenges in handling class imbalance"",
+        ""verbatim"": ""the ability to handle class imbalance in the data""
+    },
+    ""5"": {
+        ""summary"": ""Limitations of saliency mapping availability in clinical practice"",
+        ""verbatim"": ""limitations in the availability of these techniques in real clinical practice""
+    }
+}",5,"{
+    ""1"": {
+        ""summary"": ""The method is not novel and comparison to state-of-the-art methods is limited."",
+        ""verbatim"": ""The method is not novel, however the comparison of the proposed method with state-of-the-art methods is limited.""
+    },
+    ""2"": {
+        ""summary"": ""Lack of clarity and detail in evaluation and contributions."",
+        ""verbatim"": ""The evaluation and contributions are suggested to have more clarity and details.""
+    },
+    ""3"": {
+        ""summary"": ""Insufficient experiments and analysis to support the contributions."",
+        ""verbatim"": ""The paper needs more extensive experiments and analysis to strengthen its contributions.""
+    },
+    ""4"": {
+        ""summary"": ""Need for broader discussion and comparison with other state-of-the-art methods."",
+        ""verbatim"": ""The authors should expand discussion of comparison and application of the proposed method with other state-of-the-art methods in the field.""
+    },
+    ""5"": {
+        ""summary"": ""Additional citation sources required within the application of the proposed method."",
+        ""verbatim"": ""Additional citations sources is needed within application of the proposed method in medical imaging.""
+    },
+    ""6"": {
+        ""summary"": ""Study focus is too narrow, limited to one specific area."",
+        ""verbatim"": ""The study is limited only to one specific area.""
+    },
+    ""7"": {
+        ""summary"": ""Claims and statements in the paper are unsubstantiated and lack references."",
+        ""verbatim"": ""The authors need to proof and reference all claims and statements in the paper.""
+    },
+    ""8"": {
+        ""summary"": ""Further studies suggested for generalization beyond specific applications."",
+        ""verbatim"": ""Further studies are suggested for generalization techniques and application of the proposed method beyond medical imaging and segmentation in magnetic resonance imaging.""
+    }
+}",8,{},0,"{
+    ""A1-B4"": {
+        ""rationale"": ""Both points highlight the need for a broader discussion and comparison regarding the effectiveness of the methods utilized, specifically asking for further explanation on performance and including comparative analysis with state-of-the-art methods."",
+        ""similarity"": ""7""
+    }
+}",1
 Explanation-Based Attention for Semi-Supervised Deep Active Learning,SyxKiVmedV.json,"[TITLE]
 EXPLANATION-BASED ATTENTION FOR SEMI-SUPERVISED DEEP ACTIVE LEARNING
 
@@ -3023,7 +3848,58 @@ We introduce an attention mechanism to improve feature extraction for deep activ
         ""rationale"": ""Both Review A and Review B raise concerns about the limitations of the experiments in providing a robust proof of concept for the proposed methods. Review A criticizes the need for more extensive experimentation and the use of the integration gradient and pseudo-labels, while Review B pinpoints the issue with using only simple, well-understood datasets (MNIST, SVHN) which may not validate the method's effectiveness across a broader range of applications."",
         ""similarity"": ""7""
     }
-}",1
+}",1,"Significance:
+The paper presents an novel approach to improve the performance of deep learning models in the semi-supervised setting. The proposed mechanism uses explanation-based attention to improve the predictions made by deep learning models, which is a recent trend in the machine learning research field. The results show improvements in accuracy and faster convergence speed compared to uncertainty-based methods.
+
+Potential reasons for acceptance:
+The paper contributes to the ongoing research in deep learning, particularly in the area of explainability and the application of deep learning models in the semi-supervised setting. The use explanation-based attention mechanism is a recent trend in the machine learning research and is becoming increasingly popular for its ability to improve the performance of deep learning models. The paper's experimental setup follows the standard methods in the research and provides clear and detailed explanations for its methods.
+
+Potential reasons for rejection:
+The given paper lacks a clear statement of the research question and the problem being addressed. The experimental setup is not well described and lacks enough context to evaluate the proposed method effectively. The paper does not sufficiently compare the results with relevant previous work in the field, making it difficult to assess its novelty and significance.
+
+Suggestions for improvement:
+The authors can provide a clearer statement of the research question and the problem being addressed. They can include more detail on the experimental setup, including the dataset used, preprocessing techniques, and training details. The authors can make more comparisons with previous work in the field to establish the novelty and significance of their findings.
+
+To summarize each point within the given criteria, please consider the following:
+
+1. Significance and novelty:
+
+The paper presents a novel approach to explainability in the semi-supervised deep learning models using a explanation-based attention mechanism. The application of this mechanism is a current trend in the deep learning research area, and has become increasingly popular due to its potential improve performance and interpretability of deep learning models.
+
+2. Potential reasons for acceptance:
+
+The paper contributes to the deep learning research, particularly in the explainability and improvement of deep learning models in the semi-supervised setting. The proposed attention mechanism aligns with recent trends in the deep learning research and is likely to be of interest to the deep learning community. The study design and methodology are clearly described and well documented, increasing the confidence in the reliability and validity of the results.
+
+3. Potential reasons for rejection:
+
+The research question and problem statement are not clear and well defined. The experiments lack clear and sufficient detail, making it difficult to evaluate the methodology effectively. The paper lacks sufficient comparison with relevant previous work and the field, making it unclear its novelty and significance.
+
+4. Suggestions for improvement:
+
+The authors can provide a clearer statement of the research question and problem being addressed. They can include more detail on the experimental setup and methods, including the specifications of datasets used, preprocessing techniques, and training settings. The authors can include more comparisons with relevant previous work and the field. They can clearly summarize their main contributions and the results, and discuss its implications for future research. They can provide code and data for reproducibility to support their findings. In addition, they can address any potential criticisms and limitations of their study and suggest potential avenues for future research.",,"{
+    ""1"": {
+        ""summary"": ""Lack of clear research question and problem statement"",
+        ""verbatim"": ""The given paper lacks a clear statement of the research question and the problem being addressed.""
+    },
+    ""2"": {
+        ""summary"": ""Insufficient experimental setup description"",
+        ""verbatim"": ""The experimental setup is not well described and lacks enough context to evaluate the proposed method effectively.""
+    },
+    ""3"": {
+        ""summary"": ""Inadequate comparison with relevant previous work"",
+        ""verbatim"": ""The paper does not sufficiently compare the results with relevant previous work in the field, making it difficult to assess its novelty and significance.""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""Review is empty or not provided"",
+        ""verbatim"": ""nan""
+    }
+}",1,"{
+    ""A1-B2"": {
+        ""rationale"": ""Both points address the concerns related to the clarity and adequacy of experimental descriptions. Review A discusses the unclear intuition and methodology behind using integrated gradients and pseudo-labels as well as the assumption made in the experimental setup. Similarly, Review B mentions that the experimental setup is not well described, lacking sufficient context for effective evaluation."",
+        ""similarity"": ""7""
+    }
+}",1,{},0
 Why Deep Surgical Models Fail?: Revisiting Surgical Action Triplet Recognition through the Lens of Robustness,zZcCINENgm.json,"[TITLE]
 WHY DEEP SURGICAL MODELS FAIL?: REVISITING SURGICAL ACTION TRIPLET RECOGNITION THROUGH THE LENS OF ROBUSTNESS
 
@@ -3247,7 +4123,77 @@ Surgical action triplet recognition provides a better understanding of the surgi
         ""summary"": ""Integration and impact on current surgical practices not addressed"",
         ""verbatim"": ""Technical challenges unaddressed""
     }
-}",2,{},0
+}",2,{},0,"[Significance and novelty]
+1. The paper investigates a crucial problem in the field of surgical data science: the failure of deep learning models for surgical action triplet recognition despite their potential benefits in providing context-aware support and safety for surgeons.
+2. The study presents the first examination of this issue through the lens of robustness and explainability, contributing new insights into the challenges and potential solutions for creating more trustworthy and reliable models.
+3. The findings reveal the importance of addressing core and spurious attributes in deep learning models to achieve improved performance and reliability, shedding light on a significant research avenue in the field.
+
+[Potential reasons for acceptance]
+1. The research addresses a significant issue in surgical data science, providing insights into the reasons behind the lower performance and unreliability of deep learning models for surgical action triplet recognition compared to other tasks.
+2. The investigative methodology, which includes weak and strong δ−perturbations via adversarial optimization and feature-based explanations, adds valuable depth to the study and provides concrete evidence for the identified failure modes and underlying causes.
+3. The proposed focus on core and spurious attributes in deep learning models offers a promising avenue for enhancing confidence in surgical AI systems and increasing their acceptance and implementation in clinical settings.
+
+[Potential reasons for rejection]
+1. The study might be rejected if the research community does not acknowledge or perceive the identified issue of lower performance and unreliability in current deep learning models for surgical action triplet recognition as significant or pressing enough.
+2. If the methodology is deemed unsatisfactory by reviewers, including concerns about the selection or validation of δ−perturbations, the applicability of feature-based explanations, or the adequacy of the adversarial optimization scheme, the manuscript may face rejection.
+3. The paper may lack sufficient comparisons or benchmarks against other state-of-the-art techniques, or may not provide a clear enough connection between the findings and potential solutions that can be implemented in practice, which could negatively impact its acceptance prospects.
+
+[Suggestions for improvement]
+1. Expand the experimental section to include more comprehensive comparisons with other state-of-the-art methods in surgical action triplet recognition, thereby establishing a clearer context within the literature and emphasizing the significance of the findings.
+2. Conduct a sensitivity analysis to investigate the impact of different δ−perturbation magnitudes and thresholds, ensuring the robustness of the methodology and enriching the study's results.
+3. Introduce a discussion on specific practical solutions based on the research findings, detailing how the insights gained from this study can be implemented in real-world surgical applications and improving the overall reliability and robustness of deep learning models for surgical action triplet recognition.","[Significance and novelty]
+<Deep dive into a challenging problem> The paper addresses an interesting and challenging problem of surgical action triplet recognition, shedding light on the robustness and reliability of the state-of-the-art deep learning models.
+<Introduction of new approaches and metrics> The paper introduces new robustness metrics, such as δ-correctness and δ-precision, and explores the attribution-based method and adversarial example attacks to improve understanding of the model behavior.
+
+[Potential reasons for acceptance]
+<In-depth analysis of model failures> The paper provides a detailed analysis of failure cases, highlighting the limitations of existing deep learning models and the need for robustness and explainability in surgical applications.
+<Development of new robustness metrics> The introduction of δ-correctness and δ-precision as new robustness metrics contributes to the advancement of evaluation criteria for surgical action triplet recognition.
+
+[Potential reasons for rejection]
+<Unclear technical details> Some reviewers expressed confusion about technical details, such as the implementation of the feature attribution method, lack of comparison with baseline methods, and the definition of attack-robustness.
+<Lack of validation of claimed contributions> Reviewers questioned the effectiveness and validity of the proposed contributions, especially in demonstrating the superiority of robust predictions.
+
+[Suggestions for improvement]
+<Clarity in technical explanations> The authors should provide clearer and detailed explanations of the technical aspects, such as the feature attribution method, implementation details, and evaluation metrics, to enhance the understanding for readers and reviewers.
+<Validation of contributions> To address the concerns raised by reviewers, the authors should provide more comprehensive evidence and validation of the claimed contributions, especially in demonstrating the superiority of robust predictions over other baselines.
+
+","{
+    ""1"": {
+        ""summary"": ""Perception of the issue's significance in the research community"",
+        ""verbatim"": ""The study might be rejected if the research community does not acknowledge or perceive the identified issue of lower performance and unreliability in current deep learning models for surgical action triplet recognition as significant or pressing enough.""
+    },
+    ""2"": {
+        ""summary"": ""Methodological concerns regarding perturbations and explanations"",
+        ""verbatim"": ""If the methodology is deemed unsatisfactory by reviewers, including concerns about the selection or validation of δ−perturbations, the applicability of feature-based explanations, or the adequacy of the adversarial optimization scheme, the manuscript may face rejection.""
+    },
+    ""3"": {
+        ""summary"": ""Lack of sufficient benchmarks and unclear connection to practical solutions"",
+        ""verbatim"": ""The paper may lack sufficient comparisons or benchmarks against other state-of-the-art techniques, or may not provide a clear enough connection between the findings and potential solutions that can be implemented in practice, which could negatively impact its acceptance prospects.""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""Reviewers found technical details unclear"",
+        ""verbatim"": ""Some reviewers expressed confusion about technical details, such as the implementation of the feature attribution method, lack of comparison with baseline methods, and the definition of attack-robustness.""
+    },
+    ""2"": {
+        ""summary"": ""Lack of validation for the effectiveness of the proposed contributions"",
+        ""verbatim"": ""Reviewers questioned the effectiveness and validity of the proposed contributions, especially in demonstrating the superiority of robust predictions.""
+    }
+}",2,"{
+    ""A2-B2"": {
+        ""rationale"": ""Both points discuss methodological concerns regarding the validity and adequacy of the mechanisms used in these deep learning models. Review A hints at the poor performance being not solely attributed to unreliable features, suggesting broader methodological issues, which aligns with Review B's direct criticism of the methods like perturbations and adversarial schemes."",
+        ""similarity"": ""7""
+    },
+    ""A3-B3"": {
+        ""rationale"": ""Review A argues that the conclusions in the paper are based on intuition rather than empirical data, which infers a lack of rigorous experimental backing or benchmarking. Review B's point about lacking sufficient benchmarks and a clear connection to practical solutions ties closely to this, as both points essentially criticize the paper for not sufficiently grounding its claims in concrete data or comparative analysis."",
+        ""similarity"": ""8""
+    }
+}",2,"{
+    ""A3-B2"": {
+        ""rationale"": ""Both points express concerns about the validity and support for the key claims made in the study. Review A points to the conclusions being based on intuition rather than empirical data, and Review B questions the effectiveness and validity of the proposed contributions. Both critiques highlight a lack of rigorous evidence supporting the paper's claims."",
+        ""similarity"": ""8""
+    }
+}",1
 AutoGrow: Automatic Layer Growing in Deep Convolutional Networks,S1x0CnEtvB.json,"[TITLE]
 AutoGrow: AUTOMATIC LAYER GROWING IN DEEP CONVOLUTIONAL NETWORKS
 
@@ -3466,6 +4412,71 @@ Depth is a key component of Deep Neural Networks (DNNs), however, designing dept
 }",2,"{
     ""A1-B1"": {
         ""rationale"": ""Both points critique aspects of theoretical support and effectiveness, with Review A discussing the lack of optimal results due to algorithmic preferences in design and comparison uncertainties, while Review B emphasizes the lack of theoretical justification on how the growth and stopping policies of AutoGrow function under various conditions."",
+        ""similarity"": ""7""
+    }
+}",1,"
+
+Significance and novelty:
+The paper proposes AutoGrow, a method to automate the depth discovery in Deep Neural Networks (DNNs). Traditional methods for designing depth in DNNs require significant human efforts and are heuristic. With AutoGrow, depth discovery is automated, making the process more efficient and cost-effective. The method starts with a shallow architecture and grows new layers if the growth improves accuracy; otherwise, it stops growing, discovering the optimal depth for the specific dataset. The paper demonstrates that applying the same policy to various datasets results in discovering near-optimal depth for each dataset. The findings of the paper introduce potential benefits for both research and practical applications, as it can lead to more efficient training of DNNs and discovery of optimal architectures for specific datasets.
+
+Potential reasons for acceptance:
+The research presented in the paper is of high quality, as it contributes to the field by providing an innovative solution to the problem of depth discovery in DNNs, which currently requires significant human efforts and is heuristic. The method proposed in the paper, AutoGrow, shows promising results on various datasets and improves upon traditional methods by discovering near-optimal depth in similar time and with greater efficiency. The paper presents the algorithms and experiments in a clear and concise manner, improving the readability and reproducibility of the research. The paper also includes thorough analysis and discussion of the results, highlighting the benefits and limitations of the proposed method.
+
+Potential reasons for rejection:
+The paper lacks sufficient justification for the stopping criteria used in the AutoGrow algorithm. The stopping criteria is critical for the AutoGrow method to discover the optimal depth, however, the paper does not provide sufficient explanation of how the stopping criteria is determined. The paper does not include sufficient comparison of the proposed method with existing state-ofthe-art methods. The lack of such comparison limits the contributions of the paper and reduces its novelty. Furthermore, the paper lacks sufficient discussion of the scalability of the AutoGrow algorithm to large-scale deep learning models, restricting its applicability.
+
+Suggestions for improvement:
+The authors should provide a more detailed explanation of the stopping criteria used in the AutoGrow algorithm, including the parameters and evaluation metrics used for determining the stopping condition. They should also include a thorough comparison of the proposed method with existing state-ofthe-art methods, highlighting the advantages and disadvantages of each approach and how AutoGrow improves upon them. Additionally, the authors should provide analysis of the scalability of the AutoGrow algorithm to large-scale deep learning models, assessing its applicability to practical applications. They should also consider the incorporation of interpretability features, enabling the users to understand the learning process of the AutoGrow method. Finally, the authors could benefit from providing code and data availability, as it would enable researchers to test and reproduce the results reported in the paper.
+
+","[Significance and novelty]
+<Originality of the proposed work> The paper presents an original approach (AutoGRoW) to adaptively compute the depth in neural networks. It is the first work that addresses the trade-off between accuracy and inference speed directly without human intervention.
+<Technical solidity and strong results> The paper shows technically solid experimental results on different neural networks architectures and datasets, outperforming many baseline designs for architecture search in terms of speed-accuracy trade-off.
+
+[Potential reasons for acceptance]
+<High quality of the paper in terms of its solid approach of automatic search space exploration, technical robustness, and strong experimental results> The paper is technically solid in terms of its approach of automatic search space exploration, technical robustness, and strong experimental results.
+<Comprehensive experiments and clear presentation> The paper has comprehensive experiments and clear presentation.
+
+[Potential reasons for rejection]
+<Lack of comprehensive empirical evaluation> The empirical evaluation of the proposed approach is not comprehensive, and the ablation studies are superficial.
+<Insuffient clarity and missing important related work> The paper leaves out some important related work and suffers from misses in clarity.
+
+[Suggestions for improvement]
+<Conduct more comprehensive empirical studies> The paper should conduct more comprehensive empirical studies and conduct additional ablation studies.
+<Include more comprehensive related work> The authors should include more comprehensive related work in its related work section.
+<Improve presentation quality> The paper should make an effort in improving its overall presentation quality.
+
+Title: Learning deep neural networks through heuristics
+
+","{
+    ""1"": {
+        ""summary"": ""Insufficient justification for the stopping criteria in the AutoGrow algorithm."",
+        ""verbatim"": ""The paper lacks sufficient justification for the stopping criteria used in the AutoGrow algorithm.""
+    },
+    ""2"": {
+        ""summary"": ""Lack of comparison with existing state-of-the-art methods."",
+        ""verbatim"": ""The paper does not include sufficient comparison of the proposed method with existing state-ofthe-art methods.""
+    },
+    ""3"": {
+        ""summary"": ""Limited discussion on the scalability of the AutoGrow algorithm."",
+        ""verbatim"": ""The paper lacks sufficient discussion of the scalability of the AutoGrow algorithm to large-scale deep learning models.""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""The empirical evaluation of the proposed approach is not comprehensive, and the ablation studies are superficial."",
+        ""verbatim"": ""The empirical evaluation of the proposed approach is not comprehensive, and the ablation studies are superficial.""
+    },
+    ""2"": {
+        ""summary"": ""The paper lacks some important related work and has issues with clarity."",
+        ""verbatim"": ""The paper leaves out some important related work and suffers from misses in clarity.""
+    }
+}",2,"{
+    ""A1-B2"": {
+        ""rationale"": ""Both Review A1 and Review B2 express concerns about the novelty and effectiveness of the proposed method compared to existing techniques. Review A1 discusses that the growth strategy in the paper appears similar to ones used in other communities and questions the optimal results claimed by the paper due to possible algorithmic bias. Review B2 highlights the paper’s lack of comparison with existing state-of-the-art methods."",
+        ""similarity"": ""7""
+    }
+}",1,"{
+    ""A2-B2"": {
+        ""rationale"": ""Both points A2 and B2 question the novelty of the approach compared to existing work. Review A specifically addresses the performance of the proposed method concerning the broader literature of NAS and implies that other methods may not have used certain initializations due to inherent limitations, suggesting a lack of novelty or depth in innovative technique, which directly relates to B2's critique of omitting important related work and issues in clarity."",
         ""similarity"": ""7""
     }
 }",1
@@ -3753,7 +4764,83 @@ Time series forecasting plays a crucial role in marketing, finance and many othe
         ""rationale"": ""Both points express a strong concern over the lack of comparative analysis with modern or advanced methods in the field. Review A emphasizes the absence of comparisons with relevant, advanced change-point detection methods and existing econometric literature, whereas Review B notes the lack of detailed comparative analyses with recent state-of-the-art approaches, particularly in machine learning applied to similar problems. Both critiques center on the paper's insufficient integration and benchmarking with contemporary methods, highlighting a critical gap in literature comparison and novelty."",
         ""similarity"": ""8""
     }
-}",1
+}",1," [Significance and novelty]
+The paper presents a novel state space time series model that can capture the structures of change points and anomaly points in addition to trends and seasonality. This model, named BAYES, utilizes a Bayesian framework for inferring hidden variables, providing distributions and forecasting intervals with theoretical guarantees. The proposed model significantly improves time series forecasting performance compared to existing methods, demonstrated in both synthetic data and real data applications. This is a significant contribution to the field as it addresses a long-standing issue of change point and anomaly detection in time series forecasting, which is crucial in marketing, finance, and other quantitative fields.
+
+[Potential reasons for acceptance]
+First, the paper introduces a novel approach to time series foreasting, specifically a state space time series model (BAYES) that can capture change points and anomalies in addition to trends and seasonality. This is a crucial contribution to the field as it allows for more accurate change point and anomaly detection, a challenge in time series forecasting for various industries such as marketing and finance.
+
+Second, the researchers present a Bayesian framework for inferring hidden variables, providing distributions and forecasting intervals. This approach offers provable theoretical properties, increasing the reliability and transparency of the results.
+
+Third, the proposed methodology is shown to outperform existing methods in both synthetic data and real data applications, providing valuable insights for practitioners in various industries that rely on time series forecasting.
+
+[Potential reasons for rejection]
+First, the methodology implementation relies on iterative algorithms with MCMC, Kalman filter, and Kalman smoothing. These algorithms may not be easily implemented by all practitioners, limiting the accessibility of the proposed method.
+
+Second, the paper lacks a comparison of the proposed model with other state-of-the-art models, which may call into question the novelty of the contribution.
+
+Third, the paper's real data sets are not publicly available, limiting the replicability of the findings.
+
+[Suggestions for improvement]
+First, the authors could provide a more comprehensive comparison with other state-of-the-art models to solidify the novelty and significance of the proposed model.
+
+Second, the researchers could consider providing detailed implementation instructions for the iterative algorithms used in the methodology, making it easier for practitioners to implement the proposed approach.
+
+Third, the authors could make the real data sets publicly available to increase the transparency and replicability of the findings.
+
+","[Potential reasons for acceptance]
+1. Use of Bayesian approach for inferring the hidden variables of the model, which provably has some theoretical properties and has the potential for superior performance in the comparison with other conventional methods such as ARIMA and Holt-Winters.
+2. Informative algorithm with MCMC, Kalman filter, and Kalman smoothing strategies are used for more accurate time series forecasting.
+3. Synthetic data and real data applications show superior performance of the proposed methodology in time series forecasting compared to existing methods and change point detection and anomaly detection.
+
+[Potential reasons for rejection]
+1. English grammar and spelling errors in the manuscript indicate a lack of proof-reading and editing.
+2. The structure of the manuscript is complicated, making it difficult for the main points of the section to be distinguished, and the content appears to be very rushed.
+3. The manuscript lacks clarifications on various parameters with detailed explanations on the experiments, which could influence the paper's readiness for publication.
+
+[Suggestions for improvement]
+1. Proof-reread the manuscript for grammar and spelling errors to maintain a professional appearance.
+2. Simplify the structure of the manuscript by reorganizing sections to better highlight the main points.
+3. Provide detailed explanations on the parameters used in the experiments and their impacts on the results for clearer understanding.
+
+[Significance and novelty]
+1. The proposed methodology of change point forecasting and detection for time series using a Bayesian framework with MCMC approach presents novelty in the area of time series forecasting.
+2. The superior performance on both synthetic data and real data applications, along with detailed analyses, show the potential for acceptance.","{
+    ""1"": {
+        ""summary"": ""Method complexity and accessibility issues due to reliance on advanced iterative algorithms"",
+        ""verbatim"": ""First, the methodology implementation relies on iterative algorithms with MCMC, Kalman filter, and Kalman smoothing. These algorithms may not be easily implemented by all practitioners, limiting the accessibility of the proposed method.""
+    },
+    ""2"": {
+        ""summary"": ""Absence of comparison with other state-of-the-art models"",
+        ""verbatim"": ""Second, the paper lacks a comparison of the proposed model with other state-of-the-art models, which may call into question the novelty of the contribution.""
+    },
+    ""3"": {
+        ""summary"": ""Limited replicability due to non-public real data sets"",
+        ""verbatim"": ""Third, the paper's real data sets are not publicly available, limiting the replicability of the findings.""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""Manuscript contains numerous English grammar and spelling errors."",
+        ""verbatim"": ""English grammar and spelling errors in the manuscript indicate a lack of proof-reading and editing.""
+    },
+    ""2"": {
+        ""summary"": ""The manuscript's structure is overly complicated and unclear."",
+        ""verbatim"": ""The structure of the manuscript is complicated, making it difficult for the main points of the section to be distinguished, and the content appears to be very rushed.""
+    },
+    ""3"": {
+        ""summary"": ""Lack of detailed explanations for various experimental parameters."",
+        ""verbatim"": ""The manuscript lacks clarifications on various parameters with detailed explanations on the experiments, which could influence the paper's readiness for publication.""
+    }
+}",3,"{
+    ""A1-B2"": {
+        ""rationale"": ""Both Review A and Review B highlight the absence of comparisons with other relevant models or literature. Review A discusses the lack of comparison with relevant econometric literature and advanced change-point detection methods, while Review B mentions the absence of comparisons with other state-of-the-art models, affecting the perceived novelty of the paper."",
+        ""similarity"": ""8""
+    },
+    ""A2-B2"": {
+        ""rationale"": ""Review A's concerns about the novelty of the paper and Review B's commentary on the lack of comparison with state-of-the-art models both fundamentally challenge the novelty of the proposed framework by questioning its differentiation from existing methods."",
+        ""similarity"": ""9""
+    }
+}",2,{},0
 Deep Anomaly Detection with Outlier Exposure,HyxCxhRcY7.json,"[TITLE]
 DEEP ANOMALY DETECTION WITH OUTLIER EXPOSURE
 
@@ -3987,6 +5074,53 @@ It is important to detect anomalous inputs when deploying machine learning syste
     ""A3-B1"": {
         ""rationale"": ""While A3 critiques the novelty and effectiveness of the OE loss in dealing with outliers in classification, B1 addresses broader concerns about the model's dependency on an auxiliary outlier dataset possibly leading to overfitting. Both points converge on the aspect of how the model handles outlier data although from different perspectives"",
         ""similarity"": ""6""
+    }
+}",1," [Significance and novelty]
+The paper by the authors presents Outlier Exposure (OE), an innovative approach to improve anomaly detection in deep learning models, especially relevant in the context of larger and more complex inputs in deep learning. OE leverages diverse datasets of outliers to train anomaly detectors, enabling them to generalize and detect unseen anomalies, enhancing the significance and novelty of the proposed method in the field of deep learning-based anomaly detection (Anomaly Detection with Outlier Exposure).
+
+[Potential reasons for acceptance]
+The research finds that OE significantly improves detection performance on natural language processing and small- and large-scale vision tasks, offering a potential reason for acceptance as it addresses the challenge of detecting anomalous inputs in deep learning systems, especially relevant with the usage of larger and more complex data inputs.
+
+[Potential reasons for rejection]
+The paper lacks a clear explanation of the selection process for choosing the auxiliary dataset of outliers, which could be a potential reason for rejection if reviewers or readers find it as a critical concern. Also, there is limited justification offered regarding the scalability and applicability of OE to real-world use-cases.
+
+[Suggestions for improvement]
+To improve the paper, the authors could elaborate more on the dataset selection process, emphasizing the criteria used for picking outliers from diverse datasets, providing clear details on the representation, size, diversity, and distribution of the auxiliary dataset, data processing, preparation and preprocessing techniques. Additionally, a more comprehensive evaluation of OE on a larger number of use-cases, including both public and private datasets, could be performed for a more robust demonstration of the applicability and scalability of the proposed method. Furthermore, the authors could explore different OE designs and configurations to identify the best performing model and provide clear implementation details of the OE framework to facilitate reproducibility and transparency. Lastly, the authors could discuss any potential limitations, ethical concerns and future research directions of OE for a more roundened consideration of its contribution to the deep learning field.
+
+","[Significance and novelty]
+<Technical novelty and significance> The contributions are only marginally significant or novel. Some claims in the paper are not well-supported or require small changes to be supported. Additionally, the technical and empirical novelty and significance of the contributions are rated as marginal.
+
+[Potential reasons for acceptance]
+<Strong experimental results> The paper is well-written and the motivation is clear. The results of the extensive experiments on NLP and vision tasks are good, showing improvements in outlier exposure (OE) and comparison with generative models on CIFAR10 dataset.
+
+[Potential reasons for rejection]
+<Limited technical contribution> The technical novelty and significance of the contributions are rated as marginal, and some claims in the paper are not well-supported or require small changes to be supported.
+
+[Suggestions for improvement]
+<Expand literature review> An expanded literature review of related works with more deep learning and anomaly detection would provide a more thorough discussion of the importance of the work.
+<Further justification of novelty> The paper could benefit from further justification of claimed novelties and significance of the contributions.
+<Improving writing quality> The quality of writing can be improved, and the references should be organized for each section.","{
+    ""1"": {
+        ""summary"": ""Lack of clarity in the selection process for outliers"",
+        ""verbatim"": ""The paper lacks a clear explanation of the selection process for choosing the auxiliary dataset of outliers""
+    },
+    ""2"": {
+        ""summary"": ""Limited justification on scalability and applicability"",
+        ""verbatim"": ""there is limited justification offered regarding the scalability and applicability of OE to real-world use-cases""
+    }
+}",2,"{
+    ""1"": {
+        ""summary"": ""Marginal technical novelty and significance"",
+        ""verbatim"": ""The technical novelty and significance of the contributions are rated as marginal.""
+    },
+    ""2"": {
+        ""summary"": ""Unsupported or weakly supported claims"",
+        ""verbatim"": ""Some claims in the paper are not well-supported or require small changes to be supported.""
+    }
+}",2,{},0,"{
+    ""A3-B1"": {
+        ""rationale"": ""Both points address the lack of novelty in the presented work. Review A critiques the proposed OE loss for classification as lacking originality, suggesting it resembles a previously known confidence loss. Review B comments on the marginal technical novelty and significance of the contributions. Both concern the issue of originality and novelty in the scientific contribution of the paper."",
+        ""similarity"": ""7""
     }
 }",1
 Planning for Implicit Coordination using FOND,HJelxWI9w4.json,"[TITLE]
@@ -4240,7 +5374,66 @@ Epistemic Planning can be used to achieve implicit coordination in cooperative m
         ""rationale"": ""Both points discuss concerns about the scalability and general scope of their studies or approaches. Review A mentions the approach does not scale well and suggests evaluating more instances or domains for better insights. Review B notes that the narrow scope of the case study might limit its generalizability. Both points are concerned with how the research might apply to a wider context or more varied scenarios."",
         ""similarity"": ""7""
     }
-}",1
+}",1," [Significance and novelty]
+
+This paper makes a significant contribution to the field of AI planning by introducing a decidable fragment of epistemic planning, a type of planning that allows for implicit coordination in multi-agent systems where agents have distributed knowledge and capabilities. The novelty lies in the identification of a decidable fragment of epistemic planning that guarantees arbitrary initial state uncertainty and nondeterminism, while preventing the uncertainty from increasing for agents. This research is particularly important as it allows for the reduction of planning with implicit coordination to fully observable nondeterministic planning, which shares the same computational complexity.
+
+[Potential reasons for acceptance]
+The research presented in the paper is valuable due to its potential impact on the field of AI planning. The identification of a decidable fragment of epistemic planning provides a way for agents to coordinate and plan in a distributed environment without requiring agreement on a common plan or protocol beforehand.
+
+Moreover, the paper provides a small case study that demonstrates the application of the proposed compilation approach in practice. The case study involves multi-agent path finding with destination uncertainty in the fully observable nondeterministic domain. The successful solution to the case study further validates the potential of the proposed approach.
+
+[Potential reasons for rejection]
+One potential reason for rejection could be the lack of a clear validation methodology within the case study presented in the paper. The case study only includes a single instance run of the algorithm, which may not provide enough evidence for the generalizability of the proposed approach.
+
+Additionally, the decision procedure for the epistemic planning problem is described in a high-level manner, making it difficult to understand the details of the procedure without additional clarification from the authors.
+
+[Suggestions for improvement]
+To improve the paper, the authors may consider providing a more comprehensive validation of the proposed approach through multiple runs of the algorithm on a variety of problem instances. This would provide stronger evidence for the generalizability and scalability of the approach.
+
+Additionally, the authors may provide a more detailed description of the decision procedure for the epistemic planning problem to allow for a better understanding of the underlying methods. This would improve transparency and allow for reproducibility of the research findings.
+
+","[Significance and novelty]
+:
+<Addressing a significant problem in the field of planning> The paper introduces a novel approach to addressing epistemic planning problems, showcasing planning without shared explicit coordination between multiple agents, which can have general applicability to real-world scenarios involving decentralized control.
+
+[Potential reasons for acceptance]
+:
+<Thorough and effective presentation> The paper is well-written, clear in its presentation, and provides adequate references to support its statements.
+<Thorough literature survey and comparison on current work> The paper provides a thorough literature survey and comparison of the work, particularly in implicit coordination and planning literature.
+
+[Potential reasons for rejection]
+:
+<Lack of clarity around notions like 'epistemic'> Reviewers had difficulties in understanding the paper due to ambiguous notions and undefined terms throughout, such as the term 'epistemic'.
+<Lack of clarity in related work and organization> The related work section was very hard to find, and the organization of the paper could be improved for better understanding.
+
+[Suggestions for improvement]
+:
+1.<Define terms and notions clearly> The authors should clearly define notions and terms in the introduction to improve the understanding for readers, including notions like 'epistemic'.
+2.<Clarify the related work and improve organization> The authors should clarify related work, organize the paper better for improved understanding of the content.","{
+    ""1"": {
+        ""summary"": ""Lack of a thorough validation methodology in the case study"",
+        ""verbatim"": ""One potential reason for rejection could be the lack of a clear validation methodology within the case study presented in the paper.""
+    },
+    ""2"": {
+        ""summary"": ""Limited explanation of decision procedure for epistemic planning"",
+        ""verbatim"": ""Additionally, the decision procedure for the epistemic planning problem is described in a high-level manner, making it difficult to understand the details of the procedure without additional clarification from the authors.""
+    }
+}",2,"{
+    ""1"": {
+        ""summary"": ""Ambiguity and undefined terms in the paper"",
+        ""verbatim"": ""Reviewers had difficulties in understanding the paper due to ambiguous notions and undefined terms throughout, such as the term 'epistemic'.""
+    },
+    ""2"": {
+        ""summary"": ""Poor organization and unclear related work section"",
+        ""verbatim"": ""The related work section was very hard to find, and the organization of the paper could be improved for better understanding.""
+    }
+}",2,"{
+    ""A2-B1"": {
+        ""rationale"": ""Both points discuss the inadequacy in demonstrating or evaluating the effectiveness of the approach or methodology. Review A critiques the method's scalability and lack of testing across different instances or domains, essentially pointing out a missing broader validation. Review B addresses the absence of a clear validation methodology in the case study, which aligns with the concern of proper evaluation of the method overall."",
+        ""similarity"": ""7""
+    }
+}",1,{},0
 Hierarchical Reinforcement Learning via Advantage-Weighted Information Maximization,Hyl_vjC5KQ.json,"[TITLE]
 HIERARCHICAL REINFORCEMENT LEARNING VIA ADVANTAGE-WEIGHTED INFORMATION MAXIMIZATION
 
@@ -4496,7 +5689,75 @@ Real-world tasks are often highly structured. Hierarchical reinforcement learnin
         ""rationale"": ""Both points address uncertainties in validation of the proposed methodologies under more complex or advanced settings. Review A questions the choice of optimizing mutual information with a designated 'optimal' policy and suggests better validation through more complex experiments and comparisons. Similarly, Review B points to limited scope of validation and suggests expanding experimentation."",
         ""similarity"": ""7""
     }
-}",1
+}",1,"[Significance and novelty]
+1. The paper introduces a novel hierarchical reinforcement learning (HRL) method that learns a latent variable of a hierarchical policy using mutual information maximization, which is an innovative approach in the field of HRL.
+2. The use of advantage-weighted importance sampling to learn option policies that correspond to modes of the advantage function is a new application of importance sampling in HRL.
+3. The gating policy that learns to select option policies based on an option-value function and optimizes these option policies using the deterministic policy gradient method is a novel way of defining hierarchical policies in HRL.
+
+[Potential reasons for acceptance]
+1. The proposed HRL method offers a novel and innovative approach to learn a hierarchical policy structure using mutual information maximization, which has the potential to significantly enhance the performance of RL in real-world tasks with a hierarchical structure.
+2. The introduction of advantage-weighted importance sampling for learning option policies that correspond to modes of the advantage function demonstrates a sound theoretical understanding of HRL and provides a practical method for learning option policies.
+3. The gating policy and its use of the deterministic policy gradient method for optimization contribute to the overall framework's potential for enhancing the performance of RL, thus providing a strong theoretical foundation and practical applicability.
+
+[Potential reasons for rejection]
+1. The paper does not provide a thorough comparison with existing HRL methods, which may lack sufficient evidence of the superiority of the proposed approach over similar methods in the literature.
+2. The analysis of convergence properties and experimental evaluation of the proposed framework could benefit from further exploration and discussion in the paper.
+3. The paper lacks robustness analysis and practical implementation considerations for real-world applications, which may hinder its relevance and applicability to real-world problems.
+
+[Suggestions for improvement]
+1. The authors could consider a more comprehensive comparison with other state-of-the-art HRL methods to provide a clearer perspective on the contributions and potential advantages of their approach.
+2. The authors could provide a more detailed analysis of the convergence properties of the proposed method and perform a more exhaustive set of experiments to validate its applicability to a wider range of tasks and environments.
+3. The authors could discuss practical implementation considerations, such as scaling and computational cost, to prepare the reader for potential challenges and future work related to the framework.","[Significance and novelty]
+<Hierarchical policy representation learning> The proposed method of hierarchical policy representation learning and advantage-weighted importance sampling demonstrates novelty and significance in addressing the problem of learning hierarchical policies through mutual information maximization and deterministic policy gradient method.
+<Combining options and actor-critic methods> The combination of options learning and actor-critic methods at the option level in the proposed algorithm demonstrates a new approach in reinforcement learning research.
+
+[Potential reasons for acceptance]
+<Innovative approach> The innovative approach in learning hierarchical policies using mutual information maximization and deterministic policy gradient method makes the paper a potential reason for acceptance.
+<Improved results on complex benchmarking domain> The improved results on a complex benchmarking domain, namely Mujoco provide support for the paper's potential acceptance.
+
+[Potential reasons for rejection]
+<Clarity and presentation> The paper's lack of clarity in presenting the method, as suggested by multiple reviewers, could be a potential reason for rejection.
+<Missing baseline in results> The absence of a baseline in the results presented in Figures 3 and 4 is a potential reason for rejection as indicated by reviewers.
+
+[Suggestions for improvement]
+<Improve clarity in presenting the method> The paper could benefit from improving the clarity in presenting the method as suggested by multiple reviewers, particularly in the explanation of the algorithm and the figures.
+<Inclusion of baseline in results> Incorporating a baseline in the presented results, as suggested by reviewers, could strengthen the paper.","{
+    ""1"": {
+        ""summary"": ""Lack of comprehensive comparison with existing HRL methods."",
+        ""verbatim"": ""The paper does not provide a thorough comparison with existing HRL methods, which may lack sufficient evidence of the superiority of the proposed approach over similar methods in the literature.""
+    },
+    ""2"": {
+        ""summary"": ""Insufficient analysis of convergence properties and experimental evaluation."",
+        ""verbatim"": ""The analysis of convergence properties and experimental evaluation of the proposed framework could benefit from further exploration and discussion in the paper.""
+    },
+    ""3"": {
+        ""summary"": ""Absence of robustness analysis and practical implementation considerations."",
+        ""verbatim"": ""The paper lacks robustness analysis and practical implementation considerations for real-world applications, which may hinder its relevance and applicability to real-world problems.""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""Lack of clarity in presentation"",
+        ""verbatim"": ""The paper's lack of clarity in presenting the method, as suggested by multiple reviewers, could be a potential reason for rejection.""
+    },
+    ""2"": {
+        ""summary"": ""Missing baseline in results"",
+        ""verbatim"": ""The absence of a baseline in the results presented in Figures 3 and 4 is a potential reason for rejection as indicated by reviewers.""
+    }
+}",2,"{
+    ""A2-B1"": {
+        ""rationale"": ""Both points highlight the lack of comparative evaluation with other HRL (Hierarchical Reinforcement Learning) approaches. Review A criticizes the absence of systematic comparison with similar models, while Review B points out the missing thorough comparison with existing HRL methods, specifically questioning the evidence of superiority."",
+        ""similarity"": ""8""
+    }
+}",1,"{
+    ""A1-B1"": {
+        ""rationale"": ""Both Review A1 and Review B1 express concerns about the paper's lack of clarity. A1 focuses specifically on the unclear rationale for optimizing mutual information under a proposed policy, while B1 notes the overall lack of clarity in presenting the method. Both points emphasize the ambiguity in the presentation of the study."",
+        ""similarity"": ""7""
+    },
+    ""A2-B1"": {
+        ""rationale"": ""Review A2 and Review B1 similarly criticize the unclear presentation, but in slightly different contexts. A2 points out unclear terminology and unexplained equations, contributing to a comprehensive lack of clarity and comparative evaluation, which aligns with B1's general observation of clarity issues in the paper's presentation."",
+        ""similarity"": ""7""
+    }
+}",2
 An Adversarial Learning Framework for a Persona-based Multi-turn Dialogue Model,rkeYUsRqKQ.json,"[TITLE]
 AN ADVERSARIAL LEARNING FRAMEWORK FOR A PERSONA-BASED MULTI-TURN DIALOGUE MODEL
 
@@ -4739,4 +6000,76 @@ In this paper, we extend the persona-based sequence-to-sequence (Seq2Seq) neural
         ""summary"": ""Complexity of Implementation"",
         ""verbatim"": ""The increased complexity of the phredGAN models compared to traditional Seq2Seq systems might pose a barrier to adoption and could be a potential reason for rejection if the benefits do not convincingly outweigh the costs.""
     }
-}",2,{},0
+}",2,{},0,"[Significance and novelty]
+
+1. Extension of persona-based Seq2Seq model to multi-turn dialogues: The authors introduce a novel approach to extend the persona-based Seq2Seq neural network conversation model to multi-turn dialogue scenarios by modifying the hredGAN architecture, making it a significant contribution to the field [2].
+2. Capturing utterance attributes: The authors' proposed system, phredGAN, has a persona-based HRED generator (PHRED) and a conditional discriminator, allowing the model to capture crucial utterance attributes, such as speaker identity, dialogue topic, and speaker sentiments [1].
+3. Two approaches for conditional discriminator: The proposed system offers two approaches to accomplish the conditional discriminator, phredGAN a and phredGAN d, providing a more flexible solution to handle varying datasets with different attribute modalities [3].
+
+[Potential reasons for acceptance]
+1. Superior performance: The authors provide quantitative measures and crowd-sourced human evaluation to demonstrate the superior performance of their phredGAN system over the person SeqSeq model [4]. They show improvement in various aspects, including conversational fluency, persona consistency, and attribute prediction accuracy.
+2. Comprehensive evaluation: The paper's evaluation covers various aspects using a variety of quantitative measures and crowd-sourced human evaluation, providing a robust and in-depth assessment of the proposed system's capabilities [5].
+3. Exploration of trade-offs: The authors examine the trade-offs between the two variants of phredGAN on datasets with diverse attribute modalities, shedding light on important considerations for using these models in practice [6].
+
+[Potential reasons for rejection]
+1. Lack of theoretical grounding: While the paper demonstrates the practical benefits of the proposed models, it does not provide a solid theoretical grounding to explain the underlying mechanism, making the model hard to reproduce and understand [7].
+2. Experiment setup limitations: The paper's evaluation is limited to specific datasets, and the findings may not generalize to other conversational datasets or scenarios, which may impact the broader applicability of the proposed models [8].
+3. Limited analysis of attribute importance: The paper focuses on a few specific attributes (speaker identity, dialogue topic, and speaker sentiments) but does not discuss other important attributes or their relative importance, which could affect the overall performance in various conversational scenarios [9].
+
+[Suggestions for improvement]
+1. Provide theoretical foundations: The authors could expand their work by providing a more solid theoretical grounding to explain the mechanisms of their models, allowing for a better understanding of their inner workings and potential improvements [10].
+2. Evaluate on a broader range of datasets: The authors could experiment with additional conversational datasets, testing the robustness and generalizability of their proposed models in various conversational contexts [11].
+3. Analyze the importance of attributes: The authors should explore the importance of different attributes in multi-turn dialogue scenarios, allowing for a more comprehensive understanding of the various factors affecting conversational performance [12].
+4. Compare against other state-of-the-art models: It would be beneficial to compare the proposed models against other state-of-the-art dialogue models to provide a more nuanced understanding of their strengths and limitations [13].","[Significance and novelty]
+<Discrete attribute representation> The paper proposes a novel extension of the HRED GAN framework to handle discrete attributes, such as speaker identity and sentiment, which is a significant and somewhat new contribution in the field of dialogue modeling.
+<Experimentation with different attributes> The paper explores different attributes, such as topic and sentiment, and evaluates the model's performance on both strong and weak attribute modalities, which is an interesting aspect of the research.
+
+[Potential reasons for acceptance]
+<Effective demonstration of proposed model> The authors effectively demonstrate the proposed model's performance by showcasing improvements on datasets with different strength of attributes and by conducting human evaluations.
+<Extensive empirical analysis> The paper's extensive experiments and human evaluation provide enough evidence to justify the effectiveness of the proposed model.
+
+[Potential reasons for rejection]
+<Inadequate technical novelty> The technical novelty of the proposed approach is limited, as the core of the idea comes from existing works, and significant increment in terms of technical contributions is not well justified.
+<Clarity and language issues> The paper suffers from poor writing, lack of clarity in notations, and numerous typos, which affects the overall readability and presentation of the research.
+
+[Suggestions for improvement]
+<Clarify technical novelty> The authors should better justify the technical novelty of their approach, especially in comparison to existing works, to clearly demonstrate the contributions of their research.
+<Address language and clarity issues> To enhance the paper's readability, authors should address the numerous typos, improve notations, and provide clearer explanations in key areas.
+
+","{
+    ""1"": {
+        ""summary"": ""The paper lacks theoretical grounding for the proposed models, which affects understandability and reproducibility."",
+        ""verbatim"": ""Lack of theoretical grounding: While the paper demonstrates the practical benefits of the proposed models, it does not provide a solid theoretical grounding to explain the underlying mechanism, making the model hard to reproduce and understand [7].""
+    },
+    ""2"": {
+        ""summary"": ""The evaluation is limited to specific datasets, thereby questioning the generalizability of the findings to other conversational datasets or scenarios."",
+        ""verbatim"": ""Experiment setup limitations: The paper's evaluation is limited to specific datasets, and the findings may not generalize to other conversational datasets or scenarios, which may impact the broader applicability of the proposed models [8].""
+    },
+    ""3"": {
+        ""summary"": ""The analysis of attribute importance is limited, potentially affecting the model's performance in varied conversational scenarios."",
+        ""verbatim"": ""Limited analysis of attribute importance: The paper focuses on a few specific attributes (speaker identity, dialogue topic, and speaker sentiments) but does not discuss other important attributes or their relative importance, which could affect the overall performance in various conversational scenarios [9].""
+    }
+}",3,"{
+    ""1"": {
+        ""summary"": ""Limited technical novelty"",
+        ""verbatim"": ""The technical novelty of the proposed approach is limited, as the core of the idea comes from existing works, and significant increment in terms of technical contributions is not well justified.""
+    },
+    ""2"": {
+        ""summary"": ""Poor writing and lack of clarity"",
+        ""verbatim"": ""The paper suffers from poor writing, lack of clarity in notations, and numerous typos, which affects the overall readability and presentation of the research.""
+    }
+}",2,"{
+    ""A4-B2"": {
+        ""rationale"": ""Both points criticize the evaluation of the proposed model. Review A discusses the evaluation's weakness in demonstrating the model's benefits, while Review B points out the limitation of the evaluation being specific to certain datasets, questioning its generalizability. These concerns both address the shortcomings in how the model's effectiveness is validated."",
+        ""similarity"": ""7""
+    }
+}",1,"{
+    ""A1-B1"": {
+        ""rationale"": ""Both points from Review A and Review B comment on the limited novelty of the paper due to its heavy reliance on previous works. The main argument in both points is that the contributions made by the paper are not sufficiently novel or significant, with Review B explicitly mentioning that the 'significant increment in terms of technical contributions is not well justified,' which aligns closely with Review A's note on the contributions being 'incremental.'"",
+        ""similarity"": ""9""
+    },
+    ""A3-B2"": {
+        ""rationale"": ""Both reviews highlight issues with the writing and presentation of the paper. Review A focuses on the difficulty in understanding the model and its components due to clarity issues, while Review B stresses poor writing, lack of clarity, and typos affecting readability and presentation. Both points reflect concerns about how the obscurity of presentation affects the reader's comprehension and assessment of the research."",
+        ""similarity"": ""7""
+    }
+}",2
