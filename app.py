@@ -78,8 +78,29 @@ app.layout = html.Div([
         dbc.Row([
             dbc.Col(dcc.Textarea(
                 id='output-text',
-                style={'width': '100%', 'height': 200},
-                placeholder="Extracted text will be shown here...",
+                style={'width': '100%', 'height': 50},
+                placeholder="Extracted abstract will be shown here.",
+            ), width=12)
+        ])
+        dbc.Row([
+            dbc.Col(dcc.Textarea(
+                id='output-gpt-abstract',
+                style={'width': '25%', 'height': 200},
+                placeholder="GPT-abstract reviews.",
+            ), width=12)
+        ])
+        dbc.Row([
+            dbc.Col(dcc.Textarea(
+                id='output-gpt-full',
+                style={'width': '25%', 'height': 200},
+                placeholder="GPT-full reviews",
+            ), width=12)
+        ])
+        dbc.Row([
+            dbc.Col(dcc.Textarea(
+                id='output-model',
+                style={'width': '50%', 'height': 200},
+                placeholder="Model output.",
             ), width=12)
         ])
     ])
@@ -106,29 +127,7 @@ def update_output(contents, filename, date):
     user_input = generate_user_input(content)
     output_logger.info(content["[TITLE]"])
     output_logger.info(content["[ABSTRACT]"])
-
-    # send to backend model
-    output_logger.info("=" * 50)
-    output_logger.info("Generating review...")
-
-    start_time = time.time()
-    gpt_reviews = gpt_review.inference(user_input, gpt_model, one_shot, client)
-    end_time = time.time()
-    output_logger.info(f"GPT Review generated in {end_time - start_time:.2f} seconds.")
-    output_logger.info("GPT Review:")
-    output_logger.info(gpt_reviews)
-
-    start_time = time.time()
-    model_reviews = model_review.inference(user_input, model, tokenizer, device)
-    end_time = time.time()
-    output_logger.info(f"Model Review generated in {end_time - start_time:.2f} seconds.")
-    output_logger.info("=" * 50)
-
-    # get response from backend
-    output_logger.info("Model Review:")
-    output_logger.info(model_reviews)
-    return content["[TITLE]"] + "\n" + content["[ABSTRACT]"] + "\n"+ gpt_reviews + "\n" + model_reviews
-
+    return user_input
 
     # from base64 import b64decode
     # import io
@@ -140,6 +139,40 @@ def update_output(contents, filename, date):
     #         return all_text
     # except Exception as e:
     #     return f'An error occurred: {e}'
+
+@app.callback(
+    Output('output-gpt-abstract', 'value'),
+    Input('output-text', 'value')
+)
+def update_gpt_abstract_output(user_input):
+    # send to backend model
+    output_logger.info("=" * 50)
+    output_logger.info("Generating review...")
+
+    start_time = time.time()
+    gpt_reviews = gpt_review.inference(user_input, gpt_model, one_shot, client)
+    end_time = time.time()
+    output_logger.info(f"GPT Review generated in {end_time - start_time:.2f} seconds.")
+    output_logger.info("GPT Review:")
+    output_logger.info(gpt_reviews)
+    return gpt_reviews
+
+@app.callback(
+    Output('output-model', 'value'),
+    Input('output-text', 'value')
+)
+def update_gpt_abstract_output(user_input):
+    # send to backend model
+    start_time = time.time()
+    model_reviews = model_review.inference(user_input, model, tokenizer, device)
+    end_time = time.time()
+    output_logger.info(f"Model Review generated in {end_time - start_time:.2f} seconds.")
+    output_logger.info("=" * 50)
+
+    # get response from backend
+    output_logger.info("Model Review:")
+    output_logger.info(model_reviews)
+    return model_reviews
 
 # Run the app
 if __name__ == '__main__':
