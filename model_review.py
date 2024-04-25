@@ -32,20 +32,17 @@ def load_model(model_id: str, quantize: bool, device: str) -> tuple:
             load_in_4bit=True,
             bnb_4bit_use_double_quant=True,
             bnb_4bit_quant_type="nf4",
-            bnb_4bit_compute_dtype=torch.bfloat16
+            bnb_4bit_compute_dtype=torch.bfloat16,
         )
 
         model = AutoPeftModelForCausalLM.from_pretrained(
             model_id,
             device_map=device,
             torch_dtype=torch.bfloat16,
-            quantization_config=bnb_config
+            quantization_config=bnb_config,
         )
     else:
-        model = AutoPeftModelForCausalLM.from_pretrained(
-            model_id, 
-            device_map=device
-        )
+        model = AutoPeftModelForCausalLM.from_pretrained(model_id, device_map=device)
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
 
@@ -55,36 +52,41 @@ def load_model(model_id: str, quantize: bool, device: str) -> tuple:
 def extract_output(output: str) -> str:
     """
     Extracts categorized sections from a given text based on specific headings.
-    
+
     Args:
-    output (str): The text from which to extract information, where each section is expected
+        output (str): The text from which to extract information, where each section is expected
                 to begin with a heading in brackets.
-    
+
     Returns:
-    str: A formatted string with each heading and its associated content.
+        str: A formatted string with each heading and its associated content.
     """
     # Define the pattern to capture each section with lookahead for the next section or end of string
-    pattern = r"\[(Significance and novelty|Potential reasons for acceptance|Potential reasons for rejection|Suggestions for improvement)\]" \
-            r"(.*?)(?=\[(Significance and novelty|Potential reasons for acceptance|Potential reasons for rejection|Suggestions for improvement)\]|\Z)"
-    
+    pattern = (
+        r"\[(Significance and novelty|Potential reasons for acceptance|Potential reasons for rejection|Suggestions for improvement)\]"
+        r"(.*?)(?=\[(Significance and novelty|Potential reasons for acceptance|Potential reasons for rejection|Suggestions for improvement)\]|\Z)"
+    )
+
     # Focus on the relevant part of the output after "[/INST]"
     relevant_output = output.split("[/INST]")[-1]
-    
+
     # Extract sections using regex, ensuring DOTALL to match across lines
     sections = re.findall(pattern, relevant_output, flags=re.DOTALL)
-    
+
     # Convert list of tuples into a dictionary for easier access and avoid duplication
     section_dict = {}
     for section in sections:
         header, content = section[0], section[1].strip()
         if header not in section_dict:
-            section_dict[header] = content
-    
+            section_dict[header] = ""
+
+        section_dict[header] += content + "\n"
+
     # Build the final formatted output
     final_output = ""
     for key, value in section_dict.items():
-        final_output += f"[{key}]\n{value}\n\n"
-    
+        if value != "":
+            final_output += f"[{key}]\n{value}\n\n"
+
     return final_output
 
 
