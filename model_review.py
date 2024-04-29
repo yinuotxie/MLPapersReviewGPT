@@ -12,7 +12,7 @@ import scipdf
 from transformers import AutoTokenizer, BitsAndBytesConfig
 from peft import AutoPeftModelForCausalLM
 from prompts import SYSTEM_PROMPT
-from pdf_parser import parse_pdf_abstract, generate_user_input
+from pdf_parser import parse_pdf_abstract, generate_input
 from utils import setup_logger
 
 from dotenv import load_dotenv
@@ -32,18 +32,18 @@ def load_model(model_id: str, quantize: bool, device: str) -> tuple:
     """
     if quantize:
         bnb_config = BitsAndBytesConfig(
-            load_in_4bit=quantize,
-            bnb_4bit_use_double_quant=quantize,
-            bnb_4bit_quant_type="nf4" if quantize else None,
-            bnb_4bit_compute_dtype=torch.bfloat16 if quantize else None,
+            load_in_4bit=True,
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_compute_dtype=torch.bfloat16,
         )
 
         model = AutoPeftModelForCausalLM.from_pretrained(
             model_id,
-            torch_dtype=torch.bfloat16,
-            quantize_config=bnb_config,
             device_map=device,
-            token=os.getenv('HF_TOKEN')
+            token=os.getenv('HF_TOKEN'),
+            torch_dtype=torch.bfloat16,
+            quantization_config=bnb_config,
         )
     else:
         model = AutoPeftModelForCausalLM.from_pretrained(model_id, device_map=device, token=os.getenv('HF_TOKEN'))
@@ -53,24 +53,45 @@ def load_model(model_id: str, quantize: bool, device: str) -> tuple:
     return model, tokenizer
 
 
-def extract_sections(text: str) -> str:
+def extract_output(output: str) -> str:
     """
-    Extracts and formats specific sections from a text based on predefined headers.
+    Extracts categorized sections from a given text based on specific headings.
 
     Args:
-        text (str): The input text containing sections.
+        output (str): The text from which to extract information, where each section is expected
+                to begin with a heading in brackets.
 
     Returns:
-        str: Nicely formatted string containing the extracted sections.
+        str: A formatted string with each heading and its associated content.
     """
+    # Define the pattern to capture each section with lookahead for the next section or end of string
     pattern = (
         r"\[(Significance and novelty|Potential reasons for acceptance|Potential reasons for rejection|Suggestions for improvement)\]"
-        r"(.*?)(?=\n\[(Significance and novelty|Potential reasons for acceptance|Potential reasons for rejection|Suggestions for improvement)\]|\Z)"
+        r"(.*?)(?=\[(Significance and novelty|Potential reasons for acceptance|Potential reasons for rejection|Suggestions for improvement)\]|\Z)"
     )
 
-    sections = re.findall(pattern, text, flags=re.DOTALL)
-    section_dict = {section[0]: section[1].strip() for section in sections}
-    return "\n\n".join(f"[{key}]\n{value}" for key, value in section_dict.items())
+    # Focus on the relevant part of the output after "[/INST]"
+    relevant_output = output.split("[/INST]")[-1]
+
+    # Extract sections using regex, ensuring DOTALL to match across lines
+    sections = re.findall(pattern, relevant_output, flags=re.DOTALL)
+
+    # Convert list of tuples into a dictionary for easier access and avoid duplication
+    section_dict = {}
+    for section in sections:
+        header, content = section[0], section[1].strip()
+        if header not in section_dict:
+            section_dict[header] = ""
+
+        section_dict[header] += content + "\n"
+
+    # Build the final formatted output
+    final_output = ""
+    for key, value in section_dict.items():
+        if value != "":
+            final_output += f"[{key}]\n{value}\n\n"
+
+    return final_output
 
 
 def inference(
@@ -107,7 +128,7 @@ def inference(
             eos_token_id=tokenizer.eos_token_id,
         )
         decoded_output = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
-        return extract_sections(decoded_output)
+        return extract_output(decoded_output)
     except Exception as e:
         return str(e)
 
@@ -154,10 +175,10 @@ if __name__ == "__main__":
     output_logger.info("Parsing PDF file...")
     pdf = scipdf.parse_pdf_to_dict(args.pdf_file)
     content = parse_pdf_abstract(pdf)
-    user_input = generate_user_input(content)
+    user_input = generate_input(content)
 
     # Generate user input
-    user_input = generate_user_input(content)
+    user_input = generate_input(content)
     output_logger.info(user_input)
     output_logger.info("=" * 50)
 

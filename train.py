@@ -68,13 +68,13 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--train_file",
         type=str,
-        default="demo/data/abstract_dataset/train.json",
+        default="data/abstract_dataset/train.json",
         help="Path to the training dataset",
     )
     parser.add_argument(
         "--test_file",
         type=str,
-        default="demo/data/abstract_dataset/test.json",
+        default="data/abstract_dataset/test.json",
         help="Path to the testing dataset",
     )
 

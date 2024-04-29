@@ -21,13 +21,17 @@ def summary_reviews(reviews: List[str], title: str, client: openai.Client) -> Tu
     Returns:
         Tuple[str, int]: A tuple containing the JSON-formatted summary of reviews and the length of the output.
     """
-    review_messages = f"\n\n{'\n\n'.join(reviews)}\n\n"
+    # Construct the review messages with proper formatting
+    review_messages = "\n\n".join(reviews) + "\n\n"
     prompt = SUMMARY_PROMPT.format(Title=title, Review_Text=review_messages)
 
+    # Use the GPT-4 model to generate a summary
     completion = client.chat.completions.create(
-        model="gpt-4-turbo", messages=[{"role": "system", "content": prompt}]
+        model="gpt-4-turbo", 
+        messages=[{"role": "system", "content": prompt}]
     )
     
+    # Extract and clean the JSON output
     output = clean_json_output(completion.choices[0].message.content)
     length = len(json.loads(output))
     
@@ -71,8 +75,8 @@ def count_hits(matched_reviews: str, threshold: int = 7) -> int:
         int: Count of unique high-similarity hits.
     """
     comparison = json.loads(matched_reviews)
-    hit_count = sum(1 for _, value in comparison.items() if value["similarity"] >= threshold)
-
+    hit_count = sum(1 for _, value in comparison.items() if int(value["similarity"]) >= threshold)
+    
     return hit_count
 
 
