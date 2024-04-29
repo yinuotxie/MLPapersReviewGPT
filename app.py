@@ -17,7 +17,7 @@ import os
 import dash
 from dash import html, dcc, Input, Output, State
 import dash_bootstrap_components as dbc
-from pdf_parser import *
+from pdf_parser import parse_pdf_abstract, parse_pdf_content, generate_input
 import scipdf
 import spacy
 import time
@@ -58,7 +58,15 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.layout = html.Div([
     dbc.Container([
         dbc.Row([
-            dbc.Col(html.H1("CIS6200 Project Group 1: Academic GPT Demo"), width=12)
+            dbc.Col(html.H1("CIS6200 Project Group 1: Academic GPT Demo"), width=12),
+            dbc.Checklist(
+                options=[
+                    {"label": "One-Shot", "value": 1}
+                ],
+                value=[],
+                id="options",
+                switch=True,
+            ),
         ]),
         dbc.Row([
             dbc.Col(dcc.Upload(
@@ -76,38 +84,52 @@ app.layout = html.Div([
             ), width=12)
         ]),
         dbc.Row([
+            dbc.Label("Extracted Text"),
             dbc.Col(dcc.Textarea(
                 id='output-text',
-                style={'width': '100%', 'height': 50},
+                style={'width': '100%', 'height': 200},
                 placeholder="Extracted abstract will be shown here.",
             ), width=12)
-        ])
+        ]),
         dbc.Row([
+            dbc.Label("GPT Reviews (Left: Abstract, Right: Full Provided)"),
             dbc.Col(dcc.Textarea(
                 id='output-gpt-abstract',
-                style={'width': '25%', 'height': 200},
+                style={'width': '100%', 'height': 300},
                 placeholder="GPT-abstract reviews.",
-            ), width=12)
-        ])
-        dbc.Row([
+            ), width=6),
             dbc.Col(dcc.Textarea(
                 id='output-gpt-full',
-                style={'width': '25%', 'height': 200},
+                style={'width': '100%', 'height': 300},
                 placeholder="GPT-full reviews",
-            ), width=12)
-        ])
+            ), width=6)
+        ]),
         dbc.Row([
+            dbc.Label("Model Output"),
             dbc.Col(dcc.Textarea(
                 id='output-model',
-                style={'width': '50%', 'height': 200},
+                style={'width': '100%', 'height': 300},
                 placeholder="Model output.",
             ), width=12)
-        ])
+        ]),
+        dcc.Store(id='enable-one-shot', data=False),
+        dcc.Store(id='output-full-text')
     ])
 ])
 
 @app.callback(
+    Output("enable-one-shot", "data"),
+    Input("options", "value")
+)
+def on_form_change(options):
+    print("one-shot enabled?", options)
+    if len(options) > 0 and options[0] == 1:
+        return True
+    return False
+
+@app.callback(
     Output('output-text', 'value'),
+    Output('output-full-text', 'data'),
     Input('upload-pdf', 'contents'),
     State('upload-pdf', 'filename'),
     State('upload-pdf', 'last_modified')
@@ -115,19 +137,22 @@ app.layout = html.Div([
 def update_output(contents, filename, date):
     print("filename",  filename)
     if contents is None:
-        return 'No PDF file uploaded.'
+        return 'No PDF file uploaded.', ""
     content_type, content_string = contents.split(',')
     if 'application/pdf' not in content_type:
-        return 'File is not a PDF. Please upload a PDF file.'
+        return 'File is not a PDF. Please upload a PDF file.', ""
     
     # extract input from pdf
     output_logger.info("Parsing PDF file...")
     article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)
     content = parse_pdf_abstract(article_dict)
-    user_input = generate_user_input(content)
+    user_input = generate_input(content)
     output_logger.info(content["[TITLE]"])
     output_logger.info(content["[ABSTRACT]"])
-    return user_input
+    print("user_input generated")
+
+    full_input = generate_input(parse_pdf_content(article_dict))
+    return user_input, full_input
 
     # from base64 import b64decode
     # import io
@@ -142,37 +167,51 @@ def update_output(contents, filename, date):
 
 @app.callback(
     Output('output-gpt-abstract', 'value'),
-    Input('output-text', 'value')
+    Output('output-gpt-full', 'value'),
+    Input('output-text', 'value'),
+    Input('output-full-text', 'data'),
+    Input('enable-one-shot', 'data'),
 )
-def update_gpt_abstract_output(user_input):
-    # send to backend model
-    output_logger.info("=" * 50)
-    output_logger.info("Generating review...")
+def update_gpt_abstract_output(user_input, full_input, one_shot_enabled):
+    if user_input and user_input != "No PDF file uploaded.":
+        one_shot = one_shot_enabled
+        print("gpt reviews generating... one_shot=", one_shot)
+        # send to backend model
+        output_logger.info("=" * 50)
+        output_logger.info("Generating review...")
 
-    start_time = time.time()
-    gpt_reviews = gpt_review.inference(user_input, gpt_model, one_shot, client)
-    end_time = time.time()
-    output_logger.info(f"GPT Review generated in {end_time - start_time:.2f} seconds.")
-    output_logger.info("GPT Review:")
-    output_logger.info(gpt_reviews)
-    return gpt_reviews
+        start_time = time.time()
+        gpt_reviews = gpt_review.inference(user_input, gpt_model, one_shot, client)
+        end_time = time.time()
+        output_logger.info(f"GPT Review generated in {end_time - start_time:.2f} seconds.")
+        output_logger.info("GPT Review:")
+        output_logger.info(gpt_reviews)
+
+        gpt_full_reviews = gpt_review.inference(full_input, gpt_model, one_shot, client)
+        print("return type", type(gpt_reviews), type(gpt_full_reviews))
+        return gpt_reviews, gpt_full_reviews
+    return "", ""
 
 @app.callback(
     Output('output-model', 'value'),
     Input('output-text', 'value')
 )
-def update_gpt_abstract_output(user_input):
-    # send to backend model
-    start_time = time.time()
-    model_reviews = model_review.inference(user_input, model, tokenizer, device)
-    end_time = time.time()
-    output_logger.info(f"Model Review generated in {end_time - start_time:.2f} seconds.")
-    output_logger.info("=" * 50)
+def update_model_output(user_input):
+    # return ""
+    if user_input and user_input != "No PDF file uploaded.":
+        print("model reviews generating...")
+        # send to backend model
+        start_time = time.time()
+        model_reviews = model_review.inference(user_input, model, tokenizer, device)
+        end_time = time.time()
+        output_logger.info(f"Model Review generated in {end_time - start_time:.2f} seconds.")
+        output_logger.info("=" * 50)
 
-    # get response from backend
-    output_logger.info("Model Review:")
-    output_logger.info(model_reviews)
-    return model_reviews
+        # get response from backend
+        output_logger.info("Model Review:")
+        output_logger.info(model_reviews)
+        return model_reviews
+    return ""
 
 # Run the app
 if __name__ == '__main__':
