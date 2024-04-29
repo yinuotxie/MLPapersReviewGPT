@@ -7,6 +7,7 @@ data/*.json
 academic_gpt/
 cis6200/
 .env
+*.pem
 
 # model
 model/*
