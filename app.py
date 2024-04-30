@@ -12,6 +12,8 @@
 
     To run the app:
         python app.py
+
+        example pdf url: https://arxiv.org/pdf/1706.03762.pdf
 '''
 from dotenv import load_dotenv
 import os
@@ -273,7 +275,7 @@ def update_model_output(user_input):
         # get response from backend
         output_logger.info("Model Review:")
         output_logger.info(model_reviews)
-        return raw_output, model_reviews
+        return model_reviews, raw_output
     return ""
 
 # Run the app
