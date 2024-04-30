@@ -1,7 +1,8 @@
 '''
     Generate UI for uploading pdf and feeding into gpt model and review model to generate reviews for given paper.
-    Commands of setting up environment after pip install -r requirements:
+    Commands of setting up environment after pip install -r requirements.txt
 
+    pip install python-dotenv
     pip install dash dash-bootstrap-components
     pip install git+https://github.com/titipata/scipdf_parser
     python -m spacy download en_core_web_sm
@@ -40,7 +41,7 @@ output_logger = setup_logger("output_logger", "logs/output.log")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("device:", device)
 model_id = "travis0103/mistral_7b_paper_review_lora"
-quantize = False
+quantize = True
 
 # load model
 openai.api_key = os.getenv('OPENAI_API_KEY')

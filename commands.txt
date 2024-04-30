@@ -1,0 +1,30 @@
+ssh -i "project1-demo.pem" ec2-user@ec2-3-91-156-105.compute-1.amazonaws.com
+
+# on EC2
+git clone https://github.com/yinuotxie/MLPapersReviewGPT.git
+git checkout demo
+
+pip install -r requirements.txt
+pip install packaging
+pip install torch
+
+pip install python-dotenv
+pip install dash dash-bootstrap-components
+pip install git+https://github.com/titipata/scipdf_parser
+python -m spacy download en_core_web_sm
+
+pip install Pillow
+pip install transformers
+pip install peft
+pip install openai
+
+pip install bitsandbytes
+
+mkdir logs/
+vim logs/output.log
+vim .env
+
+python app.py
+
+docker pull grobid/grobid:0.8.0
+docker run --rm --gpus all --init --ulimit core=0 -p 8070:8070 grobid/grobid:0.8.0
