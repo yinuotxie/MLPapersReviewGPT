@@ -4,6 +4,7 @@
 
     pip install dash dash-bootstrap-components
     pip install git+https://github.com/titipata/scipdf_parser
+    pip install spacy
     python -m spacy download en_core_web_sm
 
     docker pull grobid/grobid:0.8.0
@@ -53,7 +54,7 @@ one_shot = False
 output_logger.info("=" * 50)
 
 # app
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
 app.layout = html.Div([
     dbc.Container([
@@ -69,6 +70,23 @@ app.layout = html.Div([
             ),
         ]),
         dbc.Row([
+            dbc.Col([
+                dbc.RadioItems(
+                    id='mode-switch',
+                    className='btn-group',
+                    inputClassName='btn-check',
+                    labelClassName='btn btn-outline-primary',
+                    labelCheckedClassName='active',
+                    options=[
+                        {'label': 'Local', 'value': 'local'},
+                        {'label': 'Online', 'value': 'online'}
+                    ],
+                    value='local',
+                    style={'width': '100%', 'padding': '10px'}
+                )
+            ], width=12)
+        ]),
+        dbc.Row([
             dbc.Col(dcc.Upload(
                 id='upload-pdf',
                 children=html.Div([
@@ -82,6 +100,14 @@ app.layout = html.Div([
                 },
                 multiple=False, # multiple file allowance
             ), width=12)
+        ]),
+        dbc.Row([
+            dbc.Col(dbc.Input(
+            id='online-url-input',
+            type='text',
+            placeholder='Enter URL of PDF file',
+            style={'width': '100%', 'height': '60px'}
+        ), width=12)
         ]),
         dbc.Row([
             dbc.Label("Extracted Text"),
@@ -112,6 +138,14 @@ app.layout = html.Div([
                 placeholder="Model output.",
             ), width=12)
         ]),
+        dbc.Row([
+            dbc.Label("Raw Model Output Before Pruning"),
+            dbc.Col(dcc.Textarea(
+                id='output-model-raw',
+                style={'width': '100%', 'height': 300},
+                placeholder="Raw model output before pruning.",
+            ), width=12)
+        ]),
         dcc.Store(id='enable-one-shot', data=False),
         dcc.Store(id='output-full-text')
     ])
@@ -128,23 +162,51 @@ def on_form_change(options):
     return False
 
 @app.callback(
+    Output('upload-pdf', 'style'),
+    Output('online-url-input', 'style'),
+    Input('mode-switch', 'value'),
+    # prevent_initial_call=True
+)
+def toggle_components(selected_option):
+    if selected_option == 'local':
+        return {
+            'width': '100%', 
+            'display': 'block', 
+            'height': '60px', 
+            'lineHeight': '60px',
+            'borderWidth': '1px', 
+            'borderStyle': 'dashed',
+            'textAlign': 'center', 
+            'margin': '10px'
+            }, {'width': '100%', 'display': 'none'}
+    elif selected_option == 'online':
+        return {'width': '100%', 'display': 'none'}, {'width': '100%', 'height': '60px', 'display': 'block'}
+
+
+@app.callback(
     Output('output-text', 'value'),
     Output('output-full-text', 'data'),
     Input('upload-pdf', 'contents'),
+    Input('online-url-input', 'value'),
     State('upload-pdf', 'filename'),
     State('upload-pdf', 'last_modified')
 )
-def update_output(contents, filename, date):
-    print("filename",  filename)
-    if contents is None:
-        return 'No PDF file uploaded.', ""
-    content_type, content_string = contents.split(',')
-    if 'application/pdf' not in content_type:
-        return 'File is not a PDF. Please upload a PDF file.', ""
-    
-    # extract input from pdf
+def update_output(contents, url, filename, date):
     output_logger.info("Parsing PDF file...")
-    article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)
+    print("parsing pdf...")
+    if url:
+        print("url", url)
+        article_dict = scipdf.parse_pdf_to_dict(url)
+    else:
+        print("filename",  filename)
+        if contents is None:
+            return 'No PDF file uploaded.', ""
+        content_type, content_string = contents.split(',')
+        if 'application/pdf' not in content_type:
+            return 'File is not a PDF. Please upload a PDF file.', ""
+    
+        # extract input from pdf
+        article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)
     content = parse_pdf_abstract(article_dict)
     user_input = generate_input(content)
     output_logger.info(content["[TITLE]"])
@@ -194,15 +256,16 @@ def update_gpt_abstract_output(user_input, full_input, one_shot_enabled):
 
 @app.callback(
     Output('output-model', 'value'),
+    Output('output-model-raw', 'value'),
     Input('output-text', 'value')
 )
 def update_model_output(user_input):
-    return ""
+    # return ""
     if user_input and user_input != "No PDF file uploaded.":
         print("model reviews generating...")
         # send to backend model
         start_time = time.time()
-        model_reviews = model_review.inference(user_input, model, tokenizer, device)
+        raw_output, model_reviews = model_review.inference(user_input, model, tokenizer, device)
         end_time = time.time()
         output_logger.info(f"Model Review generated in {end_time - start_time:.2f} seconds.")
         output_logger.info("=" * 50)
@@ -210,13 +273,13 @@ def update_model_output(user_input):
         # get response from backend
         output_logger.info("Model Review:")
         output_logger.info(model_reviews)
-        return model_reviews
+        return raw_output, model_reviews
     return ""
 
 # Run the app
 if __name__ == '__main__':
 
-    app.run_server(debug=True)
+    app.run_server(debug=True, host='0.0.0.0', port=8080)
 
     # filename = "1611.03530.pdf"
     # article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)

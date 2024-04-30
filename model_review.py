@@ -128,7 +128,7 @@ def inference(
             eos_token_id=tokenizer.eos_token_id,
         )
         decoded_output = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
-        return extract_output(decoded_output)
+        return decoded_output, extract_output(decoded_output)
     except Exception as e:
         return str(e)
 
