@@ -52,7 +52,7 @@ gpt_model = "gpt-4-turbo"
 one_shot = False
 
 # review-model
-# model, tokenizer = model_review.load_model(model_id, quantize, device)
+model, tokenizer = model_review.load_model(model_id, quantize, device)
 output_logger.info("=" * 50)
 
 # app
