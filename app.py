@@ -40,7 +40,7 @@ output_logger = setup_logger("output_logger", "logs/output.log")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("device:", device)
 model_id = "travis0103/mistral_7b_paper_review_lora"
-quantize = False
+quantize = True
 
 # load model
 openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -49,7 +49,7 @@ gpt_model = "gpt-4-turbo"
 one_shot = False
 
 # review-model
-model, tokenizer = model_review.load_model(model_id, quantize, device)
+# model, tokenizer = model_review.load_model(model_id, quantize, device)
 output_logger.info("=" * 50)
 
 # app
@@ -197,7 +197,7 @@ def update_gpt_abstract_output(user_input, full_input, one_shot_enabled):
     Input('output-text', 'value')
 )
 def update_model_output(user_input):
-    # return ""
+    return ""
     if user_input and user_input != "No PDF file uploaded.":
         print("model reviews generating...")
         # send to backend model
