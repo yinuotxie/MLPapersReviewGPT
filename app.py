@@ -297,7 +297,7 @@ def update_model_output(user_input):
 # Run the app
 if __name__ == '__main__':
 
-    app.run_server(debug=True, host='0.0.0.0', port=8080)
+    app.run_server(debug=False, host='0.0.0.0', port=8080)
 
     # filename = "1611.03530.pdf"
     # article_dict = scipdf.parse_pdf_to_dict(uploaded_directory + "/" + filename)
