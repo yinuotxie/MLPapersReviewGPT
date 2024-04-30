@@ -45,6 +45,16 @@ print("device:", device)
 model_id = "travis0103/mistral_7b_paper_review_lora"
 quantize = True
 
+# Destroy all tensors, this frees the cache
+torch.cuda.empty_cache()
+
+# Reset all previously allocated memory
+if torch.cuda.is_initialized():
+    torch.cuda.synchronize()
+    torch.cuda.reset_peak_memory_stats()
+    torch.cuda.reset_accumulated_memory_stats()
+print("CUDA memory cleared")
+
 # load model
 openai.api_key = os.getenv('OPENAI_API_KEY')
 client = openai.Client()
@@ -275,6 +285,12 @@ def update_model_output(user_input):
         # get response from backend
         output_logger.info("Model Review:")
         output_logger.info(model_reviews)
+
+        output_logger.info("=" * 50)
+
+        # get response from backend
+        output_logger.info("Model Raw Output:")
+        output_logger.info(raw_output)
         return model_reviews, raw_output
     return ""
 
