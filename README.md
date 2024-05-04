@@ -1,19 +1,49 @@
 # Machine Learning Paper Reviews GPT
+
+<p align="center">
+  <img src="assets/demo.gif">
+</p>
+
 ![pipeline](assets/pipeline.png)
 
-## Description
-This project, developed as a final project for the [UPenn CIS6200 Advanced Topics in Deep Learning](https://docs.google.com/document/d/1dkQ4XRhaiZFjGu5i_8Qcoi6MkHwOfivmFFWhBrBF30I/edit), aims to investigate the use of large language models (LLMs) for generating machine learning paper reviews. It is inspired by the study ["Can large language models provide useful feedback on research papers? A large-scale empirical analysis"](https://arxiv.org/pdf/2310.01783.pdf) and utilizes similar techniques. For more details, please see our [project report](report.pdf).
+---
 
-## Methods
+## Description
+This project, developed as a final project for [UPenn CIS6200 Advanced Topics in Deep Learning](https://docs.google.com/document/d/1dkQ4XRhaiZFjGu5i_8Qcoi6MkHwOfivmFFWhBrBF30I/edit), explores the use of large language models (LLMs) for generating reviews of machine learning papers. It is inspired by ["Can large language models provide useful feedback on research papers? A large-scale empirical analysis"](https://arxiv.org/pdf/2310.01783.pdf), utilizing similar techniques. The project consists of two primary components: the review generation pipeline and the evaluation pipeline. The review generation pipeline uses both a fine-tuned model and GPT-3.5-turbo and GPT-4-turbo as baselines, while the evaluation pipeline compares these generated reviews with human ones to assess quality. For a full project description, see our [project report](Project_report.pdf).
+
+---
+
+## Review Generation Pipeline
+![review_generation_pipeline](assets/feedback_generation.png)
+This pipeline includes two methods for generating reviews: fine-tuning and using pre-trained GPT models. The fine-tuning method leverages a specifically fine-tuned model, whereas the GPT method utilizes GPT-3.5-turbo and GPT-4-turbo. Text extraction from PDF files is managed via [scipdf_parser](https://github.com/titipata/scipdf_parser).
+
+---
+
 ### Baselines
-We employed GPT-3.5-turbo and GPT-4-turbo as baseline models for generating reviews of machine learning papers. Additionally, we experimented with one-shot learning using these models to explore different training paradigms.
+We used GPT-3.5-turbo and GPT-4-turbo as baseline models to generate machine learning paper reviews. Our experiments also explored one-shot learning techniques with these models.
+
+---
 
 ### Fine-tuning
-We also fine-tuned the [Mistral-7B-Instruct-v0.2](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2) model on a custom dataset comprised of papers and their reviews sourced from [OpenReview](https://openreview.net/). To aid in fine-tuning, GPT-4 was used to generate summary reviews. Due to computational constraints, we focused on tuning the models using only the paper abstracts. The dataset is available in the `data` directory and is also published on the Huggingface dataset hub [here](https://huggingface.co/datasets/travis0103/abstract_paper_review). The fine-tuned model is available on the Huggingface model hub [here](https://huggingface.co/travis0103/mistral_7b_paper_review_lora).
+We fine-tuned the [Mistral-7B-Instruct-v0.2](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2) model on a custom dataset of papers and their reviews from [OpenReview](https://openreview.net/). We used GPT-4 to generate summary reviews during the fine-tuning process. Due to computational constraints, the focus was primarily on paper abstracts. The dataset is available in the `data` directory and on the Huggingface dataset hub [here](https://huggingface.co/datasets/travis0103/abstract_paper_review). The fine-tuned model can be accessed on the Huggingface model hub [here](https://huggingface.co/travis0103/mistral_7b_paper_review_lora).
 
+---
+
+## Evaluation Pipeline
+![evaluation_pipeline](assets/evaluate_pipeline.png)
+We conducted retrospective evaluations comparing the comment overlap in GPT-4 vs. Human and Human vs. Human setups. Metrics such as the Szymkiewicz–Simpson Overlap Coefficient, the Jaccard Index, and the Sørensen–Dice Coefficient were employed, demonstrating that the performance of GPT-4 vs. Human is comparable to Human vs. Human. This highlights the effectiveness of our model across different conditions and datasets.
+
+For detailed evaluation methods, see the [`evaluation.ipynb`](notebooks/evaluation.ipynb) notebook.
+
+---
 
 ## Usage 
 The project provides two pipelines for generating reviews:
+1. **Model Pipeline**: Utilizes the fine-tuned model for review generation.
+2. **GPT Pipeline**: Generates reviews using GPT-3.5-turbo or GPT-4-turbo.
+
+---
+
 
 ### Installation
 Clone the repository and set up the environment:
@@ -24,7 +54,9 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-Note: The scipdf_parser package, required for PDF text extraction, must run within a Docker container. Instructions are available in the [scipdf_parser repository](https://github.com/titipata/scipdf_parser).
+**Note**: *The scipdf_parser package, required for PDF text extraction, must run within a Docker container. Instructions are available in the [scipdf_parser repository](https://github.com/titipata/scipdf_parser)*.
+
+---
 
 ### Model Pipeline
 Generate reviews using our fine-tuned model. Currently, only the abstracts of papers are supported:
@@ -35,6 +67,8 @@ python model_review.py
     --model_id <model_id> 
     --quantize
 ```
+
+---
 
 ### GPT Pipeline
 Alternatively, use the GPT pipeline to generate reviews:
@@ -47,18 +81,14 @@ python gpt_review.py
     --one_shot
 ```
 
-You can also check the [`inferece.ipynb`](notebooks/inference.ipynb
-) notebook for more details.
+You can also check the [`inferece.ipynb`](notebooks/inference.ipynb) notebook for more details.
 
-## Evaluation
-We conducted retrospective evaluations to compare the overlap of comments between GPT-4 vs. Human and Human vs. Human setups. The hit rate, which measures the proportion of matching comments, was controlled by aligning the number of comments from humans to match those generated by GPT-4.
-
-Additionally, we explored the robustness of our results using various overlap metrics such as the Szymkiewicz–Simpson Overlap Coefficient, the Jaccard Index, and the Sørensen–Dice Coefficient. These metrics confirmed that the overlap performance of GPT-4 vs. Human is comparable to Human vs. Human, demonstrating the effectiveness of the model across different datasets and conditions.
-
-Check the [`evaluation.ipynb`](notebooks/evaluation.ipynb) notebook for more details of how the evaluation was conducted.
+---
 
 ## Acknowledgements
 We extend our deepest gratitude to our professor, [Prof. Lyle Ungar](https://www.cis.upenn.edu/~ungar/), for his invaluable guidance and support throughout the project. We also thank the teaching assistants, Visweswaran Baskaran, Haotong (Victor) Tian, and Royina Karegoudra Jayanth, for their helpful feedback and assistance. 
+
+---
 
 ## References
 * [Can large language models provide useful feedback on research papers? A large-scale empirical analysis](https://arxiv.org/pdf/2310.01783.pdf)
