@@ -143,3 +143,8 @@ widgetsnbextension==4.0.10
 xxhash==3.4.1
 yarl==1.9.4
 zipp==3.18.1
+dash
+dash-bootstrap-components
+git+https://github.com/titipata/scipdf_parser
+spacy
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0.tar.gz
