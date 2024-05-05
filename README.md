@@ -85,6 +85,17 @@ You can also check the [`inferece.ipynb`](notebooks/inference.ipynb) notebook fo
 
 ---
 
+### UI Pipeline
+We provide a user interface (UI) that help to visualize and compare results from GPT models and our model. To start the UI, you need to create a .env file that contains OPEN_AI_KEY and HF_TOKEN (huggingface token). To run the app, 
+
+```bash
+python app.py
+```
+
+If there's dependencies unsinstalled, please refer to the documentation included in app.py.
+
+---
+
 ## Acknowledgements
 We extend our deepest gratitude to our professor, [Prof. Lyle Ungar](https://www.cis.upenn.edu/~ungar/), for his invaluable guidance and support throughout the project. We also thank the teaching assistants, Visweswaran Baskaran, Haotong (Victor) Tian, and Royina Karegoudra Jayanth, for their helpful feedback and assistance. 
 
