@@ -92,7 +92,7 @@ We provide a UI that helps to visualize and compare results from GPT models and 
 python app.py
 ```
 
-If there's dependencies unsinstalled, please refer to the documentation included in app.py.
+If there's dependencies unsinstalled, please refer to the documentation included in [`app.py`](app.py) for more details.
 
 ---
 
