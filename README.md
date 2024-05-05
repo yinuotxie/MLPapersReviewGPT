@@ -9,7 +9,7 @@
 ---
 
 ## Description
-This project, developed as a final project for [UPenn CIS6200 Advanced Topics in Deep Learning](https://docs.google.com/document/d/1dkQ4XRhaiZFjGu5i_8Qcoi6MkHwOfivmFFWhBrBF30I/edit), explores the use of large language models (LLMs) for generating reviews of machine learning papers. It is inspired by ["Can large language models provide useful feedback on research papers? A large-scale empirical analysis"](https://arxiv.org/pdf/2310.01783.pdf), utilizing similar techniques. The project consists of two primary components: the review generation pipeline and the evaluation pipeline. The review generation pipeline uses both a fine-tuned model and GPT-3.5-turbo and GPT-4-turbo as baselines, while the evaluation pipeline compares these generated reviews with human ones to assess quality. For a full project description, see our [project report](Project_report.pdf).
+This project, developed as a final project for [UPenn CIS6200 Advanced Topics in Deep Learning](https://docs.google.com/document/d/1dkQ4XRhaiZFjGu5i_8Qcoi6MkHwOfivmFFWhBrBF30I/edit), explores the use of large language models (LLMs) for generating reviews of machine learning papers. It is inspired by ["Can large language models provide useful feedback on research papers? A large-scale empirical analysis"](https://arxiv.org/pdf/2310.01783.pdf), utilizing similar techniques. The project consists of two primary components: the review generation pipeline and the evaluation pipeline. The review generation pipeline uses both a fine-tuned model and GPT-3.5-turbo and GPT-4-turbo as baselines, while the evaluation pipeline compares these generated reviews with human ones to assess quality. For a full project description, see our [project report](Project_Report.pdf).
 
 ---
 
